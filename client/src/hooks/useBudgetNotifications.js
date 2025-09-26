@@ -49,7 +49,10 @@ export function useBudgetNotifications(transactions, budgets, onNotification) {
         onNotification({
           type: 'error',
           title: t("budgets.overBudget", "Buxheti u tejkalua!"),
-          message: t("budgets.overBudgetMessage", `Kategoria "${budget.category}" ka tejkaluar buxhetin me ${(spent - budget.limit).toFixed(2)}€`),
+          message: t("budgets.overBudgetMessage", {
+            category: budget.category,
+            amount: (spent - budget.limit).toFixed(2)
+          }),
           category: budget.category
         })
         notifiedBudgets.current.add(budgetKey)
@@ -59,7 +62,10 @@ export function useBudgetNotifications(transactions, budgets, onNotification) {
         onNotification({
           type: 'warning',
           title: t("budgets.warning", "Paralajmërim"),
-          message: t("budgets.warningMessage", `Kategoria "${budget.category}" ka shpenzuar ${percentage.toFixed(1)}% të buxhetit`),
+          message: t("budgets.warningMessage", {
+            category: budget.category,
+            percentage: percentage.toFixed(1)
+          }),
           category: budget.category
         })
         notifiedBudgets.current.add(budgetKey)
