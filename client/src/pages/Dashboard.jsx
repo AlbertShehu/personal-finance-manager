@@ -11,7 +11,7 @@ import KpiGrid from "@/features/dashboard/components/KpiGrid";
 import CashflowAreaChart from "@/features/dashboard/components/CashflowAreachart";
 import RecentTransactions from "@/features/dashboard/components/RecentTransactions";
 import DateRangeTabs from "@/features/dashboard/components/DateRangeTabs";
-import ForecastCard from "@/features/dashboard/components/ForestCard";
+import ForecastCard from "@/features/dashboard/components/ForecastCard";
 import TopCategoriesPieChart from "@/features/dashboard/components/TopCategoriesPieChart";
 import MonthlyBarChart from "@/features/dashboard/components/MonthlyBarChart";
 
