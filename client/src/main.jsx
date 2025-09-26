@@ -3,21 +3,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
+import { store } from '@/store/store'
 import App from './App'
 import './index.css'
 import '@fontsource-variable/inter'
 import i18n from './lib/i18'
 import { GoogleOAuthProvider } from '@react-oauth/google'
-
-// Minimal store for testing
-const testStore = configureStore({
-  reducer: {
-    auth: (state = { user: null, loading: false, token: null }, action) => state,
-    transactions: (state = { items: [], loading: false, error: null }, action) => state,
-  },
-  devTools: process.env.NODE_ENV !== 'production',
-})
 
 // Dark-mode bootstrap për të shmangur flicker
 const rootEl = document.documentElement
@@ -66,7 +57,7 @@ if (!GOOGLE_CLIENT_ID) {
 // Gjithmonë rrethoj App me GoogleOAuthProvider që hooks e Google të mos hedhin error
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={testStore}>
+    <Provider store={store}>
       <BrowserRouter>
         <ErrorBoundary>
           {GOOGLE_CLIENT_ID ? (

@@ -53,9 +53,11 @@ api.interceptors.request.use((config) => {
     } catch {}
   }
   // X-Request-ID ndihmon në debug në server
-  const rnd = globalThis?.crypto?.randomUUID?.()
-  if (!config.headers['X-Request-ID'] && rnd) {
-    config.headers['X-Request-ID'] = rnd
+  if (typeof window !== 'undefined' && typeof globalThis !== 'undefined') {
+    const rnd = globalThis?.crypto?.randomUUID?.()
+    if (!config.headers['X-Request-ID'] && rnd) {
+      config.headers['X-Request-ID'] = rnd
+    }
   }
   return config
 })
@@ -92,7 +94,9 @@ api.interceptors.response.use(
       } else {
         clearAuth()
       }
-      if (location.pathname !== '/login') window.location.assign('/login')
+      if (typeof window !== 'undefined' && typeof location !== 'undefined') {
+        if (location.pathname !== '/login') window.location.assign('/login')
+      }
     }
     return Promise.reject(error)
   }

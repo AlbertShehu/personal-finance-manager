@@ -102,17 +102,32 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
 
 /* ---------------- Initial state (rehydrate) ---------------- */
 
-const { user: initialUser, token: initialToken } = getStoredAuth()
-// vendos header-in në ngarkim të modulit nëse ka token
-setAuthHeader(initialToken)
-
-const initialState = {
-  user: initialUser,
-  token: initialToken,
-  isAuthenticated: !!initialToken,
-  isLoading: false,
-  error: null, // do të mbajë vetëm message-in
+// Shmang localStorage access gjatë module loading për production compatibility
+const getInitialState = () => {
+  if (typeof window === 'undefined') {
+    return {
+      user: null,
+      token: null,
+      isAuthenticated: false,
+      isLoading: false,
+      error: null,
+    }
+  }
+  
+  const { user: initialUser, token: initialToken } = getStoredAuth()
+  // vendos header-in në ngarkim të modulit nëse ka token
+  setAuthHeader(initialToken)
+  
+  return {
+    user: initialUser,
+    token: initialToken,
+    isAuthenticated: !!initialToken,
+    isLoading: false,
+    error: null, // do të mbajë vetëm message-in
+  }
 }
+
+const initialState = getInitialState()
 
 /* ---------------- Slice ---------------- */
 
