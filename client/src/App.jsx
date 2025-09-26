@@ -6,19 +6,19 @@ import Layout from './components/layout/Layout'
 import { Toaster } from "@/components/ui/toaster"
 import { MotionConfig, useReducedMotion } from 'framer-motion'
 
-// Lazy-load pages
-const LandingPage      = lazy(() => import('./pages/LandingPage'))
-const Login            = lazy(() => import('./pages/Login'))
-const Register         = lazy(() => import('./pages/Register'))
-const ForgotPassword   = lazy(() => import('./pages/login/ForgotPasswordPage'))
-const ResetPassword    = lazy(() => import('./pages/login/ResetPasswordPage'))
-const Dashboard        = lazy(() => import('./pages/Dashboard'))
-const Analytics        = lazy(() => import('./pages/sidebar/Analytics'))
-const Budgets          = lazy(() => import('./pages/sidebar/Budgets'))
-const Profile          = lazy(() => import('./pages/Profile'))
-const PasswordSettings = lazy(() => import('./pages/settings/PasswordSettings'))
-const ProfileSettings  = lazy(() => import('./pages/settings/ProfileSettings'))
-const Transactions     = lazy(() => import('./pages/sidebar/Transactions'))
+// Lazy-load pages with error handling
+const LandingPage      = lazy(() => import('./pages/LandingPage').catch(() => ({ default: () => <div>Error loading LandingPage</div> })))
+const Login            = lazy(() => import('./pages/Login').catch(() => ({ default: () => <div>Error loading Login</div> })))
+const Register         = lazy(() => import('./pages/Register').catch(() => ({ default: () => <div>Error loading Register</div> })))
+const ForgotPassword   = lazy(() => import('./pages/login/ForgotPasswordPage').catch(() => ({ default: () => <div>Error loading ForgotPassword</div> })))
+const ResetPassword    = lazy(() => import('./pages/login/ResetPasswordPage').catch(() => ({ default: () => <div>Error loading ResetPassword</div> })))
+const Dashboard        = lazy(() => import('./pages/Dashboard').catch(() => ({ default: () => <div>Error loading Dashboard</div> })))
+const Analytics        = lazy(() => import('./pages/sidebar/Analytics').catch(() => ({ default: () => <div>Error loading Analytics</div> })))
+const Budgets          = lazy(() => import('./pages/sidebar/Budgets').catch(() => ({ default: () => <div>Error loading Budgets</div> })))
+const Profile          = lazy(() => import('./pages/Profile').catch(() => ({ default: () => <div>Error loading Profile</div> })))
+const PasswordSettings = lazy(() => import('./pages/settings/PasswordSettings').catch(() => ({ default: () => <div>Error loading PasswordSettings</div> })))
+const ProfileSettings  = lazy(() => import('./pages/settings/ProfileSettings').catch(() => ({ default: () => <div>Error loading ProfileSettings</div> })))
+const Transactions     = lazy(() => import('./pages/sidebar/Transactions').catch(() => ({ default: () => <div>Error loading Transactions</div> })))
 
 /** Error boundary i thjeshtë për lazy chunks / render errors */
 class ErrorBoundary extends React.Component {
@@ -95,7 +95,7 @@ export default function App() {
             <Route
               element={
                 <PrivateRoute>
-                  <Layout />
+                  {Layout ? <Layout /> : <div>Error loading Layout</div>}
                 </PrivateRoute>
               }
             >
