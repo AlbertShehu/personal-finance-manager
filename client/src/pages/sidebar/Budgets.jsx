@@ -10,11 +10,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
 import { Plus, Target, AlertTriangle, CheckCircle, RefreshCw, Trash2 } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
 
 export default function Budgets() {
   const { t } = useTranslation()
   const { transactions = [], loading, refetch } = useTransactions()
-  const [showNotification, setShowNotification] = React.useState(null)
+  const { toast } = useToast()
   
   // Load budgets from localStorage or start empty
   const [budgets, setBudgets] = useState(() => {
@@ -36,7 +37,13 @@ export default function Budgets() {
   }, [budgets])
 
   // Use the budget notifications hook
-  useBudgetNotifications(transactions, budgets, setShowNotification)
+  useBudgetNotifications(transactions, budgets, (notification) => {
+    toast({
+      title: notification.title,
+      description: notification.message,
+      variant: notification.type === 'error' ? 'destructive' : 'default',
+    })
+  })
 
   // Auto-refetch when transactions change (for real-time updates)
   React.useEffect(() => {
@@ -116,34 +123,6 @@ export default function Budgets() {
 
   return (
     <main className="space-y-6 px-4 sm:px-6 py-6" aria-label={t("budgets.title", "Buxhetet")}>
-      {/* Notification */}
-      {showNotification && (
-        <div className={`fixed top-4 right-4 z-50 max-w-sm p-4 rounded-lg shadow-lg border ${
-          showNotification.type === 'error' 
-            ? 'bg-red-50 border-red-200 text-red-800 dark:bg-red-950/20 dark:border-red-800 dark:text-red-200'
-            : 'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-950/20 dark:border-yellow-800 dark:text-yellow-200'
-        }`}>
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0">
-              {showNotification.type === 'error' ? (
-                <AlertTriangle className="h-5 w-5 text-red-600" />
-              ) : (
-                <AlertTriangle className="h-5 w-5 text-yellow-600" />
-              )}
-            </div>
-            <div className="flex-1">
-              <h4 className="font-semibold text-sm">{showNotification.title}</h4>
-              <p className="text-sm mt-1">{showNotification.message}</p>
-            </div>
-            <button
-              onClick={() => setShowNotification(null)}
-              className="flex-shrink-0 text-gray-400 hover:text-gray-600"
-            >
-              ×
-            </button>
-          </div>
-        </div>
-      )}
 
       <div className="flex items-center justify-between">
         <Header 

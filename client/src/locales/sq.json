@@ -178,10 +178,10 @@
     "spent": "Shpenzuar",
     "overBudget": "Buxheti u tejkalua!",
     "overBudgetDesc": "Kjo kategori ka shpenzuar më shumë se buxheti i caktuar.",
-    "overBudgetMessage": "Kategoria \"{category}\" ka tejkaluar buxhetin me {amount}€",
+    "overBudgetMessage": "Kategoria \"{{category}}\" ka tejkaluar buxhetin me {{amount}}€",
     "warning": "Paralajmërim",
     "warningDesc": "Buxheti është pothuajse i shteruar.",
-    "warningMessage": "Kategoria \"{category}\" ka shpenzuar {percentage}% të buxhetit",
+    "warningMessage": "Kategoria \"{{category}}\" ka shpenzuar {{percentage}}% të buxhetit",
     "alert": "Alarm",
     "noBudgets": "Nuk ka buxhete",
     "noBudgetsDesc": "Shtoni buxhetin tuaj të parë për të filluar menaxhimin e shpenzimeve."

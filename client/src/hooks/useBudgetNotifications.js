@@ -46,12 +46,14 @@ export function useBudgetNotifications(transactions, budgets, onNotification) {
 
       // Check if budget is exceeded
       if (percentage >= 100) {
+        const amount = (spent - budget.limit).toFixed(2)
+        
         onNotification({
           type: 'error',
           title: t("budgets.overBudget", "Buxheti u tejkalua!"),
           message: t("budgets.overBudgetMessage", {
             category: budget.category,
-            amount: (spent - budget.limit).toFixed(2)
+            amount: amount
           }),
           category: budget.category
         })
@@ -59,12 +61,14 @@ export function useBudgetNotifications(transactions, budgets, onNotification) {
       }
       // Check if budget is close to limit (80-99%)
       else if (percentage >= 80 && percentage < 100) {
+        const percentageStr = percentage.toFixed(1)
+        
         onNotification({
           type: 'warning',
           title: t("budgets.warning", "Paralajmërim"),
           message: t("budgets.warningMessage", {
             category: budget.category,
-            percentage: percentage.toFixed(1)
+            percentage: percentageStr
           }),
           category: budget.category
         })

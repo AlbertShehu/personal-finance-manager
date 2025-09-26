@@ -171,10 +171,10 @@
     "spent": "Ausgegeben",
     "overBudget": "Budget überschritten!",
     "overBudgetDesc": "Diese Kategorie hat das Limit überschritten.",
-    "overBudgetMessage": "Kategorie \"{category}\" hat Budget um {amount}€ überschritten",
+    "overBudgetMessage": "Kategorie \"{{category}}\" hat Budget um {{amount}}€ überschritten",
     "warning": "Warnung",
     "warningDesc": "Budget ist fast aufgebraucht.",
-    "warningMessage": "Kategorie \"{category}\" hat {percentage}% des Budgets ausgegeben",
+    "warningMessage": "Kategorie \"{{category}}\" hat {{percentage}}% des Budgets ausgegeben",
     "alert": "Warnung",
     "noBudgets": "Keine Budgets",
     "noBudgetsDesc": "Füge dein erstes Budget hinzu, um Ausgaben zu steuern."

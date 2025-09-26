@@ -171,10 +171,10 @@
     "spent": "Spent",
     "overBudget": "Budget exceeded!",
     "overBudgetDesc": "This category has spent more than its limit.",
-    "overBudgetMessage": "Category \"{category}\" has exceeded budget by {amount}€",
+    "overBudgetMessage": "Category \"{{category}}\" has exceeded budget by {{amount}}€",
     "warning": "Warning",
     "warningDesc": "Budget is almost depleted.",
-    "warningMessage": "Category \"{category}\" has spent {percentage}% of budget",
+    "warningMessage": "Category \"{{category}}\" has spent {{percentage}}% of budget",
     "alert": "Alert",
     "noBudgets": "No budgets",
     "noBudgetsDesc": "Add your first budget to start managing spending."
