@@ -1,0 +1,815 @@
+{
+  "common": {
+    "skipToContent": "Skip to content",
+    "undo": "Undo",
+    "validation": {
+      "email": {
+        "gmailOnly": "Only Gmail addresses are allowed",
+        "valid": "Valid Gmail address",
+        "length": "Gmail local part must be 6–30 characters",
+        "characters": "Email contains invalid characters for Gmail",
+        "dots": "Gmail doesn’t allow dots at the start or end",
+        "consecutiveDots": "Gmail doesn’t allow consecutive dots"
+      }
+    }
+  },
+  "landing": {
+    "metaTitle": "FinMan – Smart Personal Finance Manager",
+    "tagline": "Secure finance platform",
+    "title": "Manage your finances in style",
+    "subtitle": "Analytics, exports, security — all in one place. Choose a simple and smart solution.",
+    "login": "Login",
+    "register": "Register",
+    "loginAria": "Sign in to your account",
+    "registerAria": "Create a new account",
+    "imageAlt": "Financial illustration"
+  },
+  "features": {
+    "aria": "Key features",
+    "security": {
+      "title": "Secure by default",
+      "desc": "Your data is encrypted and protected with strict access policies."
+    },
+    "insights": {
+      "title": "Actionable insights",
+      "desc": "Understand spending with clear charts and category breakdowns."
+    },
+    "fast": {
+      "title": "Fast & delightful",
+      "desc": "Responsive, keyboard-friendly UI optimized for all devices."
+    },
+    "cta": "Start free"
+  },
+  "stats": {
+    "aria": "Product statistics",
+    "users": "Users",
+    "transactions": "Tracked transactions",
+    "rating": "Average rating",
+    "countries": "Countries"
+  },
+  "navbar": {
+    "title": "Finance",
+    "subtitle": "Management"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "analytics": "Analytics",
+    "budgets": "Budgets",
+    "settings": "Settings",
+    "navigation": {
+      "title": "Navigation"
+    },
+    "quickStats": {
+      "title": "Quick stats",
+      "income": "Income",
+      "expenses": "Expenses",
+      "balance": "Balance",
+      "transactions": "Transactions"
+    },
+    "quickActions": {
+      "title": "Quick actions",
+      "addTransaction": "Add transaction",
+      "exportData": "Export data",
+      "syncData": "Sync"
+    },
+    "recentActivity": {
+      "title": "Recent activity",
+      "noTransactions": "No recent transactions",
+      "viewAll": "View all"
+    },
+    "openMenu": "Open menu"
+  },
+  "sidebarSheet": {
+    "dashboard": "Dashboard",
+    "transactions": "Transactions"
+  },
+  "avatar": {
+    "greeting": "Hello",
+    "account": "My account",
+    "profile": "Profile",
+    "settings": "Settings",
+    "password": "Password",
+    "editProfile": "Edit profile",
+    "logout": "Logout",
+    "logoutSuccess": "Logged out successfully",
+    "logoutDescription": "See you next time!"
+  },
+  "dashboard": {
+    "title": "Financial dashboard",
+    "subtitle": "Overview of your income and expenses",
+    "recommendations": "Budget recommendations by AI 🤖",
+    "income": "Income",
+    "expense": "Expenses",
+    "balance": "Balance",
+    "analysis": "Monthly analysis & Categories 🔍",
+    "thisMonth": "This month",
+    "loading": "Loading...",
+    "loadError": "Failed to load data",
+    "transactionAnalysis": "Transaction analysis",
+    "categoryAnalysis": "Category analysis",
+    "transactionTrends": "Transaction trends",
+    "kpi": {
+      "savingsRate": "Savings rate",
+      "avgDaily": "Avg. daily spend"
+    },
+    "recent": "Last 5 activities",
+    "viewAll": "View all",
+    "addTransaction": "Add transaction",
+    "empty": "No insights for this range. Add a transaction to see insights.",
+    "noChartData": "Not enough data to show a trend.",
+    "noCategoryData": "No category data for this range.",
+    "noMonthlyData": "No monthly data to display."
+  },
+  "analytics": {
+    "title": "Analytics",
+    "subtitle": "Detailed financial analysis",
+    "loading": "Loading...",
+    "error": "Failed to load data",
+    "refresh": "Refresh",
+    "totalIncome": "Total income",
+    "totalExpenses": "Total expenses",
+    "netBalance": "Net balance",
+    "transactions": "Transactions",
+    "thisMonth": "This month",
+    "topCategories": "Top categories",
+    "topCategoriesDesc": "Spending by category this month",
+    "monthlyTrend": "Monthly trend",
+    "monthlyTrendDesc": "Income and expenses in the last 6 months",
+    "noData": "No data for this month",
+    "insights": "Insights",
+    "insightsDesc": "Analysis and recommendations based on your data",
+    "negativeBalance": "Negative balance",
+    "negativeBalanceDesc": "You spend more than you earn. Consider reducing expenses.",
+    "topSpending": "Top spending",
+    "topSpendingDesc": "Category \"{category}\" has the highest spending this month.",
+    "realTime": "Real-time analytics",
+    "realTimeDesc": "Latest metrics for your finances",
+    "netWorth": "Net worth",
+    "savingsRate": "Savings rate",
+    "avgDaily": "Average daily spend",
+    "volatility": "Volatility",
+    "dailyTrend": "Daily trend",
+    "categorySpending": "Spending by category",
+    "topCategoriesRealtime": "Top spending categories"
+  },
+  "budgets": {
+    "title": "Budgets",
+    "subtitle": "Manage your monthly budgets",
+    "refresh": "Refresh",
+    "totalBudget": "Total budget",
+    "totalSpent": "Spent",
+    "remaining": "Remaining",
+    "thisMonth": "This month",
+    "addBudget": "Add new budget",
+    "addBudgetDesc": "Create a new budget for a category",
+    "category": "Category",
+    "categoryPlaceholder": "Enter category",
+    "limit": "Limit (€)",
+    "add": "Add",
+    "budgetDesc": "Limit and spending for this category",
+    "spent": "Spent",
+    "overBudget": "Budget exceeded!",
+    "overBudgetDesc": "This category has spent more than its limit.",
+    "overBudgetMessage": "Category \"{category}\" has exceeded budget by {amount}€",
+    "warning": "Warning",
+    "warningDesc": "Budget is almost depleted.",
+    "warningMessage": "Category \"{category}\" has spent {percentage}% of budget",
+    "alert": "Alert",
+    "noBudgets": "No budgets",
+    "noBudgetsDesc": "Add your first budget to start managing spending."
+  },
+  "range": {
+    "last30": "Last 30 days",
+    "thisMonth": "This month",
+    "ytd": "Year to date",
+    "all": "All"
+  },
+  "auth": {
+    "register": "Register",
+    "login": "Login"
+  },
+  "profile": {
+    "noData": "No user data.",
+    "id": "ID",
+    "registered": "Registered on",
+    "form": {
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "submit": "Save changes",
+      "saving": "Saving..."
+    },
+    "validation": {
+      "name": "Name must be at least 2 characters.",
+      "email": "Please enter a valid email address."
+    },
+    "success": {
+      "title": "Profile updated ✅",
+      "description": "Your profile was saved successfully."
+    },
+    "error": {
+      "title": "Update failed ❌",
+      "default": "An error occurred while saving the profile."
+    }
+  },
+  "settings": {
+    "password": {
+      "title": "Change Password"
+    },
+    "profile": {
+      "title": "Edit Profile"
+    }
+  },
+  "aside": {
+    "welcome": "Welcome to FinMan",
+    "description": "Manage finances wisely. Export, analyze, secure.",
+    "backToHome": "Back to home",
+    "rights": "All rights reserved."
+  },
+  "login": {
+    "title": "Sign in to FinMan",
+    "subtitle": "Welcome back — sign in to continue 🚀",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "loading": "Signing in...",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "gmailOk": "Valid Gmail",
+    "gmailOnly": "Only Gmail addresses are allowed",
+    "gmailHint": "Please provide a valid Gmail or Googlemail address",
+    "or": "or",
+    "success": {
+      "title": "Welcome back 👋",
+      "description": "You're signed in."
+    },
+    "error": {
+      "title": "Login failed",
+      "required": "Email and password are required.",
+      "notFound": "Incorrect email or user does not exist.",
+      "invalidPassword": "Incorrect password.",
+      "server": "Login failed due to a server error.",
+      "default": "Something went wrong. Please try again."
+    },
+    "validation": {
+      "email": "Please enter a valid email address.",
+      "emailRules": {
+        "gmailOnly": "Only Gmail addresses are allowed",
+        "length": "Gmail local part must be 6–30 characters",
+        "characters": "Email contains invalid characters for Gmail",
+        "dots": "Gmail doesn’t allow dots at the start or end",
+        "consecutiveDots": "Gmail doesn’t allow consecutive dots"
+      },
+      "password": "Password must be at least 6 characters"
+    },
+    "google": {
+      "button": "Sign in with Google",
+      "notConfigured": {
+        "title": "Google Sign-In not configured",
+        "desc": "Set VITE_GOOGLE_CLIENT_ID in client/.env and restart the dev server to enable Google Sign-In."
+      },
+      "success": {
+        "title": "Welcome!",
+        "desc": "Signed in with Google successfully."
+      },
+      "error": {
+        "title": "Google Sign-In error",
+        "desc": "Please try again."
+      }
+    }
+  },
+  "register": {
+    "title": "Create your account",
+    "subtitle": "Start tracking your finances in minutes.",
+    "name": "Full name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "submit": "Create account",
+    "loading": "Creating your account…",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "gmailOk": "Valid Gmail",
+    "gmailOnly": "Only Gmail addresses are allowed",
+    "gmailHint": "Please provide a valid Gmail or Googlemail address",
+    "or": "or",
+    "passwordReq": {
+      "min": "At least 8 characters",
+      "number": "At least one number",
+      "symbol": "At least one symbol"
+    },
+    "success": {
+      "title": "Account created",
+      "description": "You can sign in with your new account now.",
+      "descriptionVerify": "Registration completed. Check your Gmail for the verification link."
+    },
+    "error": {
+      "title": "Registration failed",
+      "required": "All fields are required.",
+      "duplicateEmail": "This email is already registered."
+    },
+    "google": {
+      "button": "Sign in with Google",
+      "notConfigured": {
+        "title": "Google Sign-In not configured",
+        "desc": "Set VITE_GOOGLE_CLIENT_ID in client/.env and restart the dev server to enable Google Sign-In."
+      },
+      "success": {
+        "title": "Welcome!",
+        "desc": "Signed in with Google successfully."
+      },
+      "error": {
+        "title": "Google Sign-In error",
+        "desc": "Please try again."
+      }
+    },
+    "validation": {
+      "name": "Please enter your name",
+      "email": "Please enter a valid email address",
+      "emailRules": {
+        "gmailOnly": "Only Gmail addresses are allowed",
+        "length": "Gmail local part must be 6–30 characters",
+        "characters": "Email contains invalid characters for Gmail",
+        "dots": "Gmail doesn’t allow dots at the start or end",
+        "consecutiveDots": "Gmail doesn’t allow consecutive dots"
+      },
+      "password": {
+        "min": "Password must be at least 8 characters",
+        "number": "Password must contain at least one number",
+        "symbol": "Password must contain at least one symbol",
+        "match": "Passwords do not match"
+      }
+    }
+  },
+  "password": {
+    "form": {
+      "currentPasswordLabel": "Current password",
+      "newPasswordLabel": "New password",
+      "confirmNewPasswordLabel": "Confirm new password",
+      "submit": "Change password"
+    },
+    "validation": {
+      "currentPassword": "Current password is required.",
+      "newPassword": "New password must be at least 6 characters.",
+      "confirmNewPassword": "Passwords do not match."
+    },
+    "success": {
+      "title": "Password changed 🔐",
+      "description": "Password updated successfully."
+    },
+    "error": {
+      "title": "Error ❌",
+      "default": "Failed to change password."
+    }
+  },
+  "insight": {
+    "empty": "🎯 No insights right now.",
+    "delete": "Delete insight",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "dismissed": "Insight dismissed",
+    "restored": "Restored",
+    "increase": {
+      "title": "📈 Spending in {{category}} increased",
+      "description": "You spent €{{amount}} this month, which is {{percent}}% more than last month."
+    },
+    "decrease": {
+      "title": "📉 Spending in {{category}} decreased",
+      "description": "Only €{{amount}} this month — a {{percent}}% drop vs last month. Keep it up!"
+    },
+    "transaction": {
+      "title": "📌 Transaction in {{category}}",
+      "description": "On {{date}}, you added a “{{type}}” of €{{amount}} in “{{category}}”.",
+      "expense": "Expense",
+      "income": "Income"
+    }
+  },
+  "charts": {
+    "monthly": {
+      "title": "Monthly Income & Expenses",
+      "income": "Income",
+      "expense": "Expenses"
+    },
+    "topCategories": "Most used categories",
+    "noCategoryData": "No category data."
+  },
+  "chart": {
+    "title": "Monthly financial chart",
+    "loading": "Loading chart...",
+    "noData": "No transactions to display.",
+    "income": "Income",
+    "expense": "Expenses"
+  },
+  "overview": {
+    "total": "Total",
+    "income": "Total income",
+    "expense": "Total expenses"
+  },
+  "table": {
+    "title": "Transactions list",
+    "date": "Date",
+    "category": "Category",
+    "description": "Description",
+    "amount": "Amount",
+    "type": "Type",
+    "actions": "Actions",
+    "filters": {
+      "all": "All",
+      "income": "Income",
+      "expense": "Expenses"
+    },
+    "exportPdf": "Export PDF",
+    "manageIncome": "Manage Income",
+    "addTransaction": "Add transaction",
+    "empty": "No transactions found for this filter.",
+    "confirmDelete": "Are you sure you want to delete this transaction?",
+    "deleteSuccess": "Transaction deleted successfully",
+    "deleteDescription": "Transaction removed from list",
+    "detailsTitle": "Transaction details"
+  },
+  "income": {
+    "title": "Monthly Income Management",
+    "subtitle": "Set your monthly salary and additional income for better financial planning",
+    "currentMonth": "Current Month Income",
+    "currentMonthDesc": "Set your salary and additional income for this month",
+    "monthlySalary": "Monthly Salary",
+    "additionalIncome": "Additional Income",
+    "totalMonthly": "Total Monthly",
+    "history": "Income History",
+    "historyDesc": "Income from previous months",
+    "salary": "Salary",
+    "additional": "Additional",
+    "transactionDescription": "Monthly salary",
+    "additionalDescription": "Additional income",
+    "addToTransactions": "Add to Transactions",
+    "saveOnly": "Save Only",
+    "adding": "Adding...",
+    "saving": "Saving...",
+    "success": {
+      "title": "Success",
+      "saved": "Income data saved successfully",
+      "addedToTransactions": "Income added to transactions"
+    },
+    "error": {
+      "title": "Error",
+      "salaryRequired": "Monthly salary is required",
+      "saveFailed": "Failed to save data",
+      "addFailed": "Failed to add income"
+    },
+    "warning": {
+      "title": "Warning",
+      "alreadyAdded": "Salary for this month has already been added"
+    }
+  },
+  "transaction": {
+    "modal": {
+      "title": "Add transaction",
+      "cancel": "Cancel",
+      "submit": "Add",
+      "editTitle": "Edit transaction",
+      "editSubtitle": "Update fields and save changes"
+    },
+    "form": {
+      "category": "Category",
+      "description": "Description",
+      "amount": "Amount (€)",
+      "date": "Date",
+      "type": "Type"
+    },
+    "filter": {
+      "income": "Income",
+      "expense": "Expense"
+    },
+    "toast": {
+      "addSuccess": "✅ Transaction added",
+      "addSuccessDesc": "Your transaction was recorded.",
+      "addError": "❌ Failed to add transaction",
+      "validationError": "❌ Validation error",
+      "updateSuccess": "✅ Transaction updated",
+      "updateError": "❌ Failed to update transaction",
+      "noChanges": "No changes to save",
+      "addDescription": "Your transaction has been added successfully."
+    },
+    "validation": {
+      "categoryRequired": "Category is required",
+      "descriptionRequired": "Description is required",
+      "amountPositive": "Amount must be positive",
+      "dateRequired": "Date is required"
+    }
+  },
+  "transactions": {
+    "title": "Transactions",
+    "search": "Search transactions...",
+    "filters": "Filters",
+    "export": "Export",
+    "type": "Type",
+    "allTypes": "All types",
+    "income": "Income",
+    "expense": "Expenses",
+    "category": "Category",
+    "allCategories": "All categories",
+    "sortBy": "Sort by",
+    "date": "Date",
+    "amount": "Amount",
+    "description": "Description",
+    "sortOrder": "Sort order",
+    "showing": "Showing",
+    "of": "of",
+    "total": "total",
+    "view": "View",
+    "edit": "Edit",
+    "untitled": "Untitled",
+    "monthlyFinancialChart": "Monthly financial chart",
+    "noData": "No transactions to display.",
+    "loadingChart": "Loading chart...",
+    "typeMap": {
+      "INCOME": "Income",
+      "EXPENSE": "Expense"
+    }
+  },
+  "actions": {
+    "close": "Close",
+    "edit": "Edit",
+    "save": "Save",
+    "delete": "Delete"
+  },
+  "forgot": {
+    "title": "Forgot your password?",
+    "subtitle": "Enter your email and we'll send reset instructions.",
+    "submit": "Send link",
+    "sending": "Sending...",
+    "gmailOk": "Valid Gmail",
+    "gmailOnly": "Only Gmail addresses are allowed",
+    "gmailHint": "Please provide a valid Gmail or Googlemail address",
+    "success": "If the email exists, instructions were sent.",
+    "descriptionVerify": "Reset link sent. Check your Gmail.",
+    "error": "Something went wrong. Try again.",
+    "invalidEmail": "An invalid Gmail address was provided.",
+    "emailNotFound": "No account found with this email address.",
+    "serverError": "Failed to send reset email. Try again.",
+    "rateLimit": "Too many requests. Please wait before trying again.",
+    "default": "An unexpected error occurred. Please try again.",
+    "required": "Email address is required.",
+    "invalidFormat": "Please enter a valid email address.",
+    "notGmail": "Only Gmail addresses are allowed.",
+    "localPartTooShort": "Gmail local part must be at least 6 characters.",
+    "localPartTooLong": "Gmail local part cannot exceed 30 characters.",
+    "invalidCharacters": "Email contains invalid characters for Gmail.",
+    "dotsAtEnds": "Gmail doesn’t allow dots at the start or end.",
+    "consecutiveDots": "Gmail doesn’t allow consecutive dots."
+  },
+  "error": {
+    "title": "Password reset failed",
+    "required": "Email address is required.",
+    "invalidFormat": "Please enter a valid email address.",
+    "notGmail": "Only Gmail addresses are allowed.",
+    "localPartTooShort": "Gmail local part must be at least 6 characters.",
+    "localPartTooLong": "Gmail local part cannot exceed 30 characters.",
+    "invalidCharacters": "Email contains invalid characters for Gmail.",
+    "dotsAtEnds": "Gmail doesn’t allow dots at the start or end.",
+    "consecutiveDots": "Gmail doesn’t allow consecutive dots."
+  },
+  "validation": {
+    "emailRules": {
+      "gmailOnly": "Only Gmail addresses are allowed",
+      "length": "Gmail local part must be 6–30 characters",
+      "characters": "Email contains invalid characters for Gmail",
+      "dots": "Gmail doesn’t allow dots at the start or end",
+      "consecutiveDots": "Gmail doesn’t allow consecutive dots"
+    }
+  },
+  "reset": {
+    "title": "Reset password",
+    "subtitle": "Enter a new password for your account.",
+    "password": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordPlaceholder": "********",
+    "confirmPlaceholder": "********",
+    "submit": "Reset password",
+    "loading": "Resetting…",
+    "success": "Password reset. You can sign in now.",
+    "error": "Reset failed",
+    "backToLogin": "Back to login",
+    "missingToken": "Reset link is invalid or expired.",
+    "passwordReq": {
+      "min": "At least 8 characters",
+      "number": "At least one number",
+      "symbol": "At least one symbol"
+    },
+    "validation": {
+      "password": {
+        "min": "Password must be at least 8 characters",
+        "number": "Password must contain at least one number",
+        "symbol": "Password must contain at least one symbol"
+      },
+      "match": "Passwords do not match"
+    }
+  },
+  "theme": {
+    "title": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "smartInsights": {
+    "title": "Personalized AI Recommendations",
+    "noData": {
+      "title": "Not enough data",
+      "description": "Add more transactions to get personalized AI recommendations."
+    },
+    "lowSavings": {
+      "title": "Low savings",
+      "description": "Your savings are only {{rate}}%. Aim for at least 20% for stability.",
+      "action": "Review your spending"
+    },
+    "excellentSavings": {
+      "title": "Excellent savings! 🎉",
+      "description": "Your savings are {{rate}}% — great! Keep it up.",
+      "action": "Consider investing"
+    },
+    "incomeDecline": {
+      "title": "Income decline",
+      "description": "Your income decreased by {{percent}}% vs last month.",
+      "action": "Look for new opportunities"
+    },
+    "incomeGrowth": {
+      "title": "Great income growth! 📈",
+      "description": "Your income increased by {{percent}}% — fantastic!",
+      "action": "Review your budget"
+    },
+    "expenseIncrease": {
+      "title": "Expense spike",
+      "description": "Expenses increased by {{percent}}%. Check your budget.",
+      "action": "Identify unnecessary spending"
+    },
+    "highCategorySpending": {
+      "title": "High spending in category",
+      "description": "You spend {{amount}}€ on {{category}} ({{percentage}}% of income).",
+      "action": "Consider cutting back"
+    },
+    "highDailySpending": {
+      "title": "High daily spending",
+      "description": "You spend {{amount}}€ on average per day.",
+      "action": "Plan your expenses"
+    },
+    "negativeBalance": {
+      "title": "Negative balance",
+      "description": "You spend {{amount}}€ more than your income.",
+      "action": "Reduce expenses immediately"
+    },
+    "diversifySpending": {
+      "title": "Diversify spending",
+      "description": "Your spending is concentrated in only {{count}} categories.",
+      "action": "Consider other categories"
+    },
+    "considerInvesting": {
+      "title": "Consider investing",
+      "description": "With {{rate}}% savings, you could consider long-term investments.",
+      "action": "Seek investment advice"
+    },
+    "priority": {
+      "critical": "Critical",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "showMore": "Show all ({{count}})",
+    "showLess": "Show less"
+  },
+  "formValidation": {
+    "email": {
+      "required": "Email is required",
+      "invalid": "Please provide a valid Gmail or Googlemail address",
+      "gmailOnly": "Only Gmail addresses are allowed"
+    },
+    "password": {
+      "required": "Password is required",
+      "minLength": "Password must be at least 6 characters",
+      "minLength8": "Password must be at least 8 characters",
+      "number": "Password must contain at least one number",
+      "symbol": "Password must contain at least one symbol",
+      "match": "Passwords do not match"
+    },
+    "name": {
+      "required": "Name is required",
+      "minLength": "Name must be at least 2 characters"
+    },
+    "confirmPassword": {
+      "required": "Password confirmation is required",
+      "match": "Passwords do not match"
+    }
+  },
+  "predictions": {
+    "title": "AI Predictions",
+    "desc": "Forecasts based on your spending patterns",
+    "noData": "No prediction data",
+    "noDataDesc": "Add more transactions to get AI predictions",
+    "nextMonthIncome": "Next Month Income",
+    "nextMonthExpense": "Next Month Expenses",
+    "nextMonthNet": "Next Month Net Worth",
+    "riskAssessment": "Risk Assessment",
+    "lowRisk": "Low Risk",
+    "mediumRisk": "Medium Risk",
+    "highRisk": "High Risk",
+    "riskScore": "Risk score",
+    "aiInsights": "AI insights",
+    "advancedDetails": "Advanced details",
+    "patternAnalysis": "Pattern analysis",
+    "monthlyPattern": "Monthly pattern",
+    "categoryPattern": "Analyzed categories",
+    "transactionCount": "Transaction count",
+    "algorithmInfo": "Algorithm info",
+    "confidenceLevel": "Confidence level",
+    "dataQuality": "Data quality",
+    "excellent": "Excellent",
+    "good": "Good",
+    "basic": "Basic"
+  },
+  "performance": {
+    "title": "Performance Monitoring",
+    "desc": "Real-time performance metrics",
+    "stop": "Stop",
+    "start": "Start",
+    "renderTime": "Render time",
+    "memoryUsage": "Memory usage",
+    "networkLatency": "Network latency",
+    "cacheHitRate": "Cache hit rate",
+    "errorRate": "Error rate",
+    "throughput": "Throughput",
+    "renderTimeChart": "Render time",
+    "memoryChart": "Memory usage",
+    "advancedDetails": "Advanced details",
+    "systemInfo": "System info",
+    "userAgent": "User Agent",
+    "screenResolution": "Resolution",
+    "timezone": "Time zone",
+    "language": "Language",
+    "optimization": "Optimizations",
+    "lazyLoading": "Lazy loading",
+    "memoization": "Memoization",
+    "virtualization": "Virtualization",
+    "codeSplitting": "Code splitting",
+    "overallStatus": "Overall status",
+    "monitoringActive": "Monitoring active",
+    "monitoringInactive": "Monitoring inactive",
+    "lastUpdate": "Last update"
+  },
+  "optimization": {
+    "title": "Optimization Panel",
+    "desc": "Monitor and optimize performance",
+    "stop": "Stop",
+    "start": "Start",
+    "metrics": "Metrics",
+    "suggestions": "Suggestions",
+    "settings": "Settings",
+    "renderTime": "Render time",
+    "memoryUsage": "Memory usage",
+    "networkLatency": "Network latency",
+    "cacheHitRate": "Cache hit rate",
+    "errorRate": "Error rate",
+    "throughput": "Throughput",
+    "bundleSize": "Bundle size",
+    "loadTime": "Load time",
+    "noSuggestions": "No suggestions",
+    "noSuggestionsDesc": "Performance looks good!",
+    "cacheSettings": "Cache settings",
+    "performanceSettings": "Performance settings",
+    "clearCache": "Clear cache",
+    "exportMetrics": "Export metrics"
+  },
+  "categoryAnalysis": {
+    "title": "Category Analysis",
+    "desc": "Spending by category with trends",
+    "noData": "No data",
+    "noDataDesc": "Add transactions to see category analysis",
+    "totalExpenses": "Total expenses",
+    "currentMonth": "Current month",
+    "total": "Total",
+    "count": "Count",
+    "average": "Average",
+    "percentage": "Percentage",
+    "showing": "Showing",
+    "of": "of",
+    "categories": "categories"
+  },
+  "trends": {
+    "title": "Transaction Trends",
+    "desc": "Monthly trends for the last 6 months",
+    "noData": "No data",
+    "noDataDesc": "Add transactions to see trends",
+    "incomeTrend": "Income trend",
+    "expenseTrend": "Expense trend",
+    "netTrend": "Net trend",
+    "avgIncome": "Avg. income",
+    "avgExpense": "Avg. expenses",
+    "avgNet": "Avg. net",
+    "avgTransactions": "Avg. transactions",
+    "monthlyBreakdown": "Monthly breakdown",
+    "income": "Income",
+    "expense": "Expenses",
+    "transactions": "Transactions",
+    "expenseRatio": "Expense ratio"
+  }
+}

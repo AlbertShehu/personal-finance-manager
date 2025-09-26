@@ -1,0 +1,408 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/rules-of-hooks */
+// src/components/shared/auth/RegisterForm.jsx
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "@/lib/validations/registerSchema";
+import { useTranslation } from "react-i18next";
+import { Eye, EyeOff, CheckCircle2, CircleAlert, AlertCircle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import GoogleSignInButton from "@/components/ui/google-signin-button";
+import api from "@/lib/axios";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const isGmail = (email = "") => /@(gmail|googlemail)\.com$/i.test(email.trim().toLowerCase());
+const normalizeEmail = (email = "") => email.trim().toLowerCase();
+
+export default function RegisterForm() {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const [showPwd, setShowPwd] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const form = useForm({
+    resolver: zodResolver(registerSchema(t)),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    mode: "onChange",
+  });
+
+  // Rifresko skemën e validimit kur ndryshohet gjuha
+  useEffect(() => {
+    form.clearErrors()
+    // Rifresko validimin për të gjitha fushat
+    Object.keys(form.formState.errors).forEach(field => {
+      form.trigger(field)
+    })
+  }, [t, form]);
+
+  // Trajtuesi i suksesit të Google Sign-In
+  const handleGoogleSuccess = ({ token, user }) => {
+    navigate("/", { replace: true });
+  };
+
+  const pwd = form.watch("password") ?? "";
+  const confirm = form.watch("confirmPassword") ?? "";
+  const emailVal = normalizeEmail(form.watch("email") ?? "");
+  const gmailOk = !emailVal || isGmail(emailVal);
+
+  const reqs = {
+    len: (pwd?.length || 0) >= 8,
+    num: /\d/.test(pwd || ""),
+    sym: /[^\w\s]/.test(pwd || ""),
+  };
+  const mismatch = pwd && confirm && pwd !== confirm;
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      const payload = {
+        name: data.name?.trim(),
+        email: normalizeEmail(data.email),
+        password: data.password,
+      };
+
+      // Validimi i avancuar i email-it në frontend
+      if (!isGmail(payload.email)) {
+        toast({
+          variant: "destructive",
+          title: t("register.error.title", "Registration Failed"),
+          description: t("register.validation.emailRules.gmailOnly", "Only Gmail addresses are allowed."),
+          duration: 6000,
+        });
+        return;
+      }
+
+      // Validimi i formës së Gmail
+      const localPart = payload.email.split('@')[0];
+      if (localPart.length < 6 || localPart.length > 30) {
+        toast({
+          variant: "destructive",
+          title: t("register.error.title", "Registration Failed"),
+          description: t("register.validation.emailRules.length", "Gmail local part must be 6-30 characters."),
+          duration: 6000,
+        });
+        return;
+      }
+
+      // Kontrollo karakteret e lejuara
+      const gmailLocalPartRegex = /^[a-zA-Z0-9._%+-]+$/;
+      if (!gmailLocalPartRegex.test(localPart)) {
+        toast({
+          variant: "destructive",
+          title: t("register.error.title", "Registration Failed"),
+          description: t("register.validation.emailRules.characters", "Email contains invalid characters for Gmail."),
+          duration: 6000,
+        });
+        return;
+      }
+
+      // Kontrollo pikat
+      if (localPart.endsWith('.') || localPart.startsWith('.')) {
+        toast({
+          variant: "destructive",
+          title: t("register.error.title", "Registration Failed"),
+          description: t("register.validation.emailRules.dots", "Gmail doesn't allow dots at the beginning or end."),
+          duration: 6000,
+        });
+        return;
+      }
+
+      if (localPart.includes('..')) {
+        toast({
+          variant: "destructive",
+          title: t("register.error.title", "Registration Failed"),
+          description: t("register.validation.emailRules.consecutiveDots", "Gmail doesn't allow consecutive dots."),
+          duration: 6000,
+        });
+        return;
+      }
+
+      const res = await api.post("/auth/register", payload);
+
+      const result = res?.data || {};
+      if (result.user) localStorage.setItem("user", JSON.stringify(result.user));
+      localStorage.setItem("registerSuccess", "true");
+
+      toast({
+        title: t("register.success.title"),
+        description:
+          t(
+            "register.success.descriptionVerify",
+            "Registration completed. Check your Gmail for the verification link."
+          ) || "Registration completed. Check your Gmail for the verification link.",
+        variant: "success",
+        duration: 6000,
+      });
+
+      form.reset();
+      navigate("/login", { replace: true });
+    } catch (err) {
+      const status = err?.response?.status;
+      const mapped =
+        status === 400
+          ? err?.response?.data?.message ||
+            t("register.error.required", "All fields are required.")
+          : status === 409
+          ? t("register.error.duplicateEmail", "This email is already registered.")
+          : err?.response?.data?.message ||
+            err?.response?.data?.error ||
+            err?.message ||
+            t("register.error.default");
+
+      toast({
+        variant: "destructive",
+        title: t("register.error.title", "Registration Failed"),
+        description: mapped,
+        duration: 6000,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 sm:space-y-6 bg-card p-4 sm:p-6 md:p-8 rounded-xl shadow-md text-foreground"
+        noValidate
+      >
+        <div className="text-center space-y-1">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-300">
+            {t("register.title")}
+          </h1>
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            {t("register.subtitle")}
+          </p>
+        </div>
+
+        {/* Name */}
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("register.name")}</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder={t("register.namePlaceholder")}
+                  autoComplete="name"
+                  aria-invalid={!!form.formState.errors.name || undefined}
+                  className={cn(
+                    "bg-background text-sm sm:text-base transition-colors",
+                    form.formState.errors.name 
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
+                      : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
+                  )}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Email (Gmail-only hint) */}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="flex items-center gap-2">
+                {t("register.email")}
+                {!!emailVal &&
+                  (gmailOk ? (
+                    <span className="inline-flex items-center gap-1 text-emerald-600 text-xs">
+                      <CheckCircle2 className="h-3 w-3" />
+                      {t("register.gmailOk", "Valid Gmail")}
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1 text-red-600 text-xs">
+                      <AlertCircle className="h-3 w-3" />
+                      {t("register.gmailOnly", "Only Gmail is allowed")}
+                    </span>
+                  ))}
+              </FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  {...field}
+                  placeholder={t("register.emailPlaceholder")}
+                  autoComplete="email"
+                  aria-invalid={!!form.formState.errors.email || (!gmailOk && !!emailVal) || undefined}
+                  className={cn(
+                    "bg-background text-sm sm:text-base transition-colors",
+                    form.formState.errors.email || (!gmailOk && !!emailVal)
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
+                      : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
+                  )}
+                  onBlur={(e) => {
+                    const v = normalizeEmail(e.target.value);
+                    form.setValue("email", v, { shouldValidate: true, shouldDirty: true });
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Password */}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("register.password")}</FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    type={showPwd ? "text" : "password"}
+                    {...field}
+                    placeholder="********"
+                    autoComplete="new-password"
+                    aria-invalid={!!form.formState.errors.password || undefined}
+                    className={cn(
+                      "bg-background pr-10 text-sm sm:text-base transition-colors",
+                      form.formState.errors.password 
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
+                        : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
+                    )}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPwd((v) => !v)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded hover:bg-muted"
+                    aria-label={
+                      showPwd
+                        ? t("register.hidePassword", "Hide password")
+                        : t("register.showPassword", "Show password")
+                    }
+                  >
+                    {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </FormControl>
+              {/* Password requirements hint */}
+              <ul className="mt-2 space-y-1 text-xs sm:text-sm">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className={`h-4 w-4 ${reqs.len ? "text-emerald-600" : "text-muted-foreground"}`} />
+                  <span>{t("register.passwordReq.min", "At least 8 characters")}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className={`h-4 w-4 ${reqs.num ? "text-emerald-600" : "text-muted-foreground"}`} />
+                  <span>{t("register.passwordReq.number", "At least one number")}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className={`h-4 w-4 ${reqs.sym ? "text-emerald-600" : "text-muted-foreground"}`} />
+                  <span>{t("register.passwordReq.symbol", "At least one symbol")}</span>
+                </li>
+              </ul>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Confirm Password */}
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("register.confirmPassword")}</FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    type={showConfirm ? "text" : "password"}
+                    {...field}
+                    placeholder="********"
+                    autoComplete="new-password"
+                    aria-invalid={
+                      !!form.formState.errors.confirmPassword || mismatch || undefined
+                    }
+                    className={cn(
+                      "bg-background pr-10 text-sm sm:text-base transition-colors",
+                      form.formState.errors.confirmPassword || mismatch
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
+                        : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
+                    )}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirm((v) => !v)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded hover:bg-muted"
+                    aria-label={
+                      showConfirm
+                        ? t("register.hidePassword", "Hide password")
+                        : t("register.showPassword", "Show password")
+                    }
+                  >
+                    {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </FormControl>
+
+              {mismatch && !form.formState.errors.confirmPassword && (
+                <p className="text-xs text-red-600 mt-1 flex items-center gap-1 leading-relaxed">
+                  <CircleAlert className="h-3 w-3 sm:h-4 sm:w-4" />
+                  {t("register.validation.password.match", "Passwords do not match")}
+                </p>
+              )}
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button
+          type="submit"
+          disabled={
+            loading ||
+            !form.formState.isValid ||
+            (pwd && confirm && pwd !== confirm) ||
+            (!!emailVal && !gmailOk) // ⬅️ mos lejo submit kur s’është Gmail
+          }
+          className="w-full font-semibold py-2 sm:py-3 rounded-md text-sm sm:text-base"
+        >
+          {loading ? t("register.loading") : t("register.submit")}
+        </Button>
+
+        {/* Divider + Google */}
+        <div className="flex items-center gap-4">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-xs text-muted-foreground">{t("register.or", "or")}</span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+        <div className="flex justify-center">
+          <GoogleSignInButton
+            onSuccess={handleGoogleSuccess}
+            className="w-full max-w-xs"
+            disabled={loading}
+          >
+            {t("register.google.button", "Sign in with Google")}
+          </GoogleSignInButton>
+        </div>
+      </form>
+    </Form>
+  );
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- Content Security Policy (funksionon më mirë si header nga serveri; meta është ok për SPA) -->
+   <meta
+  http-equiv="Content-Security-Policy"
+  content="
+    default-src 'self';
+    script-src 'self' https://accounts.google.com 'wasm-unsafe-eval' 'inline-speculation-rules';
+    script-src-elem 'self' https://accounts.google.com;
+    style-src 'self' 'unsafe-inline' https://accounts.google.com;
+    style-src-elem 'self' 'unsafe-inline' https://accounts.google.com;
+    img-src 'self' data: blob: https://lh3.googleusercontent.com https://ssl.gstatic.com;
+    font-src 'self' data:;
+    connect-src 'self' https://api.finman.com http://localhost:8095 http://192.168.1.65:8095 https://accounts.google.com https://www.googleapis.com ws: wss:;
+    frame-src https://accounts.google.com;
+    worker-src 'self' blob:;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  "
+/>
+
+    <!-- Canonical (NDRYSHO me domenin real) -->
+    <link rel="canonical" href="https://yourdomain.com" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- SEO -->
+    <title>FinMan – Smart Personal Finance Manager</title>
+    <meta
+      name="description"
+      content="FinMan – A smart personal finance manager, offering insights, charts, and secure transaction tracking."
+    />
+
+    <!-- Theme colors for light/dark (për UI të shfletuesit) -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#2563EB" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111827" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="FinMan – Smart Personal Finance Manager" />
+    <meta
+      property="og:description"
+      content="Track your income and expenses, view insightful charts, and take control of your finances with FinMan."
+    />
+    <meta property="og:image" content="/finman-og-image.png" />
+    <meta property="og:url" content="https://yourdomain.com" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FinMan – Smart Personal Finance Manager" />
+    <meta
+      name="twitter:description"
+      content="Track your income and expenses, view insightful charts, and take control of your finances with FinMan."
+    />
+    <meta name="twitter:image" content="/finman-og-image.png" />
+
+    <!-- Preconnect te API (opsionale, për latency më të ulët) -->
+    <link rel="preconnect" href="https://api.finman.com" crossorigin />
+
+    <!-- Ikona dhe manifest -->
+    <link rel="icon" href="/icons/finance-logo.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+
+  <body class="min-h-screen antialiased">
+    <noscript>Please enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <!-- Vite/React entry; type="module" tashmë është defer by default -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

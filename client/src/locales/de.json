@@ -1,0 +1,815 @@
+{
+  "common": {
+    "skipToContent": "Zum Inhalt springen",
+    "undo": "Rückgängig",
+    "validation": {
+      "email": {
+        "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+        "valid": "Gültige Gmail-Adresse",
+        "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
+        "characters": "E-Mail enthält für Gmail unzulässige Zeichen",
+        "dots": "Gmail erlaubt keine Punkte am Anfang oder Ende",
+        "consecutiveDots": "Gmail erlaubt keine aufeinanderfolgenden Punkte"
+      }
+    }
+  },
+  "landing": {
+    "metaTitle": "FinMan – Intelligenter persönlicher Finanzmanager",
+    "tagline": "Sichere Finanzplattform",
+    "title": "Verwalte deine Finanzen mit Stil",
+    "subtitle": "Analysen, Exporte, Sicherheit — alles an einem Ort. Eine einfache und smarte Lösung.",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "loginAria": "In dein Konto anmelden",
+    "registerAria": "Neues Konto erstellen",
+    "imageAlt": "Finanzillustration"
+  },
+  "features": {
+    "aria": "Hauptfunktionen",
+    "security": {
+      "title": "Standardmäßig sicher",
+      "desc": "Deine Daten sind verschlüsselt und durch strenge Zugriffsrichtlinien geschützt."
+    },
+    "insights": {
+      "title": "Handlungsfähige Insights",
+      "desc": "Verständliche Diagramme und Kategorien helfen beim Ausgabeverständnis."
+    },
+    "fast": {
+      "title": "Schnell & angenehm",
+      "desc": "Reaktionsschnelles, tastaturfreundliches UI – optimiert für alle Geräte."
+    },
+    "cta": "Kostenlos starten"
+  },
+  "stats": {
+    "aria": "Produktstatistiken",
+    "users": "Nutzer",
+    "transactions": "Erfasste Transaktionen",
+    "rating": "Durchschnittsbewertung",
+    "countries": "Länder"
+  },
+  "navbar": {
+    "title": "Finance",
+    "subtitle": "Management"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "transactions": "Transaktionen",
+    "analytics": "Analysen",
+    "budgets": "Budgets",
+    "settings": "Einstellungen",
+    "navigation": {
+      "title": "Navigation"
+    },
+    "quickStats": {
+      "title": "Schnellstatistiken",
+      "income": "Einnahmen",
+      "expenses": "Ausgaben",
+      "balance": "Saldo",
+      "transactions": "Transaktionen"
+    },
+    "quickActions": {
+      "title": "Schnellaktionen",
+      "addTransaction": "Transaktion hinzufügen",
+      "exportData": "Daten exportieren",
+      "syncData": "Synchronisieren"
+    },
+    "recentActivity": {
+      "title": "Letzte Aktivitäten",
+      "noTransactions": "Keine aktuellen Transaktionen",
+      "viewAll": "Alle anzeigen"
+    },
+    "openMenu": "Menü öffnen"
+  },
+  "sidebarSheet": {
+    "dashboard": "Dashboard",
+    "transactions": "Transaktionen"
+  },
+  "avatar": {
+    "greeting": "Hallo",
+    "account": "Mein Konto",
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "password": "Passwort",
+    "editProfile": "Profil bearbeiten",
+    "logout": "Abmelden",
+    "logoutSuccess": "Erfolgreich abgemeldet",
+    "logoutDescription": "Bis zum nächsten Mal!"
+  },
+  "dashboard": {
+    "title": "Finanzdashboard",
+    "subtitle": "Überblick über deine Einnahmen und Ausgaben",
+    "recommendations": "Budgetempfehlungen von KI 🤖",
+    "income": "Einnahmen",
+    "expense": "Ausgaben",
+    "balance": "Saldo",
+    "analysis": "Monatsanalyse & Kategorien 🔍",
+    "thisMonth": "Diesen Monat",
+    "loading": "Wird geladen...",
+    "loadError": "Daten konnten nicht geladen werden",
+    "transactionAnalysis": "Transaktionsanalyse",
+    "categoryAnalysis": "Kategorieanalyse",
+    "transactionTrends": "Transaktionstrends",
+    "kpi": {
+      "savingsRate": "Sparquote",
+      "avgDaily": "Ø tägliche Ausgaben"
+    },
+    "recent": "Letzte 5 Aktivitäten",
+    "viewAll": "Alle anzeigen",
+    "addTransaction": "Transaktion hinzufügen",
+    "empty": "Keine Insights für diesen Zeitraum. Füge eine Transaktion hinzu, um Insights zu sehen.",
+    "noChartData": "Nicht genug Daten für einen Trend.",
+    "noCategoryData": "Keine Kategoriedaten für diesen Zeitraum.",
+    "noMonthlyData": "Keine Monatsdaten vorhanden."
+  },
+  "analytics": {
+    "title": "Analysen",
+    "subtitle": "Detaillierte Finanzanalyse",
+    "loading": "Wird geladen...",
+    "error": "Fehler beim Laden der Daten",
+    "refresh": "Aktualisieren",
+    "totalIncome": "Gesamteinnahmen",
+    "totalExpenses": "Gesamtausgaben",
+    "netBalance": "Nettosaldo",
+    "transactions": "Transaktionen",
+    "thisMonth": "Diesen Monat",
+    "topCategories": "Top-Kategorien",
+    "topCategoriesDesc": "Ausgaben nach Kategorie in diesem Monat",
+    "monthlyTrend": "Monatstrend",
+    "monthlyTrendDesc": "Einnahmen und Ausgaben der letzten 6 Monate",
+    "noData": "Keine Daten für diesen Monat",
+    "insights": "Insights",
+    "insightsDesc": "Analysen und Empfehlungen basierend auf deinen Daten",
+    "negativeBalance": "Negativer Saldo",
+    "negativeBalanceDesc": "Du gibst mehr aus als du einnimmst. Reduziere Ausgaben.",
+    "topSpending": "Höchste Ausgaben",
+    "topSpendingDesc": "Kategorie „{category}“ hat diesen Monat die höchsten Ausgaben.",
+    "realTime": "Echtzeit-Analysen",
+    "realTimeDesc": "Neueste Kennzahlen deiner Finanzen",
+    "netWorth": "Vermögen",
+    "savingsRate": "Sparquote",
+    "avgDaily": "Ø tägliche Ausgaben",
+    "volatility": "Volatilität",
+    "dailyTrend": "Tagestrend",
+    "categorySpending": "Ausgaben nach Kategorie",
+    "topCategoriesRealtime": "Top-Ausgabenkategorien"
+  },
+  "budgets": {
+    "title": "Budgets",
+    "subtitle": "Verwalte deine Monatsbudgets",
+    "refresh": "Aktualisieren",
+    "totalBudget": "Gesamtbudget",
+    "totalSpent": "Ausgegeben",
+    "remaining": "Verbleibend",
+    "thisMonth": "Diesen Monat",
+    "addBudget": "Neues Budget hinzufügen",
+    "addBudgetDesc": "Erstelle ein neues Budget für eine Kategorie",
+    "category": "Kategorie",
+    "categoryPlaceholder": "Kategorie eingeben",
+    "limit": "Limit (€)",
+    "add": "Hinzufügen",
+    "budgetDesc": "Limit und Ausgaben für diese Kategorie",
+    "spent": "Ausgegeben",
+    "overBudget": "Budget überschritten!",
+    "overBudgetDesc": "Diese Kategorie hat das Limit überschritten.",
+    "overBudgetMessage": "Kategorie \"{category}\" hat Budget um {amount}€ überschritten",
+    "warning": "Warnung",
+    "warningDesc": "Budget ist fast aufgebraucht.",
+    "warningMessage": "Kategorie \"{category}\" hat {percentage}% des Budgets ausgegeben",
+    "alert": "Warnung",
+    "noBudgets": "Keine Budgets",
+    "noBudgetsDesc": "Füge dein erstes Budget hinzu, um Ausgaben zu steuern."
+  },
+  "range": {
+    "last30": "Letzte 30 Tage",
+    "thisMonth": "Diesen Monat",
+    "ytd": "Seit Jahresbeginn",
+    "all": "Alle"
+  },
+  "auth": {
+    "register": "Registrieren",
+    "login": "Anmelden"
+  },
+  "profile": {
+    "noData": "Keine Benutzerdaten.",
+    "id": "ID",
+    "registered": "Registriert am",
+    "form": {
+      "nameLabel": "Name",
+      "emailLabel": "E-Mail",
+      "submit": "Änderungen speichern",
+      "saving": "Speichern..."
+    },
+    "validation": {
+      "name": "Name muss mindestens 2 Zeichen lang sein.",
+      "email": "Bitte eine gültige E-Mail-Adresse eingeben."
+    },
+    "success": {
+      "title": "Profil aktualisiert ✅",
+      "description": "Profil erfolgreich gespeichert."
+    },
+    "error": {
+      "title": "Aktualisierung fehlgeschlagen ❌",
+      "default": "Beim Speichern des Profils ist ein Fehler aufgetreten."
+    }
+  },
+  "settings": {
+    "password": {
+      "title": "Passwort ändern"
+    },
+    "profile": {
+      "title": "Profil bearbeiten"
+    }
+  },
+  "aside": {
+    "welcome": "Willkommen bei FinMan",
+    "description": "Finanzen klug verwalten. Export, Analyse, Sicherheit.",
+    "backToHome": "Zur Startseite",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "login": {
+    "title": "Bei FinMan anmelden",
+    "subtitle": "Willkommen zurück — melde dich an, um fortzufahren 🚀",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "submit": "Anmelden",
+    "loading": "Anmeldung läuft...",
+    "rememberMe": "Angemeldet bleiben",
+    "forgotPassword": "Passwort vergessen?",
+    "gmailOk": "Gültige Gmail-Adresse",
+    "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+    "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
+    "or": "oder",
+    "success": {
+      "title": "Willkommen zurück 👋",
+      "description": "Du bist angemeldet."
+    },
+    "error": {
+      "title": "Anmeldung fehlgeschlagen",
+      "required": "E-Mail und Passwort sind erforderlich.",
+      "notFound": "Falsche E-Mail oder Benutzer existiert nicht.",
+      "invalidPassword": "Falsches Passwort.",
+      "server": "Anmeldung aufgrund eines Serverfehlers fehlgeschlagen.",
+      "default": "Etwas ist schiefgelaufen. Bitte erneut versuchen."
+    },
+    "validation": {
+      "email": "Bitte eine gültige E-Mail-Adresse eingeben.",
+      "emailRules": {
+        "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+        "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
+        "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
+        "dots": "Keine Punkte am Anfang oder Ende",
+        "consecutiveDots": "Keine aufeinanderfolgenden Punkte"
+      },
+      "password": "Passwort muss mindestens 6 Zeichen haben"
+    },
+    "google": {
+      "button": "Mit Google anmelden",
+      "notConfigured": {
+        "title": "Google-Anmeldung nicht konfiguriert",
+        "desc": "Setze VITE_GOOGLE_CLIENT_ID in client/.env und starte den Dev-Server neu."
+      },
+      "success": {
+        "title": "Willkommen!",
+        "desc": "Erfolgreich mit Google angemeldet."
+      },
+      "error": {
+        "title": "Fehler bei Google-Anmeldung",
+        "desc": "Bitte erneut versuchen."
+      }
+    }
+  },
+  "register": {
+    "title": "Erstelle dein Konto",
+    "subtitle": "Starte in wenigen Minuten mit dem Tracking.",
+    "name": "Vollständiger Name",
+    "namePlaceholder": "Dein Name",
+    "email": "E-Mail",
+    "emailPlaceholder": "du@beispiel.com",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "submit": "Konto erstellen",
+    "loading": "Konto wird erstellt…",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "gmailOk": "Gültige Gmail-Adresse",
+    "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+    "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
+    "or": "oder",
+    "passwordReq": {
+      "min": "Mindestens 8 Zeichen",
+      "number": "Mindestens eine Zahl",
+      "symbol": "Mindestens ein Symbol"
+    },
+    "success": {
+      "title": "Konto erstellt",
+      "description": "Du kannst dich jetzt anmelden.",
+      "descriptionVerify": "Registrierung abgeschlossen. Prüfe Gmail auf den Bestätigungslink."
+    },
+    "error": {
+      "title": "Registrierung fehlgeschlagen",
+      "required": "Alle Felder sind erforderlich.",
+      "duplicateEmail": "Diese E-Mail ist bereits registriert."
+    },
+    "google": {
+      "button": "Mit Google anmelden",
+      "notConfigured": {
+        "title": "Google-Anmeldung nicht konfiguriert",
+        "desc": "Setze VITE_GOOGLE_CLIENT_ID in client/.env und starte den Dev-Server neu."
+      },
+      "success": {
+        "title": "Willkommen!",
+        "desc": "Erfolgreich mit Google angemeldet."
+      },
+      "error": {
+        "title": "Fehler bei Google-Anmeldung",
+        "desc": "Bitte erneut versuchen."
+      }
+    },
+    "validation": {
+      "name": "Bitte gib deinen Namen ein",
+      "email": "Bitte eine gültige E-Mail-Adresse eingeben",
+      "emailRules": {
+        "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+        "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
+        "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
+        "dots": "Keine Punkte am Anfang oder Ende",
+        "consecutiveDots": "Keine aufeinanderfolgenden Punkte"
+      },
+      "password": {
+        "min": "Passwort muss mindestens 8 Zeichen haben",
+        "number": "Passwort muss mindestens eine Zahl enthalten",
+        "symbol": "Passwort muss mindestens ein Symbol enthalten",
+        "match": "Passwörter stimmen nicht überein"
+      }
+    }
+  },
+  "password": {
+    "form": {
+      "currentPasswordLabel": "Aktuelles Passwort",
+      "newPasswordLabel": "Neues Passwort",
+      "confirmNewPasswordLabel": "Neues Passwort bestätigen",
+      "submit": "Passwort ändern"
+    },
+    "validation": {
+      "currentPassword": "Aktuelles Passwort ist erforderlich.",
+      "newPassword": "Neues Passwort muss mindestens 6 Zeichen haben.",
+      "confirmNewPassword": "Passwörter stimmen nicht überein."
+    },
+    "success": {
+      "title": "Passwort geändert 🔐",
+      "description": "Passwort erfolgreich aktualisiert."
+    },
+    "error": {
+      "title": "Fehler ❌",
+      "default": "Passwortänderung fehlgeschlagen."
+    }
+  },
+  "insight": {
+    "empty": "🎯 Zurzeit keine Empfehlungen.",
+    "delete": "Empfehlung löschen",
+    "showAll": "Alle anzeigen",
+    "showLess": "Weniger",
+    "dismissed": "Empfehlung verworfen",
+    "restored": "Wiederhergestellt",
+    "increase": {
+      "title": "📈 Ausgaben in {{category}} gestiegen",
+      "description": "Du hast diesen Monat {{amount}}€ ausgegeben — {{percent}}% mehr als letzten Monat."
+    },
+    "decrease": {
+      "title": "📉 Ausgaben in {{category}} gesunken",
+      "description": "Nur {{amount}}€ in diesem Monat — {{percent}}% weniger als im Vormonat. Weiter so!"
+    },
+    "transaction": {
+      "title": "📌 Transaktion in {{category}}",
+      "description": "Am {{date}} hast du eine „{{type}}“ über {{amount}}€ in „{{category}}“ hinzugefügt.",
+      "expense": "Ausgabe",
+      "income": "Einnahme"
+    }
+  },
+  "charts": {
+    "monthly": {
+      "title": "Monatliche Einnahmen & Ausgaben",
+      "income": "Einnahmen",
+      "expense": "Ausgaben"
+    },
+    "topCategories": "Meistgenutzte Kategorien",
+    "noCategoryData": "Keine Kategoriedaten."
+  },
+  "chart": {
+    "title": "Monatliches Finanzdiagramm",
+    "loading": "Diagramm wird geladen...",
+    "noData": "Keine Transaktionen anzuzeigen.",
+    "income": "Einnahmen",
+    "expense": "Ausgaben"
+  },
+  "overview": {
+    "total": "Gesamt",
+    "income": "Gesamteinnahmen",
+    "expense": "Gesamtausgaben"
+  },
+  "table": {
+    "title": "Transaktionsliste",
+    "date": "Datum",
+    "category": "Kategorie",
+    "description": "Beschreibung",
+    "amount": "Betrag",
+    "type": "Typ",
+    "actions": "Aktionen",
+    "filters": {
+      "all": "Alle",
+      "income": "Einnahmen",
+      "expense": "Ausgaben"
+    },
+    "exportPdf": "PDF exportieren",
+    "manageIncome": "Einkommen verwalten",
+    "addTransaction": "Transaktion hinzufügen",
+    "empty": "Keine Transaktionen für diesen Filter gefunden.",
+    "confirmDelete": "Diese Transaktion wirklich löschen?",
+    "deleteSuccess": "Transaktion erfolgreich gelöscht",
+    "deleteDescription": "Transaktion aus der Liste entfernt",
+    "detailsTitle": "Transaktionsdetails"
+  },
+  "income": {
+    "title": "Monatliches Einkommen verwalten",
+    "subtitle": "Legen Sie Ihr monatliches Gehalt und zusätzliches Einkommen für bessere Finanzplanung fest",
+    "currentMonth": "Aktuelles Monatseinkommen",
+    "currentMonthDesc": "Legen Sie Ihr Gehalt und zusätzliches Einkommen für diesen Monat fest",
+    "monthlySalary": "Monatsgehalt",
+    "additionalIncome": "Zusätzliches Einkommen",
+    "totalMonthly": "Gesamt monatlich",
+    "history": "Einkommensverlauf",
+    "historyDesc": "Einkommen aus vorherigen Monaten",
+    "salary": "Gehalt",
+    "additional": "Zusätzlich",
+    "transactionDescription": "Monatsgehalt",
+    "additionalDescription": "Zusätzliches Einkommen",
+    "addToTransactions": "Zu Transaktionen hinzufügen",
+    "saveOnly": "Nur speichern",
+    "adding": "Hinzufügen...",
+    "saving": "Speichern...",
+    "success": {
+      "title": "Erfolg",
+      "saved": "Einkommensdaten erfolgreich gespeichert",
+      "addedToTransactions": "Einkommen zu Transaktionen hinzugefügt"
+    },
+    "error": {
+      "title": "Fehler",
+      "salaryRequired": "Monatsgehalt ist erforderlich",
+      "saveFailed": "Speichern fehlgeschlagen",
+      "addFailed": "Hinzufügen des Einkommens fehlgeschlagen"
+    },
+    "warning": {
+      "title": "Warnung",
+      "alreadyAdded": "Gehalt für diesen Monat wurde bereits hinzugefügt"
+    }
+  },
+  "transaction": {
+    "modal": {
+      "title": "Transaktion hinzufügen",
+      "cancel": "Abbrechen",
+      "submit": "Hinzufügen",
+      "editTitle": "Transaktion bearbeiten",
+      "editSubtitle": "Felder aktualisieren und speichern"
+    },
+    "form": {
+      "category": "Kategorie",
+      "description": "Beschreibung",
+      "amount": "Betrag (€)",
+      "date": "Datum",
+      "type": "Typ"
+    },
+    "filter": {
+      "income": "Einnahme",
+      "expense": "Ausgabe"
+    },
+    "toast": {
+      "addSuccess": "✅ Transaktion hinzugefügt",
+      "addSuccessDesc": "Transaktion erfolgreich gespeichert.",
+      "addError": "❌ Hinzufügen fehlgeschlagen",
+      "validationError": "❌ Validierungsfehler",
+      "updateSuccess": "✅ Transaktion aktualisiert",
+      "updateError": "❌ Aktualisierung fehlgeschlagen",
+      "noChanges": "Keine Änderungen zu speichern",
+      "addDescription": "Deine Transaktion wurde erfolgreich hinzugefügt."
+    },
+    "validation": {
+      "categoryRequired": "Kategorie ist erforderlich",
+      "descriptionRequired": "Beschreibung ist erforderlich",
+      "amountPositive": "Betrag muss positiv sein",
+      "dateRequired": "Datum ist erforderlich"
+    }
+  },
+  "transactions": {
+    "title": "Transaktionen",
+    "search": "Transaktionen durchsuchen...",
+    "filters": "Filter",
+    "export": "Exportieren",
+    "type": "Typ",
+    "allTypes": "Alle Typen",
+    "income": "Einnahmen",
+    "expense": "Ausgaben",
+    "category": "Kategorie",
+    "allCategories": "Alle Kategorien",
+    "sortBy": "Sortieren nach",
+    "date": "Datum",
+    "amount": "Betrag",
+    "description": "Beschreibung",
+    "sortOrder": "Sortierreihenfolge",
+    "showing": "Anzeigen",
+    "of": "von",
+    "total": "gesamt",
+    "view": "Ansehen",
+    "edit": "Bearbeiten",
+    "untitled": "Ohne Titel",
+    "monthlyFinancialChart": "Monatliches Finanzdiagramm",
+    "noData": "Keine Transaktionen anzuzeigen.",
+    "loadingChart": "Diagramm wird geladen...",
+    "typeMap": {
+      "INCOME": "Einnahme",
+      "EXPENSE": "Ausgabe"
+    }
+  },
+  "actions": {
+    "close": "Schließen",
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "delete": "Löschen"
+  },
+  "forgot": {
+    "title": "Passwort vergessen?",
+    "subtitle": "Gib deine E-Mail ein, wir senden Anweisungen zum Zurücksetzen.",
+    "submit": "Link senden",
+    "sending": "Senden...",
+    "gmailOk": "Gültige Gmail-Adresse",
+    "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+    "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
+    "success": "Falls die E-Mail existiert, wurden Anweisungen gesendet.",
+    "descriptionVerify": "Zurücksetzungslink gesendet. Prüfe dein Gmail.",
+    "error": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+    "invalidEmail": "Ungültige Gmail-Adresse angegeben.",
+    "emailNotFound": "Kein Konto mit dieser E-Mail gefunden.",
+    "serverError": "Senden der Zurücksetzungs-E-Mail fehlgeschlagen.",
+    "rateLimit": "Zu viele Anfragen. Bitte kurz warten.",
+    "default": "Unerwarteter Fehler. Bitte erneut versuchen.",
+    "required": "E-Mail-Adresse ist erforderlich.",
+    "invalidFormat": "Bitte eine gültige E-Mail-Adresse eingeben.",
+    "notGmail": "Nur Gmail-Adressen sind erlaubt.",
+    "localPartTooShort": "Lokaler Teil muss mindestens 6 Zeichen haben.",
+    "localPartTooLong": "Lokaler Teil darf 30 Zeichen nicht überschreiten.",
+    "invalidCharacters": "E-Mail enthält unzulässige Zeichen.",
+    "dotsAtEnds": "Keine Punkte am Anfang oder Ende.",
+    "consecutiveDots": "Keine aufeinanderfolgenden Punkte."
+  },
+  "error": {
+    "title": "Passwortzurücksetzung fehlgeschlagen",
+    "required": "E-Mail-Adresse ist erforderlich.",
+    "invalidFormat": "Bitte eine gültige E-Mail-Adresse eingeben.",
+    "notGmail": "Nur Gmail-Adressen sind erlaubt.",
+    "localPartTooShort": "Lokaler Teil muss mindestens 6 Zeichen haben.",
+    "localPartTooLong": "Lokaler Teil darf 30 Zeichen nicht überschreiten.",
+    "invalidCharacters": "E-Mail enthält unzulässige Zeichen.",
+    "dotsAtEnds": "Keine Punkte am Anfang oder Ende.",
+    "consecutiveDots": "Keine aufeinanderfolgenden Punkte."
+  },
+  "validation": {
+    "emailRules": {
+      "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+      "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
+      "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
+      "dots": "Keine Punkte am Anfang oder Ende",
+      "consecutiveDots": "Keine aufeinanderfolgenden Punkte"
+    }
+  },
+  "reset": {
+    "title": "Passwort zurücksetzen",
+    "subtitle": "Gib ein neues Passwort für dein Konto ein.",
+    "password": "Neues Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "passwordPlaceholder": "********",
+    "confirmPlaceholder": "********",
+    "submit": "Passwort zurücksetzen",
+    "loading": "Wird zurückgesetzt…",
+    "success": "Passwort zurückgesetzt. Du kannst dich jetzt anmelden.",
+    "error": "Zurücksetzen fehlgeschlagen",
+    "backToLogin": "Zur Anmeldung",
+    "missingToken": "Link ist ungültig oder abgelaufen.",
+    "passwordReq": {
+      "min": "Mindestens 8 Zeichen",
+      "number": "Mindestens eine Zahl",
+      "symbol": "Mindestens ein Symbol"
+    },
+    "validation": {
+      "password": {
+        "min": "Passwort muss mindestens 8 Zeichen haben",
+        "number": "Passwort muss mindestens eine Zahl enthalten",
+        "symbol": "Passwort muss mindestens ein Symbol enthalten"
+      },
+      "match": "Passwörter stimmen nicht überein"
+    }
+  },
+  "theme": {
+    "title": "Theme",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "system": "System"
+  },
+  "smartInsights": {
+    "title": "Personalisierte KI-Empfehlungen",
+    "noData": {
+      "title": "Nicht genug Daten",
+      "description": "Füge mehr Transaktionen hinzu, um personalisierte Empfehlungen zu erhalten."
+    },
+    "lowSavings": {
+      "title": "Geringe Ersparnisse",
+      "description": "Deine Ersparnisse betragen nur {{rate}}%. Ziele auf mindestens 20% für Stabilität.",
+      "action": "Ausgaben prüfen"
+    },
+    "excellentSavings": {
+      "title": "Ausgezeichnete Ersparnisse! 🎉",
+      "description": "Deine Ersparnisse liegen bei {{rate}}% — super! Weiter so.",
+      "action": "Über Investitionen nachdenken"
+    },
+    "incomeDecline": {
+      "title": "Einnahmenrückgang",
+      "description": "Deine Einnahmen sanken um {{percent}}% gegenüber dem Vormonat.",
+      "action": "Neue Möglichkeiten suchen"
+    },
+    "incomeGrowth": {
+      "title": "Starkes Einnahmenwachstum! 📈",
+      "description": "Deine Einnahmen stiegen um {{percent}}% — großartig!",
+      "action": "Budget prüfen"
+    },
+    "expenseIncrease": {
+      "title": "Ausgabensprung",
+      "description": "Ausgaben stiegen um {{percent}}%. Budget prüfen.",
+      "action": "Unnötige Ausgaben identifizieren"
+    },
+    "highCategorySpending": {
+      "title": "Hohe Ausgaben in Kategorie",
+      "description": "Du gibst {{amount}}€ für {{category}} aus ({{percentage}}% der Einnahmen).",
+      "action": "Reduktion erwägen"
+    },
+    "highDailySpending": {
+      "title": "Hohe Tagesausgaben",
+      "description": "Durchschnittlich {{amount}}€ pro Tag.",
+      "action": "Ausgaben planen"
+    },
+    "negativeBalance": {
+      "title": "Negativer Saldo",
+      "description": "Du gibst {{amount}}€ mehr aus als du einnimmst.",
+      "action": "Ausgaben sofort reduzieren"
+    },
+    "diversifySpending": {
+      "title": "Ausgaben diversifizieren",
+      "description": "Deine Ausgaben konzentrieren sich auf nur {{count}} Kategorien.",
+      "action": "Weitere Kategorien erwägen"
+    },
+    "considerInvesting": {
+      "title": "Über Investitionen nachdenken",
+      "description": "Mit {{rate}}% Ersparnissen könntest du langfristige Investitionen erwägen.",
+      "action": "Anlageberatung einholen"
+    },
+    "priority": {
+      "critical": "Kritisch",
+      "high": "Hoch",
+      "medium": "Mittel",
+      "low": "Niedrig"
+    },
+    "showMore": "Alle anzeigen ({{count}})",
+    "showLess": "Weniger anzeigen"
+  },
+  "formValidation": {
+    "email": {
+      "required": "E-Mail ist erforderlich",
+      "invalid": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
+      "gmailOnly": "Nur Gmail-Adressen sind erlaubt"
+    },
+    "password": {
+      "required": "Passwort ist erforderlich",
+      "minLength": "Passwort muss mindestens 6 Zeichen haben",
+      "minLength8": "Passwort muss mindestens 8 Zeichen haben",
+      "number": "Passwort muss mindestens eine Zahl enthalten",
+      "symbol": "Passwort muss mindestens ein Symbol enthalten",
+      "match": "Passwörter stimmen nicht überein"
+    },
+    "name": {
+      "required": "Name ist erforderlich",
+      "minLength": "Name muss mindestens 2 Zeichen haben"
+    },
+    "confirmPassword": {
+      "required": "Passwortbestätigung ist erforderlich",
+      "match": "Passwörter stimmen nicht überein"
+    }
+  },
+  "predictions": {
+    "title": "KI-Prognosen",
+    "desc": "Vorhersagen basierend auf deinem Ausgabeverhalten",
+    "noData": "Keine Prognosedaten",
+    "noDataDesc": "Füge mehr Transaktionen hinzu, um KI-Prognosen zu erhalten",
+    "nextMonthIncome": "Einnahmen nächster Monat",
+    "nextMonthExpense": "Ausgaben nächster Monat",
+    "nextMonthNet": "Vermögen nächster Monat",
+    "riskAssessment": "Risikobewertung",
+    "lowRisk": "Niedriges Risiko",
+    "mediumRisk": "Mittleres Risiko",
+    "highRisk": "Hohes Risiko",
+    "riskScore": "Risikowert",
+    "aiInsights": "KI-Insights",
+    "advancedDetails": "Erweiterte Details",
+    "patternAnalysis": "Musterdanalyse",
+    "monthlyPattern": "Monatliches Muster",
+    "categoryPattern": "Analysierte Kategorien",
+    "transactionCount": "Anzahl Transaktionen",
+    "algorithmInfo": "Algorithmusinfo",
+    "confidenceLevel": "Konfidenzniveau",
+    "dataQuality": "Datenqualität",
+    "excellent": "Ausgezeichnet",
+    "good": "Gut",
+    "basic": "Basis"
+  },
+  "performance": {
+    "title": "Leistungsmonitoring",
+    "desc": "Echtzeit-Leistungskennzahlen",
+    "stop": "Stop",
+    "start": "Start",
+    "renderTime": "Renderzeit",
+    "memoryUsage": "Speichernutzung",
+    "networkLatency": "Netzwerklatenz",
+    "cacheHitRate": "Cache-Trefferquote",
+    "errorRate": "Fehlerrate",
+    "throughput": "Durchsatz",
+    "renderTimeChart": "Renderzeit",
+    "memoryChart": "Speichernutzung",
+    "advancedDetails": "Erweiterte Details",
+    "systemInfo": "Systeminfo",
+    "userAgent": "User Agent",
+    "screenResolution": "Auflösung",
+    "timezone": "Zeitzone",
+    "language": "Sprache",
+    "optimization": "Optimierungen",
+    "lazyLoading": "Lazy Loading",
+    "memoization": "Memoization",
+    "virtualization": "Virtualisierung",
+    "codeSplitting": "Code Splitting",
+    "overallStatus": "Gesamtstatus",
+    "monitoringActive": "Monitoring aktiv",
+    "monitoringInactive": "Monitoring inaktiv",
+    "lastUpdate": "Letzte Aktualisierung"
+  },
+  "optimization": {
+    "title": "Optimierungspanel",
+    "desc": "Leistung überwachen und optimieren",
+    "stop": "Stop",
+    "start": "Start",
+    "metrics": "Metriken",
+    "suggestions": "Vorschläge",
+    "settings": "Einstellungen",
+    "renderTime": "Renderzeit",
+    "memoryUsage": "Speichernutzung",
+    "networkLatency": "Netzwerklatenz",
+    "cacheHitRate": "Cache-Trefferquote",
+    "errorRate": "Fehlerrate",
+    "throughput": "Durchsatz",
+    "bundleSize": "Bundle-Größe",
+    "loadTime": "Ladezeit",
+    "noSuggestions": "Keine Vorschläge",
+    "noSuggestionsDesc": "Leistung sieht gut aus!",
+    "cacheSettings": "Cache-Einstellungen",
+    "performanceSettings": "Leistungseinstellungen",
+    "clearCache": "Cache leeren",
+    "exportMetrics": "Metriken exportieren"
+  },
+  "categoryAnalysis": {
+    "title": "Kategorieanalyse",
+    "desc": "Ausgaben nach Kategorien mit Trends",
+    "noData": "Keine Daten",
+    "noDataDesc": "Füge Transaktionen hinzu, um die Analyse zu sehen",
+    "totalExpenses": "Gesamtausgaben",
+    "currentMonth": "Aktueller Monat",
+    "total": "Gesamt",
+    "count": "Anzahl",
+    "average": "Durchschnitt",
+    "percentage": "Prozentsatz",
+    "showing": "Anzeigen",
+    "of": "von",
+    "categories": "Kategorien"
+  },
+  "trends": {
+    "title": "Transaktionstrends",
+    "desc": "Monatliche Trends der letzten 6 Monate",
+    "noData": "Keine Daten",
+    "noDataDesc": "Füge Transaktionen hinzu, um Trends zu sehen",
+    "incomeTrend": "Einnahmentrend",
+    "expenseTrend": "Ausgabentrend",
+    "netTrend": "Nettotrend",
+    "avgIncome": "Ø Einnahmen",
+    "avgExpense": "Ø Ausgaben",
+    "avgNet": "Ø Netto",
+    "avgTransactions": "Ø Transaktionen",
+    "monthlyBreakdown": "Monatliche Aufschlüsselung",
+    "income": "Einnahmen",
+    "expense": "Ausgaben",
+    "transactions": "Transaktionen",
+    "expenseRatio": "Ausgabenquote"
+  }
+}

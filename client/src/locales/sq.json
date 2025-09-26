@@ -1,0 +1,823 @@
+{
+  "common": {
+    "skipToContent": "Kalo te përmbajtja",
+    "undo": "Anulo",
+    "validation": {
+      "email": {
+        "gmailOnly": "Lejohen vetëm adresat Gmail",
+        "valid": "Adresë Gmail e vlefshme",
+        "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
+        "characters": "Email përmban karaktere të pavlefshme për Gmail",
+        "dots": "Gmail nuk lejon pika në fillim ose fund",
+        "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme"
+      }
+    }
+  },
+  "landing": {
+    "metaTitle": "FinMan – Menaxher i Zgjuar i Financave Personale",
+    "tagline": "Platformë financiare e sigurt",
+    "title": "Menaxho financat me stil",
+    "subtitle": "Analitika, eksporti, siguria — të gjitha në një vend. Zgjidh një zgjidhje të thjeshtë e të zgjuar.",
+    "login": "Hyr",
+    "register": "Regjistrohu",
+    "loginAria": "Hyr në llogarinë tënde",
+    "registerAria": "Krijo një llogari të re",
+    "imageAlt": "Ilustrim financiar"
+  },
+  "features": {
+    "aria": "Veçoritë kryesore",
+    "security": {
+      "title": "E sigurt si parazgjedhje",
+      "desc": "Të dhënat e tua janë të enkriptuara dhe të mbrojtura me politika strikte aksesi."
+    },
+    "insights": {
+      "title": "Vlerësime të zbatueshme",
+      "desc": "Kupto mënyrën e shpenzimeve me grafiqe të qarta dhe ndarje sipas kategorive."
+    },
+    "fast": {
+      "title": "Shpejt & i këndshëm",
+      "desc": "UI reaguese, miqësore me tastierë dhe e optimizuar për të gjitha pajisjet."
+    },
+    "cta": "Fillo falas"
+  },
+  "stats": {
+    "aria": "Statistikat e produktit",
+    "users": "Përdorues",
+    "transactions": "Transaksione të gjurmuara",
+    "rating": "Vlerësim mesatar",
+    "countries": "Shtete"
+  },
+  "navbar": {
+    "title": "Finance",
+    "subtitle": "Management"
+  },
+  "sidebar": {
+    "dashboard": "Paneli",
+    "transactions": "Transaksionet",
+    "analytics": "Analitika",
+    "budgets": "Buxhetet",
+    "settings": "Cilësimet",
+    "navigation": {
+      "title": "Navigimi"
+    },
+    "quickStats": {
+      "title": "Statistikat e Shpejta",
+      "income": "Të ardhurat",
+      "expenses": "Shpenzimet",
+      "balance": "Bilanci",
+      "transactions": "Transaksionet"
+    },
+    "quickActions": {
+      "title": "Veprime të Shpejta",
+      "addTransaction": "Shto Transaksion",
+      "exportData": "Eksporto Të Dhënat",
+      "syncData": "Sinkronizo"
+    },
+    "recentActivity": {
+      "title": "Aktiviteti i Fundit",
+      "noTransactions": "Nuk ka transaksione të fundit",
+      "viewAll": "Shiko të gjitha"
+    },
+    "openMenu": "Hap menunë"
+  },
+  "sidebarSheet": {
+    "dashboard": "Paneli",
+    "transactions": "Transaksionet"
+  },
+  "avatar": {
+    "greeting": "Përshëndetje",
+    "account": "Llogaria ime",
+    "profile": "Profili",
+    "settings": "Cilësimet",
+    "password": "Fjalëkalimi",
+    "editProfile": "Ndrysho Profilin",
+    "logout": "Dil",
+    "logoutSuccess": "U ç’kyçët me sukses",
+    "logoutDescription": "Shihemi herën tjetër!"
+  },
+  "dashboard": {
+    "title": "Paneli Financiar",
+    "subtitle": "Përmbledhje e të ardhurave dhe shpenzimeve të tua",
+    "recommendations": "Rekomandime Buxheti nga AI 🤖",
+    "income": "Të ardhura",
+    "expense": "Shpenzime",
+    "balance": "Bilanci",
+    "analysis": "Analiza mujore & Kategoritë 🔍",
+    "thisMonth": "Këtë muaj",
+    "loading": "Duke ngarkuar...",
+    "loadError": "Gabim në ngarkimin e të dhënave",
+    "transactionAnalysis": "Analiza e Transaksioneve",
+    "categoryAnalysis": "Analiza e Kategorive",
+    "transactionTrends": "Trendet e Transaksioneve",
+    "kpi": {
+      "savingsRate": "Shkalla e kursimeve",
+      "avgDaily": "Shpenzim mesatar ditor"
+    },
+    "recent": "5 aktivitetet e fundit",
+    "viewAll": "Shiko të gjitha",
+    "addTransaction": "Shto transaksion",
+    "empty": "S’ka rekomandime për këtë interval. Shto një transaksion për të parë vlerësime.",
+    "noChartData": "Nuk ka mjaft të dhëna për të treguar trend.",
+    "noCategoryData": "S’ka të dhëna kategorie për këtë interval.",
+    "noMonthlyData": "S’ka të dhëna mujore për t’u shfaqur."
+  },
+  "analytics": {
+    "title": "Analitika",
+    "subtitle": "Analiza e detajuar financiare",
+    "loading": "Duke ngarkuar...",
+    "error": "Gabim në ngarkimin e të dhënave",
+    "refresh": "Rifresko",
+    "totalIncome": "Të ardhurat totale",
+    "totalExpenses": "Shpenzimet totale",
+    "netBalance": "Bilanci neto",
+    "transactions": "Transaksionet",
+    "thisMonth": "Këtë muaj",
+    "topCategories": "Kategoritë kryesore",
+    "topCategoriesDesc": "Shpenzimet sipas kategorive këtë muaj",
+    "monthlyTrend": "Trendi mujor",
+    "monthlyTrendDesc": "Të ardhurat dhe shpenzimet 6 muajt e fundit",
+    "noData": "Nuk ka të dhëna për këtë muaj",
+    "insights": "Vlerësime",
+    "insightsDesc": "Analiza dhe rekomandime bazuar në të dhënat tuaja",
+    "negativeBalance": "Bilanç negativ",
+    "negativeBalanceDesc": "Shpenzoni më shumë se të ardhurat. Konsideroni reduktimin e shpenzimeve.",
+    "topSpending": "Shpenzimet kryesore",
+    "topSpendingDesc": "Kategoria \"{category}\" është ajo me shpenzimet më të mëdha këtë muaj.",
+    "quickActions": "Veprime të shpejta",
+    "quickActionsDesc": "Menaxho transaksionet dhe shiko detajet",
+    "viewAllTransactions": "Shiko të gjitha transaksionet",
+    "refreshData": "Rifresko të dhënat",
+    "recentTransactions": "Transaksionet e fundit",
+    "recentTransactionsDesc": "Transaksionet e fundit për analizë të detajuar",
+    "viewAll": "Shiko të gjitha",
+    "realTime": "Analiza në Kohë Reale",
+    "realTimeDesc": "Metrikat e fundit të financave tuaja",
+    "netWorth": "Pasuria Neto",
+    "savingsRate": "Shkalla e Kursimeve",
+    "avgDaily": "Shpenzim Mesatar Ditor",
+    "volatility": "Volatiliteti",
+    "dailyTrend": "Trendi Ditor",
+    "categorySpending": "Shpenzimet sipas Kategorive",
+    "topCategoriesRealtime": "Kategoritë Më të Shpenzuara"
+  },
+  "budgets": {
+    "title": "Buxhetet",
+    "subtitle": "Menaxhoni buxhetet tuaja mujore",
+    "refresh": "Rifresko",
+    "totalBudget": "Buxheti total",
+    "totalSpent": "Shpenzuar",
+    "remaining": "Mbetur",
+    "thisMonth": "Këtë muaj",
+    "addBudget": "Shto buxhet të ri",
+    "addBudgetDesc": "Krijoni një buxhet të ri për një kategori",
+    "category": "Kategoria",
+    "categoryPlaceholder": "Shkruani kategorinë",
+    "limit": "Limiti (€)",
+    "add": "Shto",
+    "budgetDesc": "Limiti dhe shpenzimet për këtë kategori",
+    "spent": "Shpenzuar",
+    "overBudget": "Buxheti u tejkalua!",
+    "overBudgetDesc": "Kjo kategori ka shpenzuar më shumë se buxheti i caktuar.",
+    "overBudgetMessage": "Kategoria \"{category}\" ka tejkaluar buxhetin me {amount}€",
+    "warning": "Paralajmërim",
+    "warningDesc": "Buxheti është pothuajse i shteruar.",
+    "warningMessage": "Kategoria \"{category}\" ka shpenzuar {percentage}% të buxhetit",
+    "alert": "Alarm",
+    "noBudgets": "Nuk ka buxhete",
+    "noBudgetsDesc": "Shtoni buxhetin tuaj të parë për të filluar menaxhimin e shpenzimeve."
+  },
+  "range": {
+    "last30": "30 ditët e fundit",
+    "thisMonth": "Ky muaj",
+    "ytd": "Që nga fillimi i vitit",
+    "all": "Të gjitha"
+  },
+  "auth": {
+    "register": "Regjistrohu",
+    "login": "Hyr"
+  },
+  "profile": {
+    "noData": "S’ka të dhëna përdoruesi.",
+    "id": "ID",
+    "registered": "Regjistruar më",
+    "form": {
+      "nameLabel": "Emri",
+      "emailLabel": "Email",
+      "submit": "Ruaj ndryshimet",
+      "saving": "Duke ruajtur..."
+    },
+    "validation": {
+      "name": "Emri duhet të ketë të paktën 2 karaktere.",
+      "email": "Ju lutem shkruani një adresë email të vlefshme."
+    },
+    "success": {
+      "title": "Profili u përditësua ✅",
+      "description": "Profili u ruajt me sukses."
+    },
+    "error": {
+      "title": "Përditësimi dështoi ❌",
+      "default": "Ndodhi një gabim gjatë ruajtjes së profilit."
+    }
+  },
+  "settings": {
+    "password": {
+      "title": "Ndrysho Fjalëkalimin"
+    },
+    "profile": {
+      "title": "Ndrysho Profilin"
+    }
+  },
+  "aside": {
+    "welcome": "Mirë se erdhe në FinMan",
+    "description": "Menaxho financat me mençuri. Eksporto, analizë, siguri.",
+    "backToHome": "Kthehu në faqen kryesore",
+    "rights": "Të gjitha të drejtat e rezervuara."
+  },
+  "login": {
+    "title": "Hyr në FinMan",
+    "subtitle": "Mirë se u ktheve — hyr për të vazhduar 🚀",
+    "email": "Email",
+    "password": "Fjalëkalimi",
+    "submit": "Hyr",
+    "loading": "Duke u identifikuar...",
+    "rememberMe": "Më mbaj mend",
+    "forgotPassword": "Ke harruar fjalëkalimin?",
+    "gmailOk": "Gmail i vlefshëm",
+    "gmailOnly": "Lejohen vetëm adresat Gmail",
+    "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
+    "or": "ose",
+    "success": {
+      "title": "Mirë se u ktheve 👋",
+      "description": "Je identifikuar."
+    },
+    "error": {
+      "title": "Identifikimi dështoi",
+      "required": "Email dhe fjalëkalimi janë të detyrueshëm.",
+      "notFound": "Email i pasaktë ose përdoruesi nuk ekziston.",
+      "invalidPassword": "Fjalëkalimi është i pasaktë.",
+      "server": "Identifikimi dështoi për shkak të një gabimi në server.",
+      "default": "Diçka shkoi keq. Provo përsëri."
+    },
+    "validation": {
+      "email": "Ju lutem jepni një adresë email të vlefshme.",
+      "emailRules": {
+        "gmailOnly": "Lejohen vetëm adresat Gmail",
+        "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
+        "characters": "Email përmban karaktere të pavlefshme për Gmail",
+        "dots": "Gmail nuk lejon pika në fillim ose fund",
+        "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme"
+      },
+      "password": "Fjalëkalimi duhet të ketë të paktën 6 karaktere"
+    },
+    "google": {
+      "button": "Hyr me Google",
+      "notConfigured": {
+        "title": "Google Sign-In nuk është konfiguruar",
+        "desc": "Vendos VITE_GOOGLE_CLIENT_ID në client/.env dhe rindez dev server-in për të aktivizuar Google Sign-In."
+      },
+      "success": {
+        "title": "Mirësevini!",
+        "desc": "Identifikim me Google i suksesshëm."
+      },
+      "error": {
+        "title": "Gabim me Google Sign-In",
+        "desc": "Ju lutem provo përsëri."
+      }
+    }
+  },
+  "register": {
+    "title": "Krijo llogarinë tënde",
+    "subtitle": "Fillo të ndjekësh financat për pak minuta.",
+    "name": "Emri i plotë",
+    "namePlaceholder": "Emri yt",
+    "email": "Email",
+    "emailPlaceholder": "ti@shembull.com",
+    "password": "Fjalëkalimi",
+    "confirmPassword": "Konfirmo fjalëkalimin",
+    "submit": "Krijo llogari",
+    "loading": "Duke krijuar llogarinë…",
+    "showPassword": "Shfaq fjalëkalimin",
+    "hidePassword": "Fshihe fjalëkalimin",
+    "gmailOk": "Gmail i vlefshëm",
+    "gmailOnly": "Lejohen vetëm adresat Gmail",
+    "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
+    "or": "ose",
+    "passwordReq": {
+      "min": "Të paktën 8 karaktere",
+      "number": "Të paktën një numër",
+      "symbol": "Të paktën një simbol"
+    },
+    "success": {
+      "title": "Llogaria u krijua",
+      "description": "Tani mund të hysh me llogarinë tënde të re.",
+      "descriptionVerify": "Regjistrimi u përfundua. Kontrollo Gmail-in për linkun e verifikimit."
+    },
+    "error": {
+      "title": "Regjistrimi dështoi",
+      "required": "Të gjitha fushat janë të detyrueshme.",
+      "duplicateEmail": "Ky email është tashmë i regjistruar."
+    },
+    "google": {
+      "button": "Hyr me Google",
+      "notConfigured": {
+        "title": "Google Sign-In nuk është konfiguruar",
+        "desc": "Vendos VITE_GOOGLE_CLIENT_ID në client/.env dhe rindez dev server-in për të aktivizuar Google Sign-In."
+      },
+      "success": {
+        "title": "Mirësevini!",
+        "desc": "Identifikim me Google i suksesshëm."
+      },
+      "error": {
+        "title": "Gabim me Google Sign-In",
+        "desc": "Ju lutem provo përsëri."
+      }
+    },
+    "validation": {
+      "name": "Ju lutem shkruani emrin",
+      "email": "Ju lutem jepni një adresë email të vlefshme",
+      "emailRules": {
+        "gmailOnly": "Lejohen vetëm adresat Gmail",
+        "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
+        "characters": "Email përmban karaktere të pavlefshme për Gmail",
+        "dots": "Gmail nuk lejon pika në fillim ose fund",
+        "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme"
+      },
+      "password": {
+        "min": "Fjalëkalimi duhet të ketë të paktën 8 karaktere",
+        "number": "Fjalëkalimi duhet të përmbajë të paktën një numër",
+        "symbol": "Fjalëkalimi duhet të përmbajë të paktën një simbol",
+        "match": "Fjalëkalimet nuk përputhen"
+      }
+    }
+  },
+  "password": {
+    "form": {
+      "currentPasswordLabel": "Fjalëkalimi aktual",
+      "newPasswordLabel": "Fjalëkalimi i ri",
+      "confirmNewPasswordLabel": "Konfirmo fjalëkalimin e ri",
+      "submit": "Ndrysho fjalëkalimin"
+    },
+    "validation": {
+      "currentPassword": "Fjalëkalimi aktual është i detyrueshëm.",
+      "newPassword": "Fjalëkalimi i ri duhet të ketë të paktën 6 karaktere.",
+      "confirmNewPassword": "Fjalëkalimet nuk përputhen."
+    },
+    "success": {
+      "title": "Fjalëkalimi u ndryshua 🔐",
+      "description": "Fjalëkalimi u përditësua me sukses."
+    },
+    "error": {
+      "title": "Gabim ❌",
+      "default": "Ndryshimi i fjalëkalimit dështoi."
+    }
+  },
+  "insight": {
+    "empty": "🎯 Nuk ka rekomandime aktualisht.",
+    "delete": "Fshij rekomandimin",
+    "showAll": "Shfaq të gjitha",
+    "showLess": "Më pak",
+    "dismissed": "Rekomandimi u largua",
+    "restored": "U rikthye",
+    "increase": {
+      "title": "📈 Shpenzimet në {{category}} janë rritur",
+      "description": "Ke shpenzuar €{{amount}} këtë muaj, që është {{percent}}% më shumë se muajin e kaluar."
+    },
+    "decrease": {
+      "title": "📉 Shpenzimet në {{category}} janë ulur",
+      "description": "Vetëm €{{amount}} këtë muaj — ulje prej {{percent}}% krahasuar me muajin e kaluar. Vazhdo kështu!"
+    },
+    "transaction": {
+      "title": "📌 Transaksion në {{category}}",
+      "description": "Më {{date}}, shtove një transaksion \"{{type}}\" prej €{{amount}} në kategorinë \"{{category}}\".",
+      "expense": "Shpenzim",
+      "income": "Të ardhura"
+    }
+  },
+  "charts": {
+    "monthly": {
+      "title": "Të ardhura & Shpenzime mujore",
+      "income": "Të ardhura",
+      "expense": "Shpenzime"
+    },
+    "topCategories": "Kategoritë më të përdorura",
+    "noCategoryData": "S’ka të dhëna për kategori."
+  },
+  "chart": {
+    "title": "Grafiku financiar mujor",
+    "loading": "Duke ngarkuar grafikun...",
+    "noData": "S’ka transaksione për t’u shfaqur.",
+    "income": "Të ardhura",
+    "expense": "Shpenzime"
+  },
+  "overview": {
+    "total": "Totali",
+    "income": "Të ardhura totale",
+    "expense": "Shpenzime totale"
+  },
+  "table": {
+    "title": "Lista e transaksioneve",
+    "date": "Data",
+    "category": "Kategoria",
+    "description": "Përshkrimi",
+    "amount": "Shuma",
+    "type": "Lloji",
+    "actions": "Veprime",
+    "filters": {
+      "all": "Të gjitha",
+      "income": "Të ardhura",
+      "expense": "Shpenzime"
+    },
+    "exportPdf": "Eksporto PDF",
+    "manageIncome": "Menaxho Të Hyrat",
+    "addTransaction": "Shto transaksion",
+    "empty": "S’u gjetën transaksione për këtë filtër.",
+    "confirmDelete": "Je i sigurt që dëshiron ta fshish këtë transaksion?",
+    "deleteSuccess": "Transaksioni u fshi me sukses",
+    "deleteDescription": "Transaksioni u hoq nga lista",
+    "detailsTitle": "Detajet e transaksionit"
+  },
+  "income": {
+    "title": "Menaxhimi i Të Hyrave Mujore",
+    "subtitle": "Vendosni rrogën mujore dhe të hyrat shtesë për planifikim më të mirë financiar",
+    "currentMonth": "Të Hyrat e Muajit Aktual",
+    "currentMonthDesc": "Vendosni rrogën dhe të hyrat shtesë për këtë muaj",
+    "monthlySalary": "Rroga Mujore",
+    "additionalIncome": "Të Hyra Shtesë",
+    "totalMonthly": "Totali Mujor",
+    "history": "Historiku i Të Hyrave",
+    "historyDesc": "Të hyrat e muajve të mëparshëm",
+    "salary": "Rroga",
+    "additional": "Shtesë",
+    "transactionDescription": "Rroga mujore",
+    "additionalDescription": "Të hyra shtesë",
+    "addToTransactions": "Shto në Transaksionet",
+    "saveOnly": "Ruaj Vetëm",
+    "adding": "Duke shtuar...",
+    "saving": "Duke ruajtur...",
+    "success": {
+      "title": "Sukses",
+      "saved": "Të dhënat e rrogës u ruajtën me sukses",
+      "addedToTransactions": "Të hyrat u shtuan në transaksionet"
+    },
+    "error": {
+      "title": "Gabim",
+      "salaryRequired": "Rroga mujore është e detyrueshme",
+      "saveFailed": "Dështoi ruajtja e të dhënave",
+      "addFailed": "Dështoi shtimi i të hyrave"
+    },
+    "warning": {
+      "title": "Paralajmërim",
+      "alreadyAdded": "Rroga për këtë muaj është shtuar tashmë"
+    }
+  },
+  "transaction": {
+    "modal": {
+      "title": "Shto transaksion",
+      "cancel": "Anulo",
+      "submit": "Shto",
+      "editTitle": "Ndrysho transaksionin",
+      "editSubtitle": "Përditëso fushat dhe ruaj ndryshimet"
+    },
+    "form": {
+      "category": "Kategoria",
+      "description": "Përshkrimi",
+      "amount": "Shuma (€)",
+      "date": "Data",
+      "type": "Lloji"
+    },
+    "filter": {
+      "income": "Të ardhura",
+      "expense": "Shpenzim"
+    },
+    "toast": {
+      "addSuccess": "✅ Transaksioni u shtua",
+      "addSuccessDesc": "Transaksioni u regjistrua me sukses.",
+      "addError": "❌ Dështoi shtimi i transaksionit",
+      "validationError": "❌ Gabim validimi",
+      "updateSuccess": "✅ Transaksioni u përditësua",
+      "updateError": "❌ Dështoi përditësimi i transaksionit",
+      "noChanges": "S’ka ndryshime për t’u ruajtur",
+      "addDescription": "Transaksioni juaj u shtua me sukses."
+    },
+    "validation": {
+      "categoryRequired": "Kategoria është e detyrueshme",
+      "descriptionRequired": "Përshkrimi është i detyrueshëm",
+      "amountPositive": "Shuma duhet të jetë pozitive",
+      "dateRequired": "Data është e detyrueshme"
+    }
+  },
+  "transactions": {
+    "title": "Transaksionet",
+    "search": "Kërko transaksione...",
+    "filters": "Filtrat",
+    "export": "Eksporto",
+    "type": "Lloji",
+    "allTypes": "Të Gjitha Llojet",
+    "income": "Të ardhura",
+    "expense": "Shpenzime",
+    "category": "Kategoria",
+    "allCategories": "Të Gjitha Kategoritë",
+    "sortBy": "Rendit Sipas",
+    "date": "Data",
+    "amount": "Shuma",
+    "description": "Përshkrimi",
+    "sortOrder": "Renditja",
+    "showing": "Duke shfaqur",
+    "of": "nga",
+    "total": "Totali",
+    "view": "Shiko",
+    "edit": "Ndrysho",
+    "viewAnalytics": "Shiko analizën",
+    "untitled": "Pa titull",
+    "monthlyFinancialChart": "Grafiku financiar mujor",
+    "noData": "S’ka transaksione për t’u shfaqur.",
+    "loadingChart": "Duke ngarkuar grafikun...",
+    "typeMap": {
+      "INCOME": "Të ardhura",
+      "EXPENSE": "Shpenzim"
+    }
+  },
+  "actions": {
+    "close": "Mbyll",
+    "edit": "Ndrysho",
+    "save": "Ruaj",
+    "delete": "Fshi"
+  },
+  "forgot": {
+    "title": "Ke harruar fjalëkalimin?",
+    "subtitle": "Shkruaj emailin dhe do të dërgojmë udhëzimet e rivendosjes.",
+    "submit": "Dërgo linkun",
+    "sending": "Duke dërguar...",
+    "gmailOk": "Gmail i vlefshëm",
+    "gmailOnly": "Lejohen vetëm adresat Gmail",
+    "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
+    "success": "Nëse emaili ekziston, udhëzimet u dërguan.",
+    "descriptionVerify": "Linku i rivendosjes u dërgua. Kontrollo Gmail-in.",
+    "error": "Diçka shkoi keq. Provo sërish.",
+    "invalidEmail": "U dha një adresë Gmail e pavlefshme.",
+    "emailNotFound": "S’u gjet asnjë llogari me këtë adresë email.",
+    "serverError": "Dështoi dërgimi i emailit të rivendosjes. Provo sërish.",
+    "rateLimit": "Shumë kërkesa. Të lutem prit para se të provosh përsëri.",
+    "default": "Ndodhi një gabim i papritur. Provo sërish.",
+    "required": "Adresa e emailit është e detyrueshme.",
+    "invalidFormat": "Ju lutem jepni një adresë email të vlefshme.",
+    "notGmail": "Lejohen vetëm adresat Gmail.",
+    "localPartTooShort": "Pjesa lokale e Gmail duhet të ketë të paktën 6 karaktere.",
+    "localPartTooLong": "Pjesa lokale e Gmail s’mund të kalojë 30 karaktere.",
+    "invalidCharacters": "Email përmban karaktere të pavlefshme për Gmail.",
+    "dotsAtEnds": "Gmail nuk lejon pika në fillim ose fund.",
+    "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme."
+  },
+  "error": {
+    "title": "Rivendosja e fjalëkalimit dështoi",
+    "required": "Adresa e emailit është e detyrueshme.",
+    "invalidFormat": "Ju lutem jepni një adresë email të vlefshme.",
+    "notGmail": "Lejohen vetëm adresat Gmail.",
+    "localPartTooShort": "Pjesa lokale e Gmail duhet të ketë të paktën 6 karaktere.",
+    "localPartTooLong": "Pjesa lokale e Gmail s’mund të kalojë 30 karaktere.",
+    "invalidCharacters": "Email përmban karaktere të pavlefshme për Gmail.",
+    "dotsAtEnds": "Gmail nuk lejon pika në fillim ose fund.",
+    "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme."
+  },
+  "validation": {
+    "emailRules": {
+      "gmailOnly": "Lejohen vetëm adresat Gmail",
+      "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
+      "characters": "Email përmban karaktere të pavlefshme për Gmail",
+      "dots": "Gmail nuk lejon pika në fillim ose fund",
+      "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme"
+    }
+  },
+  "reset": {
+    "title": "Rivendos fjalëkalimin",
+    "subtitle": "Shkruaj një fjalëkalim të ri për llogarinë tënde.",
+    "password": "Fjalëkalimi i ri",
+    "confirmPassword": "Konfirmo fjalëkalimin",
+    "passwordPlaceholder": "********",
+    "confirmPlaceholder": "********",
+    "submit": "Rivendos fjalëkalimin",
+    "loading": "Duke e rivendosur…",
+    "success": "Fjalëkalimi u rivendos. Tani mund të hyni.",
+    "error": "Rivendosja dështoi",
+    "backToLogin": "Kthehu te hyrja",
+    "missingToken": "Linku i rivendosjes është i pavlefshëm ose ka skaduar.",
+    "passwordReq": {
+      "min": "Të paktën 8 karaktere",
+      "number": "Të paktën një numër",
+      "symbol": "Të paktën një simbol"
+    },
+    "validation": {
+      "password": {
+        "min": "Fjalëkalimi duhet të ketë të paktën 8 karaktere",
+        "number": "Fjalëkalimi duhet të përmbajë të paktën një numër",
+        "symbol": "Fjalëkalimi duhet të përmbajë të paktën një simbol"
+      },
+      "match": "Fjalëkalimet nuk përputhen"
+    }
+  },
+  "theme": {
+    "title": "Tema",
+    "light": "E çelët",
+    "dark": "E errët",
+    "system": "Sistemi"
+  },
+  "smartInsights": {
+    "title": "Rekomandime AI të Personalizuara",
+    "noData": {
+      "title": "Nuk ka të dhëna të mjaftueshme",
+      "description": "Shtoni më shumë transaksione për të marrë rekomandime të personalizuara AI."
+    },
+    "lowSavings": {
+      "title": "Kursime të ulëta",
+      "description": "Kursimet tuaja janë vetëm {{rate}}%. Qëlloni për të paktën 20% për stabilitet financiar.",
+      "action": "Rishikoni shpenzimet tuaja"
+    },
+    "excellentSavings": {
+      "title": "Kursime të shkëlqyera! 🎉",
+      "description": "Kursimet tuaja janë {{rate}}% - shkëlqyeshëm! Vazhdoni kështu.",
+      "action": "Konsideroni investime"
+    },
+    "incomeDecline": {
+      "title": "Rënie në të ardhura",
+      "description": "Të ardhurat tuaja u ulën me {{percent}}% krahasuar me muajin e kaluar.",
+      "action": "Kërkoni mundësi të reja"
+    },
+    "incomeGrowth": {
+      "title": "Rritje e shkëlqyer në të ardhura! 📈",
+      "description": "Të ardhurat tuaja u rritën me {{percent}}% - fantastike!",
+      "action": "Rishikoni buxhetin tuaj"
+    },
+    "expenseIncrease": {
+      "title": "Rritje e shpejtë në shpenzime",
+      "description": "Shpenzimet u rritën me {{percent}}%. Kontrolloni buxhetin tuaj.",
+      "action": "Identifikoni shpenzimet e panevojshme"
+    },
+    "highCategorySpending": {
+      "title": "Shpenzim i lartë në kategori",
+      "description": "Shpenzoni {{amount}}€ në {{category}} ({{percentage}}% e të ardhurave).",
+      "action": "Konsideroni reduktimin"
+    },
+    "highDailySpending": {
+      "title": "Shpenzime ditore të larta",
+      "description": "Shpenzoni mesatarisht {{amount}}€ në ditë.",
+      "action": "Planifikoni shpenzimet tuaja"
+    },
+    "negativeBalance": {
+      "title": "Bilanç negativ",
+      "description": "Shpenzoni {{amount}}€ më shumë se të ardhurat.",
+      "action": "Reduktoni shpenzimet menjëherë"
+    },
+    "diversifySpending": {
+      "title": "Diversifikoni shpenzimet",
+      "description": "Shpenzimet tuaja janë të përqendruara në vetëm {{count}} kategori.",
+      "action": "Konsideroni kategoritë e tjera"
+    },
+    "considerInvesting": {
+      "title": "Konsideroni investime",
+      "description": "Me kursime prej {{rate}}%, mund të konsideroni investime për rritje afatgjatë.",
+      "action": "Kërkoni këshilla investimi"
+    },
+    "priority": {
+      "critical": "Kritike",
+      "high": "E lartë",
+      "medium": "Mesatare",
+      "low": "E ulët"
+    },
+    "showMore": "Shfaq të gjitha ({{count}})",
+    "showLess": "Shfaq më pak"
+  },
+  "formValidation": {
+    "email": {
+      "required": "Email është i detyrueshëm",
+      "invalid": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
+      "gmailOnly": "Lejohen vetëm adresat Gmail"
+    },
+    "password": {
+      "required": "Fjalëkalimi është i detyrueshëm",
+      "minLength": "Fjalëkalimi duhet të ketë të paktën 6 karaktere",
+      "minLength8": "Fjalëkalimi duhet të ketë të paktën 8 karaktere",
+      "number": "Fjalëkalimi duhet të përmbajë të paktën një numër",
+      "symbol": "Fjalëkalimi duhet të përmbajë të paktën një simbol",
+      "match": "Fjalëkalimet nuk përputhen"
+    },
+    "name": {
+      "required": "Emri është i detyrueshëm",
+      "minLength": "Emri duhet të ketë të paktën 2 karaktere"
+    },
+    "confirmPassword": {
+      "required": "Konfirmimi i fjalëkalimit është i detyrueshëm",
+      "match": "Fjalëkalimet nuk përputhen"
+    }
+  },
+  "predictions": {
+    "title": "Prediktime AI",
+    "desc": "Parashikime të bazuara në mënyrën tuaj të shpenzimeve",
+    "noData": "Nuk ka të dhëna për prediktime",
+    "noDataDesc": "Shtoni më shumë transaksione për të marrë prediktime AI",
+    "nextMonthIncome": "Të Ardhurat e Muajit të Ardhshem",
+    "nextMonthExpense": "Shpenzimet e Muajit të Ardhshem",
+    "nextMonthNet": "Pasuria Neto e Muajit të Ardhshem",
+    "riskAssessment": "Vlerësimi i Rrezikut",
+    "lowRisk": "Rrezik i Ulët",
+    "mediumRisk": "Rrezik Mesatar",
+    "highRisk": "Rrezik i Lartë",
+    "riskScore": "Pikët e rrezikut",
+    "aiInsights": "Insights AI",
+    "advancedDetails": "Detajet e Avancuara",
+    "patternAnalysis": "Analiza e Pattern-eve",
+    "monthlyPattern": "Pattern mujor",
+    "categoryPattern": "Kategoritë e analizuara",
+    "transactionCount": "Numri i transaksioneve",
+    "algorithmInfo": "Informacioni i Algoritmit",
+    "confidenceLevel": "Niveli i konfidencës",
+    "dataQuality": "Cilësia e të dhënave",
+    "excellent": "E shkëlqyer",
+    "good": "E mirë",
+    "basic": "Bazike"
+  },
+  "performance": {
+    "title": "Monitorimi i Performancës",
+    "desc": "Metrikat e performancës në kohë reale",
+    "stop": "Stop",
+    "start": "Start",
+    "renderTime": "Koha e Renderimit",
+    "memoryUsage": "Përdorimi i Memories",
+    "networkLatency": "Latenca e Rrjetit",
+    "cacheHitRate": "Shkalla e Cache Hit",
+    "errorRate": "Shkalla e Gabimeve",
+    "throughput": "Throughput",
+    "renderTimeChart": "Koha e Renderimit",
+    "memoryChart": "Përdorimi i Memories",
+    "advancedDetails": "Detajet e Avancuara",
+    "systemInfo": "Informacioni i Sistemit",
+    "userAgent": "User Agent",
+    "screenResolution": "Rezolucioni",
+    "timezone": "Zona kohore",
+    "language": "Gjuha",
+    "optimization": "Optimizimet",
+    "lazyLoading": "Lazy Loading",
+    "memoization": "Memoization",
+    "virtualization": "Virtualization",
+    "codeSplitting": "Code Splitting",
+    "overallStatus": "Statusi i Përgjithshëm",
+    "monitoringActive": "Monitorimi aktiv",
+    "monitoringInactive": "Monitorimi joaktiv",
+    "lastUpdate": "Përditësimi i fundit"
+  },
+  "optimization": {
+    "title": "Paneli i Optimizimit",
+    "desc": "Monitorimi dhe optimizimi i performancës",
+    "stop": "Stop",
+    "start": "Start",
+    "metrics": "Metrikat",
+    "suggestions": "Sugjerimet",
+    "settings": "Cilësimet",
+    "renderTime": "Koha e Renderimit",
+    "memoryUsage": "Përdorimi i Memories",
+    "networkLatency": "Latenca e Rrjetit",
+    "cacheHitRate": "Shkalla e Cache Hit",
+    "errorRate": "Shkalla e Gabimeve",
+    "throughput": "Throughput",
+    "bundleSize": "Madhësia e Bundle",
+    "loadTime": "Koha e Ngarkimit",
+    "noSuggestions": "Nuk ka sugjerime",
+    "noSuggestionsDesc": "Performanca është e mirë!",
+    "cacheSettings": "Cilësimet e Cache",
+    "performanceSettings": "Cilësimet e Performancës",
+    "clearCache": "Pastro Cache",
+    "exportMetrics": "Eksporto Metrikat"
+  },
+  "categoryAnalysis": {
+    "title": "Analiza e Kategorive",
+    "desc": "Shpenzimet sipas kategorive me trendet",
+    "noData": "Nuk ka të dhëna",
+    "noDataDesc": "Shtoni transaksione për të parë analizën e kategorive",
+    "totalExpenses": "Shpenzimet Totale",
+    "currentMonth": "Muaji Aktual",
+    "total": "Total",
+    "count": "Numri",
+    "average": "Mesatarja",
+    "percentage": "Përqindja",
+    "showing": "Duke shfaqur",
+    "of": "nga",
+    "categories": "kategori"
+  },
+  "trends": {
+    "title": "Trendet e Transaksioneve",
+    "desc": "Analiza e trendeve mujore për 6 muajt e fundit",
+    "noData": "Nuk ka të dhëna",
+    "noDataDesc": "Shtoni transaksione për të parë trendet",
+    "incomeTrend": "Trendi i Të Ardhurave",
+    "expenseTrend": "Trendi i Shpenzimeve",
+    "netTrend": "Trendi Neto",
+    "avgIncome": "Mes. Të Ardhura",
+    "avgExpense": "Mes. Shpenzime",
+    "avgNet": "Mes. Neto",
+    "avgTransactions": "Mes. Transaksione",
+    "monthlyBreakdown": "Ndarja Mujore",
+    "income": "Të Ardhura",
+    "expense": "Shpenzime",
+    "transactions": "Transaksione",
+    "expenseRatio": "Raporti i Shpenzimeve"
+  }
+}

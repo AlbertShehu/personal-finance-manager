@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int                       @id @default(autoincrement())
+  name            String
+  email           String                    @unique   // unik & case-insensitive
+  password        String                    // ruaj HASH-in (bcrypt), jo plaintext
+  emailVerifiedAt DateTime?                 // verifikimi i email-it
+
+  createdAt       DateTime                  @default(now())
+  updatedAt       DateTime                  @updatedAt
+
+  transactions    Transaction[]
+  resetToken      PasswordResetToken?
+  emailToken      EmailVerificationToken?
+}
+
+model Transaction {
+  id          Int             @id @default(autoincrement())
+  category    String
+  description String
+  amount      Float
+  type        TransactionType
+  date        DateTime        @default(now())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  userId      Int
+
+  user        User            @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([date])
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  tokenHash String   @unique
+  expiresAt DateTime
+  userId    Int      @unique
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model EmailVerificationToken {
+  id        Int      @id @default(autoincrement())
+  tokenHash String   @unique
+  expiresAt DateTime
+  userId    Int      @unique
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+}
