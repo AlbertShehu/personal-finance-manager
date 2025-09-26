@@ -1,6 +1,6 @@
 {
   "name": "finman-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Personal Finance Management App",
   "scripts": {
     "build": "cd client && npm run build",
