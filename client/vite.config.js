@@ -12,7 +12,12 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      // Siguro që këto tregojnë te **e njëjta** kopje në node_modules
+      react: path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
     },
+    // Parandalon importet e dyfishta në bundle
+    dedupe: ['react', 'react-dom'],
   },
   build: {
     sourcemap: true, // enable sourcemaps for debugging

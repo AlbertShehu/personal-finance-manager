@@ -6,6 +6,11 @@
 /* @import '@fontsource/inter/variable.css'; */
 
 @layer base {
+  html {
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+  
   :root {
     /* Font family përputhet me tailwind.config (var(--font-sans)) */
     --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, -apple-system,
@@ -121,4 +126,16 @@
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
+}
+
+/* Backdrop blur Safari support */
+.backdrop-blur,
+.backdrop-blur-sm,
+.backdrop-filter {
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast)
+                           var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
+                           var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast)
+                   var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
+                   var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
