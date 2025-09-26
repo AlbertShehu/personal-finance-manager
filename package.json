@@ -1,0 +1,13 @@
+{
+  "name": "finman-app",
+  "version": "1.0.0",
+  "description": "Personal Finance Management App",
+  "scripts": {
+    "build": "cd client && npm run build",
+    "install": "cd client && npm install",
+    "dev": "cd client && npm run dev"
+  },
+  "engines": {
+    "node": ">=18.18"
+  }
+}
