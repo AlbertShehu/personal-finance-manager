@@ -7,6 +7,6 @@
     "dev": "cd client && npm run dev"
   },
   "engines": {
-    "node": ">=18.18"
+    "node": "18.x"
   }
 }
