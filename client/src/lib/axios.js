@@ -3,11 +3,10 @@
 import axios from 'axios'
 import axiosRetry from 'axios-retry'
 
-// Lexo bazën nga env (opsionale). Nëse nuk është vendosur, fallback në backend local
-const baseRaw = (import.meta.env.VITE_API_URL || '').trim() || 'http://localhost:8095'
-
-// Siguro që base të mos ketë slash në fund, pastaj shto /api
-const BASE = baseRaw.replace(/\/+$/, '') + '/api'
+// Lexo bazën nga env (opsionale). Nëse nuk është vendosur, fallback në /api
+const baseRaw = (import.meta.env.VITE_API_URL || '').trim()
+const API_PREFIX = (import.meta.env.VITE_API_PREFIX || '/api').replace(/^\/?/, '/')
+const BASE = baseRaw ? `${baseRaw.replace(/\/+$/, '')}${API_PREFIX}` : API_PREFIX
 
 // Nëse përdor cookie auth/CSRF, vendos VITE_USE_COOKIES=true
 const useCookies = String(import.meta.env.VITE_USE_COOKIES || '').toLowerCase() === 'true'
