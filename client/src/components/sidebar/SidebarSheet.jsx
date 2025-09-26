@@ -26,7 +26,8 @@ const LINKS = [
 export default function SidebarSheet() {
   const { t } = useTranslation()
   const [open, setOpen] = React.useState(false)
-  const user = useSelector((state) => state.auth.user)
+  const authState = useSelector((state) => state.auth)
+  const user = authState?.user
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

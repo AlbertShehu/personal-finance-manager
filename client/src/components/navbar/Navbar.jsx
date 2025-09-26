@@ -12,7 +12,8 @@ import { motion, useReducedMotion } from "framer-motion"
 
 export default function Navbar() {
   const { t } = useTranslation()
-  const user = useSelector((state) => state.auth.user)
+  const authState = useSelector((state) => state.auth)
+  const user = authState?.user
   const prefersReducedMotion = useReducedMotion()
 
   const titleVariants = prefersReducedMotion

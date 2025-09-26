@@ -44,7 +44,8 @@ export default function DropDownAvatar() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { toast } = useToast()
-  const user = useSelector((state) => state.auth.user)
+  const authState = useSelector((state) => state.auth)
+  const user = authState?.user
   const { theme, setTheme } = useTheme()
 
   if (!user) return null

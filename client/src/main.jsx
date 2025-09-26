@@ -55,25 +55,20 @@ if (!GOOGLE_CLIENT_ID) {
 }
 
 // Gjithmonë rrethoj App me GoogleOAuthProvider që hooks e Google të mos hedhin error
-// Prit që i18n të inicializohet para se të renderosh
-i18n.isInitialized ? renderApp() : i18n.on('initialized', renderApp)
-
-function renderApp() {
-  ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
-          <ErrorBoundary>
-            {GOOGLE_CLIENT_ID ? (
-              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-                <App />
-              </GoogleOAuthProvider>
-            ) : (
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ErrorBoundary>
+          {GOOGLE_CLIENT_ID ? (
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
               <App />
-            )}
-          </ErrorBoundary>
-        </BrowserRouter>
-      </Provider>
-    </React.StrictMode>
-  )
-}
+            </GoogleOAuthProvider>
+          ) : (
+            <App />
+          )}
+        </ErrorBoundary>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+)
