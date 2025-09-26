@@ -7,7 +7,7 @@ import { store } from '@/store/store'
 import App from './App'
 import './index.css'
 import '@fontsource-variable/inter'
-import './lib/i18'
+import i18n from './lib/i18'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 // Dark-mode bootstrap për të shmangur flicker
@@ -55,20 +55,25 @@ if (!GOOGLE_CLIENT_ID) {
 }
 
 // Gjithmonë rrethoj App me GoogleOAuthProvider që hooks e Google të mos hedhin error
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <ErrorBoundary>
-          {GOOGLE_CLIENT_ID ? (
-            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+// Prit që i18n të inicializohet para se të renderosh
+i18n.isInitialized ? renderApp() : i18n.on('initialized', renderApp)
+
+function renderApp() {
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <BrowserRouter>
+          <ErrorBoundary>
+            {GOOGLE_CLIENT_ID ? (
+              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+                <App />
+              </GoogleOAuthProvider>
+            ) : (
               <App />
-            </GoogleOAuthProvider>
-          ) : (
-            <App />
-          )}
-        </ErrorBoundary>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
-)
+            )}
+          </ErrorBoundary>
+        </BrowserRouter>
+      </Provider>
+    </React.StrictMode>
+  )
+}
