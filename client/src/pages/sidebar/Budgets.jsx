@@ -56,15 +56,6 @@ export default function Budgets() {
     }
   }, [transactions.length, refetch])
 
-  // Auto-hide notification after 5 seconds
-  React.useEffect(() => {
-    if (showNotification) {
-      const timer = setTimeout(() => {
-        setShowNotification(null)
-      }, 5000)
-      return () => clearTimeout(timer)
-    }
-  }, [showNotification])
 
   // Llogaritja e shpenzimeve për çdo kategori
   const now = new Date()
@@ -130,12 +121,6 @@ export default function Budgets() {
           subtitle={t("budgets.subtitle", "Menaxhoni buxhetet tuaja mujore")} 
         />
         <div className="flex items-center gap-2">
-          {showNotification && (
-            <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-xs">
-              <AlertTriangle className="h-3 w-3" />
-              <span>{t("budgets.alert", "Alarm")}</span>
-            </div>
-          )}
           <Button
             variant="outline"
             size="sm"
