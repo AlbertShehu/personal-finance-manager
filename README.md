@@ -75,95 +75,6 @@ A modern, full-stack personal finance management application built with React, N
 - npm or yarn
 - Git
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/yourusername/finman-app.git
-cd finman-app
-```
-
-### 2. Install Dependencies
-
-#### Client (Frontend)
-```bash
-cd client
-npm install
-```
-
-#### Server (Backend)
-```bash
-cd ../server
-npm install
-```
-
-### 3. Environment Setup
-
-#### Client Environment
-Create `client/.env`:
-```env
-VITE_API_URL=http://localhost:5000
-VITE_GOOGLE_CLIENT_ID=your_google_client_id
-```
-
-#### Server Environment
-Create `server/.env`:
-```env
-DATABASE_URL="file:./prisma/dev.db"
-JWT_SECRET=your_jwt_secret_key
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_app_password
-```
-
-### 4. Database Setup
-```bash
-cd server
-npx prisma migrate dev
-npx prisma generate
-```
-
-### 5. Run the Application
-
-#### Start the Server
-```bash
-cd server
-npm run dev
-```
-
-#### Start the Client
-```bash
-cd client
-npm run dev
-```
-
-Visit `http://localhost:5173` to see the application!
-
-## 📁 Project Structure
-
-```
-finman-app/
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── features/       # Feature-specific components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── lib/            # Utilities and configurations
-│   │   ├── locales/        # Translation files
-│   │   ├── pages/          # Page components
-│   │   ├── store/          # Redux store
-│   │   └── main.jsx        # Entry point
-│   ├── public/             # Static assets
-│   └── package.json
-├── server/                 # Node.js backend
-│   ├── src/
-│   │   ├── controllers/    # Route controllers
-│   │   ├── middleware/     # Custom middleware
-│   │   ├── routes/         # API routes
-│   │   ├── utils/          # Utility functions
-│   │   └── index.js        # Server entry point
-│   ├── prisma/             # Database schema and migrations
-│   └── package.json
-└── README.md
-```
-
 ## 🎯 Key Features Explained
 
 ### Real-time Budget Notifications
@@ -186,40 +97,6 @@ Complete translations in 3 languages with dynamic switching:
 
 ## 🔧 Available Scripts
 
-### Client
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
-```
-
-### Server
-```bash
-npm run dev          # Start development server
-npm start            # Start production server
-npm run test         # Run tests
-```
-
-## 🚀 Deployment
-
-### Frontend (Vercel/Netlify)
-1. Build the client: `npm run build`
-2. Deploy the `dist` folder
-3. Set environment variables
-
-### Backend (Railway/Heroku)
-1. Set up environment variables
-2. Run database migrations
-3. Deploy the server code
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit changes: `git commit -m 'Add feature'`
-4. Push to branch: `git push origin feature-name`
-5. Submit a pull request
 
 ## 📄 License
 
@@ -227,9 +104,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+**Albert Shehu**
+- GitHub: [@yourusername](https://github.com/AlbertShehu)
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/albert-shehu-5202ba2b0/)
 
 ## 🙏 Acknowledgments
 
