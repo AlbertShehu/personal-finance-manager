@@ -4,7 +4,8 @@
   "description": "Personal Finance Management App",
   "scripts": {
     "build": "cd client && npm run build",
-    "dev": "cd client && npm run dev"
+    "dev": "cd client && npm run dev",
+    "preview": "cd client && npm run preview"
   },
   "engines": {
     "node": "22.x"
