@@ -121,7 +121,8 @@ function upsertThisSession() {
 export default function Profile() {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
-  const user = useSelector((state) => state.auth.user);
+  const authState = useSelector((state) => state.auth);
+  const user = authState?.user;
 
   // theme e lexuar pas-mount (shmang mismatch)
   const [themePref, setThemePref] = React.useState("system");

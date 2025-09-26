@@ -33,7 +33,8 @@ export default function LoginForm() {
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from?.pathname || "/dashboard"
-  const { isLoading } = useSelector((state) => state.auth)
+  const authState = useSelector((state) => state.auth)
+  const { isLoading } = authState || {}
   const { toast } = useToast()
   const { toast: mobileToast } = useMobileToast()
 

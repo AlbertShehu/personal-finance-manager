@@ -25,8 +25,9 @@ export default function EditProfileForm() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((s) => s.auth.user);
-  const token = useSelector((s) => s.auth.token);
+  const authState = useSelector((s) => s.auth);
+  const user = authState?.user;
+  const token = authState?.token;
 
   const form = useForm({
     resolver: zodResolver(editProfileSchema(t)),
