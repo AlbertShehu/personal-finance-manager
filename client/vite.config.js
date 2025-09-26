@@ -19,6 +19,9 @@ export default defineConfig(({ mode }) => ({
     // Parandalon importet e dyfishta në bundle
     dedupe: ['react', 'react-dom'],
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+  },
   build: {
     sourcemap: true, // enable sourcemaps for debugging
     minify: 'esbuild',
