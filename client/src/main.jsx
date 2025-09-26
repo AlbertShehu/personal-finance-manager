@@ -49,7 +49,7 @@ function ErrorBoundary({ children }) {
 const GOOGLE_CLIENT_ID = (import.meta.env.VITE_GOOGLE_CLIENT_ID || '').trim()
 if (!GOOGLE_CLIENT_ID) {
   console.warn(
-    '⚠️  VITE_GOOGLE_CLIENT_ID mungon. Google Sign-In s'do të funksionojë. ' +
+    '⚠️  VITE_GOOGLE_CLIENT_ID mungon. Google Sign-In s\'do të funksionojë. ' +
     'Për të aktivizuar, vendos VITE_GOOGLE_CLIENT_ID në client/.env'
   )
 }
