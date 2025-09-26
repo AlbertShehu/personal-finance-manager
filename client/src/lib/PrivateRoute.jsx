@@ -10,7 +10,8 @@ import { useSelector } from 'react-redux'
  * - `redirectTo` default /login
  */
 export default function PrivateRoute({ children, roles, redirectTo = '/login' }) {
-  const { user, loading } = useSelector((state) => state.auth)
+  const authState = useSelector((state) => state.auth)
+  const { user, loading } = authState || {}
   const location = useLocation()
 
   // Faqe ngarkimi e aksesueshme

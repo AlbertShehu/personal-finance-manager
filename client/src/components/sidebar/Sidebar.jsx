@@ -15,7 +15,8 @@ const LINKS = [
 
 function Sidebar() {
   const { t } = useTranslation()
-  const user = useSelector((state) => state.auth.user)
+  const authState = useSelector((state) => state.auth)
+  const user = authState?.user
 
   return (
     <aside

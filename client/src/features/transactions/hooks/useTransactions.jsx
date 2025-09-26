@@ -5,7 +5,8 @@ import api from "@/lib/axios";
 
 const useTransactions = () => {
   const dispatch = useDispatch();
-  const { items: transactions, loading, error } = useSelector((state) => state.transactions);
+  const transactionsState = useSelector((state) => state.transactions);
+  const { items: transactions = [], loading = false, error = null } = transactionsState || {};
   const [hasFetched, setHasFetched] = React.useState(false);
 
   const fetchTransactionsData = useCallback(async (force = false) => {
