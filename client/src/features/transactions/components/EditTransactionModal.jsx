@@ -164,8 +164,7 @@ export default function EditTransactionModal({ tx, isOpen, onClose, refetch }) {
     <Dialog open={!!isOpen} onOpenChange={(open) => !open && onClose?.()}>
       <DialogContent className="w-[90vw] max-w-md rounded-xl border bg-card text-foreground p-6 shadow-lg">
         {/* Butoni i mbylljes në këndin e djathtë sipër */}
-       vazh
-
+    
         <DialogHeader>
           <DialogTitle>{t("transaction.modal.editTitle", "Edit Transaction")}</DialogTitle>
           <DialogDescription>
