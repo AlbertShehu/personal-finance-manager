@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    sourcemap: mode !== 'production', // disable sourcemaps in production
+    sourcemap: true, // enable sourcemaps for debugging
     minify: 'esbuild',
     target: 'es2020',
     cssMinify: true, // nëse përdor "lightningcss", vendose: 'lightningcss'

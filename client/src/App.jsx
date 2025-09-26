@@ -1,6 +1,6 @@
 // src/App.jsx
 import React, { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import PrivateRoute from './lib/PrivateRoute'
 import Layout from './components/layout/Layout'
 import { Toaster } from "@/components/ui/toaster"
@@ -79,41 +79,38 @@ export default function App() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      {/* Centralizo politikat e motion në të gjithë app-in */}
-      <MotionConfig reducedMotion={prefersReducedMotion ? 'always' : 'never'}>
-        <ErrorBoundary>
-          <ScrollToTop />
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              {/* Public */}
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password/:token" element={<ResetPassword />} />
+    <MotionConfig reducedMotion={prefersReducedMotion ? 'always' : 'never'}>
+      <ErrorBoundary>
+        <ScrollToTop />
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            {/* Public */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
 
-              {/* Private (layout + auth) */}
-              <Route
-                element={
-                  <PrivateRoute>
-                    <Layout />
-                  </PrivateRoute>
-                }
-              >
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="analytics" element={<Analytics />} />
-                <Route path="budgets" element={<Budgets />} />
-                <Route path="profile" element={<Profile />} />
-                <Route path="settings/password" element={<PasswordSettings />} />
-                <Route path="settings/profile" element={<ProfileSettings />} />
-                <Route path="transactions" element={<Transactions />} />
-              </Route>
-            </Routes>
-          </Suspense>
-          <Toaster/>
-        </ErrorBoundary>
-      </MotionConfig>
-    </BrowserRouter>
+            {/* Private (layout + auth) */}
+            <Route
+              element={
+                <PrivateRoute>
+                  <Layout />
+                </PrivateRoute>
+              }
+            >
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="analytics" element={<Analytics />} />
+              <Route path="budgets" element={<Budgets />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="settings/password" element={<PasswordSettings />} />
+              <Route path="settings/profile" element={<ProfileSettings />} />
+              <Route path="transactions" element={<Transactions />} />
+            </Route>
+          </Routes>
+        </Suspense>
+        <Toaster/>
+      </ErrorBoundary>
+    </MotionConfig>
   )
 }
