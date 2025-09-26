@@ -8,7 +8,7 @@ import VirtualizedTransactionList from "@/features/dashboard/components/Virtuali
 import CategoryAnalysis from "@/features/dashboard/components/CategoryAnalysis";
 import TransactionTrends from "@/features/dashboard/components/TransactionTrends";
 import KpiGrid from "@/features/dashboard/components/KpiGrid";
-import CashflowAreaChart from "@/features/dashboard/components/CashflowAreaChart";
+import CashflowAreaChart from "@/features/dashboard/components/CashflowAreachart";
 import RecentTransactions from "@/features/dashboard/components/RecentTransactions";
 import DateRangeTabs from "@/features/dashboard/components/DateRangeTabs";
 import ForecastCard from "@/features/dashboard/components/ForestCard";
