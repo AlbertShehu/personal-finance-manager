@@ -1,0 +1,12 @@
+[phases.setup]
+nixPkgs = ["nodejs_22", "nodePackages.npm"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+# Nëse ke TypeScript, shto:
+# [phases.build]
+# cmds = ["npm run build"]
+
+[start]
+cmd = "npm start"
