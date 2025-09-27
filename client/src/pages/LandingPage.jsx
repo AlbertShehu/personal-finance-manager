@@ -116,7 +116,7 @@ export default function LandingPage() {
                 alt={t('landing.imageAlt')}
                 loading="eager"
                 decoding="async"
-                fetchPriority="high"
+                fetchpriority="high"
                 className="w-full h-auto object-contain aspect-[4/3]"
               />
             </div>
