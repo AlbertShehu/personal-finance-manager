@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // src/pages/LandingPage.jsx
-import React from 'react'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Rocket, LogIn, ShieldCheck, BarChart3, Zap, Users, Star, Globe, Activity } from 'lucide-react'
 import { useTranslation } from 'react-i18next'

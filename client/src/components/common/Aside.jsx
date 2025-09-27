@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // src/components/common/Aside.jsx
-import React from 'react'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import Logo from '@/assets/finance-logo.png'
