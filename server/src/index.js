@@ -41,6 +41,9 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174", 
   "http://localhost:4173",
+  "https://finman-app.com",
+  "https://finman-app.pages.dev",
+  /\.pages\.dev$/,  // Për të gjitha Cloudflare Pages subdomain-et
 ].filter(Boolean);
 
 const finalAllowedOrigins = [...new Set(allowedOrigins)];
@@ -56,7 +59,18 @@ app.use(
     origin: (origin, callback) => {
       // lejo kërkesa pa Origin (p.sh. curl, Postman)
       if (!origin) return callback(null, true);
-      if (finalAllowedOrigins.includes(origin)) return callback(null, true);
+      
+      // Kontrollo nëse origin-i është në listë ose përputhet me regex
+      const isAllowed = finalAllowedOrigins.some(allowedOrigin => {
+        if (typeof allowedOrigin === 'string') {
+          return allowedOrigin === origin;
+        } else if (allowedOrigin instanceof RegExp) {
+          return allowedOrigin.test(origin);
+        }
+        return false;
+      });
+      
+      if (isAllowed) return callback(null, true);
       return callback(new Error(`CORS policy violation: origin ${origin} not allowed.`));
     },
     credentials: true,
@@ -80,9 +94,21 @@ app.use("/api/auth", authRoutes);                // register, login, verify, for
 app.use("/api/users", userRoutes);               // profile, change-password
 app.use("/api/transactions", transactionRoutes); // CRUD transaksionesh
 
-// Health check
+// Health check endpoints
 app.get("/", (req, res) => {
-  res.send("FinMan API is running");
+  res.json({ 
+    message: "FinMan API is running",
+    timestamp: new Date().toISOString(),
+    status: "healthy"
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.json({ 
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
 });
 
 /* ===================== 404 ===================== */
