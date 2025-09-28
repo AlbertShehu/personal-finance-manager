@@ -2,9 +2,9 @@
   "name": "finman-api",
   "version": "1.0.0",
   "engines": { "node": "22.x" },
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node index.js",
     "dev": "nodemon src/index.js",
     "build": "echo \"No build step defined\"",
     "lint": "eslint .",
