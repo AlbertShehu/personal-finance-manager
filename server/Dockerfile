@@ -5,14 +5,17 @@ WORKDIR /app
 # Install dependencies needed for Prisma
 RUN apk add --no-cache openssl
 
-# Copy package files and Prisma schema BEFORE npm ci
+# Copy package files first
 COPY package*.json ./
-COPY prisma ./prisma
 
-# Install dependencies (postinstall will run prisma generate)
+# Disable postinstall to avoid Prisma generate during npm ci
+ENV PRISMA_SKIP_POSTINSTALL_GENERATE=1
+
+# Install dependencies
 RUN npm ci --omit=dev
 
-# Ensure Prisma client is generated (idempotent)
+# Copy Prisma schema and generate client
+COPY prisma ./prisma
 RUN npx prisma generate
 
 # Copy the rest of the server code
