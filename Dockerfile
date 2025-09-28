@@ -5,13 +5,13 @@ RUN apk add --no-cache openssl
 
 WORKDIR /app
 
-# Copy server package files
+# Copy only server package files
 COPY server/package*.json ./
 
 # Install dependencies
 RUN npm ci --only=production
 
-# Copy server source code
+# Copy only server source code
 COPY server/ ./
 
 # Generate Prisma client
