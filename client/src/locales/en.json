@@ -2,14 +2,15 @@
   "common": {
     "skipToContent": "Skip to content",
     "undo": "Undo",
+    "cancel": "Cancel",
     "validation": {
       "email": {
         "gmailOnly": "Only Gmail addresses are allowed",
         "valid": "Valid Gmail address",
         "length": "Gmail local part must be 6–30 characters",
         "characters": "Email contains invalid characters for Gmail",
-        "dots": "Gmail doesn’t allow dots at the start or end",
-        "consecutiveDots": "Gmail doesn’t allow consecutive dots"
+        "dots": "Gmail doesn't allow dots at the start or end",
+        "consecutiveDots": "Gmail doesn't allow consecutive dots"
       }
     }
   },
@@ -811,5 +812,38 @@
     "expense": "Expenses",
     "transactions": "Transactions",
     "expenseRatio": "Expense ratio"
+  },
+  "settings": {
+    "profile": {
+      "title": "Profile Settings"
+    },
+    "password": {
+      "title": "Password Settings"
+    },
+    "account": {
+      "title": "Account Settings",
+      "delete": {
+        "title": "Delete Account",
+        "description": "Once you delete your account, there is no going back. Please be certain.",
+        "warning": "This action will permanently delete your account and all associated data. This cannot be undone.",
+        "confirm": "Are you absolutely sure? This action cannot be undone.",
+        "password": "Enter your password to confirm",
+        "passwordPlaceholder": "Your password",
+        "button": "Delete My Account",
+        "confirmButton": "Yes, Delete My Account",
+        "deleting": "Deleting..."
+      }
+    }
+  },
+  "profile": {
+    "settings": {
+      "title": "Settings",
+      "profile": "Profile Settings",
+      "profile.desc": "Update your name and email",
+      "password": "Password",
+      "password.desc": "Change your password",
+      "account": "Account",
+      "account.desc": "Manage your account"
+    }
   }
 }

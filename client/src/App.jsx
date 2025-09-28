@@ -18,6 +18,7 @@ const Budgets          = lazy(() => import('./pages/sidebar/Budgets').catch(() =
 const Profile          = lazy(() => import('./pages/Profile').catch(() => ({ default: () => <div>Error loading Profile</div> })))
 const PasswordSettings = lazy(() => import('./pages/settings/PasswordSettings').catch(() => ({ default: () => <div>Error loading PasswordSettings</div> })))
 const ProfileSettings  = lazy(() => import('./pages/settings/ProfileSettings').catch(() => ({ default: () => <div>Error loading ProfileSettings</div> })))
+const AccountSettings  = lazy(() => import('./pages/settings/AccountSettings').catch(() => ({ default: () => <div>Error loading AccountSettings</div> })))
 const Transactions     = lazy(() => import('./pages/sidebar/Transactions').catch(() => ({ default: () => <div>Error loading Transactions</div> })))
 
 /** Error boundary i thjeshtë për lazy chunks / render errors */
@@ -105,6 +106,7 @@ export default function App() {
               <Route path="profile" element={<Profile />} />
               <Route path="settings/password" element={<PasswordSettings />} />
               <Route path="settings/profile" element={<ProfileSettings />} />
+              <Route path="settings/account" element={<AccountSettings />} />
               <Route path="transactions" element={<Transactions />} />
             </Route>
           </Routes>
