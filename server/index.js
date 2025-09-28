@@ -1,138 +1,204 @@
-// server/index.js
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
-require("./lib/mailer").verifyMailer?.();
-
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
-const morgan = require("morgan");
-
-// Rrugët
-const authRoutes = require("./routes/authRoutes");
-const userRoutes = require("./routes/userRoutes");
-const transactionRoutes = require("./routes/transactionRoutes");
+const express = require('express');
+const cors = require('cors');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { PrismaClient } = require('@prisma/client');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 const app = express();
+const prisma = new PrismaClient();
 const PORT = process.env.PORT || 8095;
 
-/* ===================== Kontrolle bazike të env ===================== */
-if (!process.env.BASE_URL) {
-  console.warn("⚠️  BASE_URL mungon në .env (përdoret për CORS dhe redirect te front-end).");
-}
-if (!process.env.SERVER_URL) {
-  console.warn("⚠️  SERVER_URL mungon në .env (përdoret për linkun e verifikimit në email).");
-}
+// Middleware
+app.use(express.json());
+app.use(cors({
+  origin: [
+    'https://finman-app.com',
+    'https://finman-app.pages.dev',
+    'http://localhost:5173',
+    'http://localhost:4173'
+  ],
+  credentials: true
+}));
 
-/* ===================== Rate limiter ===================== */
-// Mbron nga brute-force / scraping të tepruar
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minuta
-  max: 1000,                // max 1000 kërkesa per IP / 15 min (rritur për development)
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: "Too many requests from this IP, please try again later.",
+// Email transporter
+const transporter = nodemailer.createTransporter({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
 });
 
-/* ===================== Origins të lejuar për CORS ===================== */
-const allowedOrigins = [
-  process.env.BASE_URL,
-  process.env.CLIENT_URL,
-  "http://localhost:5173",
-  "http://localhost:5174", 
-  "http://localhost:4173",
-  "https://finman-app.com",
-  "https://finman-app.pages.dev",
-  /\.pages\.dev$/,  // Për të gjitha Cloudflare Pages subdomain-et
-].filter(Boolean);
-
-const finalAllowedOrigins = [...new Set(allowedOrigins)];
-
-/* ===================== Middleware ===================== */
-// 1) Body parsing (para rrugeve)
-app.use(express.json({ limit: "1mb" }));
-app.use(express.urlencoded({ extended: true }));
-
-// 2) CORS
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // lejo kërkesa pa Origin (p.sh. curl, Postman)
-      if (!origin) return callback(null, true);
-      
-      // Kontrollo nëse origin-i është në listë ose përputhet me regex
-      const isAllowed = finalAllowedOrigins.some(allowedOrigin => {
-        if (typeof allowedOrigin === 'string') {
-          return allowedOrigin === origin;
-        } else if (allowedOrigin instanceof RegExp) {
-          return allowedOrigin.test(origin);
-        }
-        return false;
-      });
-      
-      if (isAllowed) return callback(null, true);
-      return callback(new Error(`CORS policy violation: origin ${origin} not allowed.`));
-    },
-    credentials: true,
-  })
-);
-
-// 3) Siguri & logging
-app.use(
-  helmet({
-    // API zakonisht s’ka nevojë për CSP strikte; lihet default
-  })
-);
-app.use(limiter);
-app.use(morgan("dev"));
-
-// app.set("trust proxy", 1); // Për proxy (nginx, render, heroku, etj.)
-
-/* ===================== Rrugët ===================== */
-// Shënim: authRoutes përfshin edhe GET /verify → /api/auth/verify
-app.use("/api/auth", authRoutes);                // register, login, verify, forgot/reset
-app.use("/api/users", userRoutes);               // profile, change-password
-app.use("/api/transactions", transactionRoutes); // CRUD transaksionesh
-
-// Health check endpoints
-app.get("/", (req, res) => {
-  res.json({ 
-    message: "FinMan API is running",
-    timestamp: new Date().toISOString(),
-    status: "healthy"
-  });
+// Health check
+app.get('/', (req, res) => {
+  res.json({ message: 'FinMan API is running', status: 'healthy' });
 });
 
-app.get("/health", (req, res) => {
-  res.json({ 
-    status: "ok",
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime()
-  });
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-/* ===================== 404 ===================== */
-app.use((req, res) => {
-  res.status(404).json({ message: "Route not found" });
+// Register
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: 'Të gjitha fushat janë të detyrueshme' });
+    }
+
+    // Check if user exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() }
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ message: 'Përdoruesi ekziston tashmë' });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create user
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email: email.toLowerCase(),
+        password: hashedPassword,
+        emailVerifiedAt: new Date() // Skip email verification for now
+      }
+    });
+
+    res.status(201).json({ 
+      message: 'Përdoruesi u krijua me sukses',
+      user: { id: user.id, name: user.name, email: user.email }
+    });
+
+  } catch (error) {
+    console.error('Register error:', error);
+    res.status(500).json({ message: 'Gabim në server' });
+  }
 });
 
-/* ===================== Error handler global ===================== */
+// Login
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email dhe fjalëkalimi janë të detyrueshëm' });
+    }
+
+    // Find user
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() }
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: 'Kredencialet janë gabim' });
+    }
+
+    // Check password
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Kredencialet janë gabim' });
+    }
+
+    // Generate JWT
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET || 'fallback-secret',
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      message: 'Login i suksesshëm',
+      token,
+      user: { id: user.id, name: user.name, email: user.email }
+    });
+
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Gabim në server' });
+  }
+});
+
+// Get user transactions
+app.get('/api/transactions', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    if (!token) {
+      return res.status(401).json({ message: 'Token i detyrueshëm' });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret');
+    const userId = decoded.userId;
+
+    const transactions = await prisma.transaction.findMany({
+      where: { userId },
+      orderBy: { date: 'desc' }
+    });
+
+    res.json(transactions);
+
+  } catch (error) {
+    console.error('Get transactions error:', error);
+    res.status(500).json({ message: 'Gabim në server' });
+  }
+});
+
+// Create transaction
+app.post('/api/transactions', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    if (!token) {
+      return res.status(401).json({ message: 'Token i detyrueshëm' });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret');
+    const userId = decoded.userId;
+
+    const { category, description, amount, type } = req.body;
+
+    if (!category || !description || !amount || !type) {
+      return res.status(400).json({ message: 'Të gjitha fushat janë të detyrueshme' });
+    }
+
+    const transaction = await prisma.transaction.create({
+      data: {
+        category,
+        description,
+        amount: parseFloat(amount),
+        type,
+        userId
+      }
+    });
+
+    res.status(201).json(transaction);
+
+  } catch (error) {
+    console.error('Create transaction error:', error);
+    res.status(500).json({ message: 'Gabim në server' });
+  }
+});
+
+// Error handler
 app.use((err, req, res, next) => {
-  console.error("🔥 Global error:", err.stack || err);
-  res.status(err.status || 500).json({
-    message: err.message || "Internal Server Error",
-  });
+  console.error(err.stack);
+  res.status(500).json({ message: 'Gabim në server' });
 });
 
-/* ===================== Unhandled rejections ===================== */
-process.on("unhandledRejection", (err) => {
-  console.error("Unhandled rejection:", err);
-  // Në dev mund të mbyllësh procesin; në prod përdor një supervisor (pm2 / systemd)
-  // process.exit(1);
-});
-
-/* ===================== Start server ===================== */
+// Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Backend running at http://localhost:${PORT}`);
-  console.log("🌍 CORS allowed origins:", finalAllowedOrigins);
+  console.log(`🚀 Server running on port ${PORT}`);
+});
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  await prisma.$disconnect();
+  process.exit(0);
 });
