@@ -86,7 +86,7 @@ app.use(
 app.use(limiter);
 app.use(morgan("dev"));
 
-// app.set("trust proxy", 1); // Për proxy (nginx, render, heroku, etj.)
+app.set("trust proxy", 1); // Për proxy (nginx, render, heroku, etj.)
 
 /* ===================== Rrugët ===================== */
 // Shënim: authRoutes përfshin edhe GET /verify → /api/auth/verify

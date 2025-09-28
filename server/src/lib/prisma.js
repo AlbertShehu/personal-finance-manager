@@ -17,5 +17,9 @@ if (process.env.NODE_ENV === 'production') {
   prisma = global.prisma;
 }
 
+// Sigurohu që prisma është i definuar
+if (!prisma) {
+  prisma = new PrismaClient();
+}
 
 module.exports = prisma;
