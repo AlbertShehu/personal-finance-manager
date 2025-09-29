@@ -11,12 +11,7 @@ export const loginSchema = (t) =>
         .email({
           message: t("formValidation.email.invalid", "Please enter a valid email address"),
         })
-        .refine(
-          (v) => /@(gmail|googlemail)\.com$/i.test(v),
-          {
-            message: "", // Mos shfaq mesazh për Gmail validation - frontend e trajton
-          }
-        )
+        // Lejo çdo email valid
     ),
     password: z
       .string()

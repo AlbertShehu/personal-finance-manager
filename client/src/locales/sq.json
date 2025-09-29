@@ -4,7 +4,7 @@
     "undo": "Anulo",
     "validation": {
       "email": {
-        "gmailOnly": "Lejohen vetëm adresat Gmail",
+        "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
         "valid": "Adresë Gmail e vlefshme",
         "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
         "characters": "Email përmban karaktere të pavlefshme për Gmail",
@@ -243,7 +243,7 @@
     "rememberMe": "Më mbaj mend",
     "forgotPassword": "Ke harruar fjalëkalimin?",
     "gmailOk": "Gmail i vlefshëm",
-    "gmailOnly": "Lejohen vetëm adresat Gmail",
+    "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
     "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
     "or": "ose",
     "success": {
@@ -261,7 +261,7 @@
     "validation": {
       "email": "Ju lutem jepni një adresë email të vlefshme.",
       "emailRules": {
-        "gmailOnly": "Lejohen vetëm adresat Gmail",
+        "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
         "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
         "characters": "Email përmban karaktere të pavlefshme për Gmail",
         "dots": "Gmail nuk lejon pika në fillim ose fund",
@@ -299,7 +299,7 @@
     "showPassword": "Shfaq fjalëkalimin",
     "hidePassword": "Fshihe fjalëkalimin",
     "gmailOk": "Gmail i vlefshëm",
-    "gmailOnly": "Lejohen vetëm adresat Gmail",
+    "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
     "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
     "or": "ose",
     "passwordReq": {
@@ -336,7 +336,7 @@
       "name": "Ju lutem shkruani emrin",
       "email": "Ju lutem jepni një adresë email të vlefshme",
       "emailRules": {
-        "gmailOnly": "Lejohen vetëm adresat Gmail",
+        "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
         "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
         "characters": "Email përmban karaktere të pavlefshme për Gmail",
         "dots": "Gmail nuk lejon pika në fillim ose fund",
@@ -549,7 +549,7 @@
     "submit": "Dërgo linkun",
     "sending": "Duke dërguar...",
     "gmailOk": "Gmail i vlefshëm",
-    "gmailOnly": "Lejohen vetëm adresat Gmail",
+    "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
     "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
     "success": "Nëse emaili ekziston, udhëzimet u dërguan.",
     "descriptionVerify": "Linku i rivendosjes u dërgua. Kontrollo Gmail-in.",
@@ -581,7 +581,7 @@
   },
   "validation": {
     "emailRules": {
-      "gmailOnly": "Lejohen vetëm adresat Gmail",
+      "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
       "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
       "characters": "Email përmban karaktere të pavlefshme për Gmail",
       "dots": "Gmail nuk lejon pika në fillim ose fund",
@@ -690,7 +690,7 @@
     "email": {
       "required": "Email është i detyrueshëm",
       "invalid": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
-      "gmailOnly": "Lejohen vetëm adresat Gmail"
+      "invalid": "Ju lutemi shkruani një adresë email të vlefshme"
     },
     "password": {
       "required": "Fjalëkalimi është i detyrueshëm",

@@ -4,7 +4,7 @@
     "undo": "Rückgängig",
     "validation": {
       "email": {
-        "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+        "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
         "valid": "Gültige Gmail-Adresse",
         "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
         "characters": "E-Mail enthält für Gmail unzulässige Zeichen",
@@ -236,7 +236,7 @@
     "rememberMe": "Angemeldet bleiben",
     "forgotPassword": "Passwort vergessen?",
     "gmailOk": "Gültige Gmail-Adresse",
-    "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+    "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
     "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
     "or": "oder",
     "success": {
@@ -254,7 +254,7 @@
     "validation": {
       "email": "Bitte eine gültige E-Mail-Adresse eingeben.",
       "emailRules": {
-        "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+        "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
         "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
         "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
         "dots": "Keine Punkte am Anfang oder Ende",
@@ -292,7 +292,7 @@
     "showPassword": "Passwort anzeigen",
     "hidePassword": "Passwort verbergen",
     "gmailOk": "Gültige Gmail-Adresse",
-    "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+    "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
     "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
     "or": "oder",
     "passwordReq": {
@@ -329,7 +329,7 @@
       "name": "Bitte gib deinen Namen ein",
       "email": "Bitte eine gültige E-Mail-Adresse eingeben",
       "emailRules": {
-        "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+        "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
         "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
         "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
         "dots": "Keine Punkte am Anfang oder Ende",
@@ -541,7 +541,7 @@
     "submit": "Link senden",
     "sending": "Senden...",
     "gmailOk": "Gültige Gmail-Adresse",
-    "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+    "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
     "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
     "success": "Falls die E-Mail existiert, wurden Anweisungen gesendet.",
     "descriptionVerify": "Zurücksetzungslink gesendet. Prüfe dein Gmail.",
@@ -573,7 +573,7 @@
   },
   "validation": {
     "emailRules": {
-      "gmailOnly": "Nur Gmail-Adressen sind erlaubt",
+      "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
       "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
       "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
       "dots": "Keine Punkte am Anfang oder Ende",
@@ -682,7 +682,7 @@
     "email": {
       "required": "E-Mail ist erforderlich",
       "invalid": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
-      "gmailOnly": "Nur Gmail-Adressen sind erlaubt"
+      "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
     },
     "password": {
       "required": "Passwort ist erforderlich",

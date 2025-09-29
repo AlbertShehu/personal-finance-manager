@@ -255,11 +255,8 @@
     "validation": {
       "email": "Please enter a valid email address.",
       "emailRules": {
-        "gmailOnly": "Only Gmail addresses are allowed",
-        "length": "Gmail local part must be 6–30 characters",
-        "characters": "Email contains invalid characters for Gmail",
-        "dots": "Gmail doesn’t allow dots at the start or end",
-        "consecutiveDots": "Gmail doesn’t allow consecutive dots"
+        "invalid": "Please enter a valid email address",
+        "required": "Email address is required"
       },
       "password": "Password must be at least 6 characters"
     },
@@ -330,11 +327,8 @@
       "name": "Please enter your name",
       "email": "Please enter a valid email address",
       "emailRules": {
-        "gmailOnly": "Only Gmail addresses are allowed",
-        "length": "Gmail local part must be 6–30 characters",
-        "characters": "Email contains invalid characters for Gmail",
-        "dots": "Gmail doesn’t allow dots at the start or end",
-        "consecutiveDots": "Gmail doesn’t allow consecutive dots"
+        "invalid": "Please enter a valid email address",
+        "required": "Email address is required"
       },
       "password": {
         "min": "Password must be at least 8 characters",

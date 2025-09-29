@@ -43,56 +43,12 @@ export default function ForgotPasswordPage() {
     try {
       const email = values.email.trim().toLowerCase();
       
-      // Validimi i avancuar i email-it në frontend
-      if (!/@(gmail|googlemail)\.com$/i.test(email)) {
+      // Validimi bazë i email-it (çdo email provider)
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
         toast({
           title: t("forgot.error.title", "Error"),
-          description: t("forgot.validation.emailRules.gmailOnly", "Only Gmail addresses are allowed."),
-          variant: "destructive",
-          duration: 6000,
-        });
-        return;
-      }
-
-      // Validimi i formës së Gmail
-      const localPart = email.split('@')[0];
-      if (localPart.length < 6 || localPart.length > 30) {
-        toast({
-          title: t("forgot.error.title", "Error"),
-          description: t("forgot.validation.emailRules.length", "Gmail local part must be 6-30 characters."),
-          variant: "destructive",
-          duration: 6000,
-        });
-        return;
-      }
-
-      // Kontrollo karakteret e lejuara
-      const gmailLocalPartRegex = /^[a-zA-Z0-9._%+-]+$/;
-      if (!gmailLocalPartRegex.test(localPart)) {
-        toast({
-          title: t("forgot.error.title", "Error"),
-          description: t("forgot.validation.emailRules.characters", "Email contains invalid characters for Gmail."),
-          variant: "destructive",
-          duration: 6000,
-        });
-        return;
-      }
-
-      // Kontrollo pikat
-      if (localPart.endsWith('.') || localPart.startsWith('.')) {
-        toast({
-          title: t("forgot.error.title", "Error"),
-          description: t("forgot.validation.emailRules.dots", "Gmail doesn't allow dots at the beginning or end."),
-          variant: "destructive",
-          duration: 6000,
-        });
-        return;
-      }
-
-      if (localPart.includes('..')) {
-        toast({
-          title: t("forgot.error.title", "Error"),
-          description: t("forgot.validation.emailRules.consecutiveDots", "Gmail doesn't allow consecutive dots."),
+          description: t("forgot.validation.emailRules.invalid", "Please enter a valid email address."),
           variant: "destructive",
           duration: 6000,
         });

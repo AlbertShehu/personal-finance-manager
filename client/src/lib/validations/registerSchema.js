@@ -14,9 +14,7 @@ export const registerSchema = (t) =>
         .trim()
         .min(1, { message: t("formValidation.email.required", "Email is required") })
         .email({ message: t("formValidation.email.invalid", "Please enter a valid email address") })
-        .regex(/@(gmail|googlemail)\.com$/i, {
-          message: "", // Mos shfaq mesazh për Gmail validation - frontend e trajton
-        })
+        // Lejo çdo email valid
         .transform((v) => v.toLowerCase()),
 
       password: z

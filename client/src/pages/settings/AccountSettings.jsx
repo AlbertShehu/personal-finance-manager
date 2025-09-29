@@ -9,8 +9,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertTriangle, Trash2 } from 'lucide-react';
-import { api } from '@/lib/api';
-import { logout } from '@/store/slices/authSlice';
+import api from '@/lib/api';
+import { logoutUser } from '@/store/authSlice';
 
 const AccountSettings = () => {
   const { t } = useTranslation();
@@ -42,7 +42,7 @@ const AccountSettings = () => {
       localStorage.clear();
       
       // Dispatch logout action
-      dispatch(logout());
+      dispatch(logoutUser());
       
       // Navigate to home page
       navigate('/', { replace: true });

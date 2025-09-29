@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const { hashPassword, comparePassword } = require("../utils/hash");
 const { sendVerifyEmail, sendResetEmail } = require("../lib/emails");
-const { validateGmailEmail } = require("../utils/emailValidator");
+const { validateEmail } = require("../utils/emailValidator");
 
 // Google Sign-In
 const { OAuth2Client } = require("google-auth-library");
@@ -41,7 +41,7 @@ const register = async (req, res) => {
     }
     
     // Validimi i avancuar i email-it Gmail
-    const emailValidation = await validateGmailEmail(email);
+    const emailValidation = await validateEmail(email);
     if (!emailValidation.isValid) {
       // console.log("❌ [REGISTER] Email validation failed:", emailValidation.error);
       return res.status(400).json({ message: emailValidation.error });
@@ -140,7 +140,7 @@ const login = async (req, res) => {
     }
     
     // Validimi i email-it Gmail
-    const emailValidation = await validateGmailEmail(email);
+    const emailValidation = await validateEmail(email);
     if (!emailValidation.isValid) {
       console.log("❌ [LOGIN] Email validation failed:", emailValidation.error);
       return res.status(400).json({ message: emailValidation.error });
@@ -187,7 +187,7 @@ const forgotPassword = async (req, res) => {
     if (!email) return res.status(400).json({ message: "Email është i detyrueshëm." });
     
     // Validimi i email-it Gmail
-    const emailValidation = await validateGmailEmail(email);
+    const emailValidation = await validateEmail(email);
     if (!emailValidation.isValid) {
       console.log("❌ [FORGOT] Email validation failed:", emailValidation.error);
       return res.status(400).json({ message: emailValidation.error });
