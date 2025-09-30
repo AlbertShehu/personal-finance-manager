@@ -22,5 +22,8 @@ COPY . .
 
 ENV NODE_ENV=production
 
+# Run database migrations
+RUN npx prisma migrate deploy
+
 # Start app
 CMD ["node", "index.js"]
