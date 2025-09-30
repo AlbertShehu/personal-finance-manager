@@ -2,14 +2,11 @@
   "common": {
     "skipToContent": "Zum Inhalt springen",
     "undo": "Rückgängig",
+    "cancel": "Abbrechen",
     "validation": {
       "email": {
         "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
-        "valid": "Gültige Gmail-Adresse",
-        "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
-        "characters": "E-Mail enthält für Gmail unzulässige Zeichen",
-        "dots": "Gmail erlaubt keine Punkte am Anfang oder Ende",
-        "consecutiveDots": "Gmail erlaubt keine aufeinanderfolgenden Punkte"
+        "length": "Der lokale Teil muss 6–30 Zeichen lang sein"
       }
     }
   },
@@ -235,9 +232,7 @@
     "loading": "Anmeldung läuft...",
     "rememberMe": "Angemeldet bleiben",
     "forgotPassword": "Passwort vergessen?",
-    "gmailOk": "Gültige Gmail-Adresse",
     "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
-    "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
     "or": "oder",
     "success": {
       "title": "Willkommen zurück 👋",
@@ -256,7 +251,6 @@
       "emailRules": {
         "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
         "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
-        "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
         "dots": "Keine Punkte am Anfang oder Ende",
         "consecutiveDots": "Keine aufeinanderfolgenden Punkte"
       },
@@ -291,9 +285,7 @@
     "loading": "Konto wird erstellt…",
     "showPassword": "Passwort anzeigen",
     "hidePassword": "Passwort verbergen",
-    "gmailOk": "Gültige Gmail-Adresse",
     "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
-    "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
     "or": "oder",
     "passwordReq": {
       "min": "Mindestens 8 Zeichen",
@@ -303,7 +295,7 @@
     "success": {
       "title": "Konto erstellt",
       "description": "Du kannst dich jetzt anmelden.",
-      "descriptionVerify": "Registrierung abgeschlossen. Prüfe Gmail auf den Bestätigungslink."
+      "descriptionVerify": "Registrierung abgeschlossen. Prüfe deine E-Mail auf den Bestätigungslink."
     },
     "error": {
       "title": "Registrierung fehlgeschlagen",
@@ -331,7 +323,6 @@
       "emailRules": {
         "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
         "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
-        "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
         "dots": "Keine Punkte am Anfang oder Ende",
         "consecutiveDots": "Keine aufeinanderfolgenden Punkte"
       },
@@ -485,6 +476,8 @@
     "toast": {
       "addSuccess": "✅ Transaktion hinzugefügt",
       "addSuccessDesc": "Transaktion erfolgreich gespeichert.",
+      "deleteAccountSuccess": "✅ Konto gelöscht",
+      "deleteAccountSuccessDesc": "Ihr Konto wurde erfolgreich gelöscht.",
       "addError": "❌ Hinzufügen fehlgeschlagen",
       "validationError": "❌ Validierungsfehler",
       "updateSuccess": "✅ Transaktion aktualisiert",
@@ -540,20 +533,17 @@
     "subtitle": "Gib deine E-Mail ein, wir senden Anweisungen zum Zurücksetzen.",
     "submit": "Link senden",
     "sending": "Senden...",
-    "gmailOk": "Gültige Gmail-Adresse",
     "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
-    "gmailHint": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
     "success": "Falls die E-Mail existiert, wurden Anweisungen gesendet.",
-    "descriptionVerify": "Zurücksetzungslink gesendet. Prüfe dein Gmail.",
+    "descriptionVerify": "Zurücksetzungslink gesendet. Prüfe deine E-Mail.",
     "error": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
-    "invalidEmail": "Ungültige Gmail-Adresse angegeben.",
+    "invalidEmail": "Ungültige E-Mail-Adresse angegeben.",
     "emailNotFound": "Kein Konto mit dieser E-Mail gefunden.",
     "serverError": "Senden der Zurücksetzungs-E-Mail fehlgeschlagen.",
     "rateLimit": "Zu viele Anfragen. Bitte kurz warten.",
     "default": "Unerwarteter Fehler. Bitte erneut versuchen.",
     "required": "E-Mail-Adresse ist erforderlich.",
     "invalidFormat": "Bitte eine gültige E-Mail-Adresse eingeben.",
-    "notGmail": "Nur Gmail-Adressen sind erlaubt.",
     "localPartTooShort": "Lokaler Teil muss mindestens 6 Zeichen haben.",
     "localPartTooLong": "Lokaler Teil darf 30 Zeichen nicht überschreiten.",
     "invalidCharacters": "E-Mail enthält unzulässige Zeichen.",
@@ -564,7 +554,6 @@
     "title": "Passwortzurücksetzung fehlgeschlagen",
     "required": "E-Mail-Adresse ist erforderlich.",
     "invalidFormat": "Bitte eine gültige E-Mail-Adresse eingeben.",
-    "notGmail": "Nur Gmail-Adressen sind erlaubt.",
     "localPartTooShort": "Lokaler Teil muss mindestens 6 Zeichen haben.",
     "localPartTooLong": "Lokaler Teil darf 30 Zeichen nicht überschreiten.",
     "invalidCharacters": "E-Mail enthält unzulässige Zeichen.",
@@ -575,7 +564,6 @@
     "emailRules": {
       "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
       "length": "Der lokale Teil muss 6–30 Zeichen lang sein",
-      "characters": "E-Mail enthält unzulässige Zeichen für Gmail",
       "dots": "Keine Punkte am Anfang oder Ende",
       "consecutiveDots": "Keine aufeinanderfolgenden Punkte"
     }
@@ -681,7 +669,6 @@
   "formValidation": {
     "email": {
       "required": "E-Mail ist erforderlich",
-      "invalid": "Bitte eine gültige Gmail- oder Googlemail-Adresse angeben",
       "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
     },
     "password": {

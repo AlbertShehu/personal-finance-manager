@@ -3,19 +3,21 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertTriangle, Trash2 } from 'lucide-react';
-import api from '@/lib/api';
+import api from '@/lib/axios';
 import { logoutUser } from '@/store/authSlice';
 
 const AccountSettings = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { toast } = useToast();
   
   const [password, setPassword] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -36,6 +38,14 @@ const AccountSettings = () => {
     try {
       await api.delete('/users/me', {
         data: { password }
+      });
+
+      // Show success toast
+      toast({
+        title: t('transaction.toast.deleteAccountSuccess'),
+        description: t('transaction.toast.deleteAccountSuccessDesc'),
+        variant: 'success',
+        duration: 5000
       });
 
       // Clear localStorage

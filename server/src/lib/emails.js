@@ -4,6 +4,15 @@ const { getMailer } = require("./mailer");
 async function sendVerifyEmail({ to, name = "përdorues", token }) {
   if (!to || !token) throw new Error("sendVerifyEmail: 'to' dhe 'token' janë të detyrueshëm.");
   if (!process.env.SERVER_URL) throw new Error("sendVerifyEmail: mungon SERVER_URL në .env");
+  
+  // Në development, printo email-in në console në vend që ta dërgojë
+  if (process.env.NODE_ENV === 'development') {
+    const verifyUrl = `${process.env.SERVER_URL}/api/auth/verify?token=${encodeURIComponent(token)}`;
+    console.log("📨 [DEV] Email verification link:", verifyUrl);
+    console.log("📨 [DEV] Email would be sent to:", to);
+    return { success: true, message: "Email printed to console (development mode)" };
+  }
+  
   if (!process.env.EMAIL_USER) throw new Error("sendVerifyEmail: mungon EMAIL_USER në .env");
 
   const transporter = getMailer();
@@ -17,7 +26,7 @@ async function sendVerifyEmail({ to, name = "përdorues", token }) {
         Verifiko email-in tënd për FinMan.
       </span>
       <h2>Verifikimi i Email-it</h2>
-      <p>Përshëndetje ${escapeHtml(name)},</p>
+      <p>Përshëndetje ${name},</p>
       <p>Për të aktivizuar llogarinë tënde në <b>FinMan</b>, kliko linkun më poshtë:</p>
       <p><a href="${verifyUrl}" target="_blank">${verifyUrl}</a></p>
       <p>Ky link është i vlefshëm për 24 orë.</p>

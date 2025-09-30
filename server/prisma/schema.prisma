@@ -3,21 +3,22 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
-  id              Int          @id @default(autoincrement())
-  name            String
-  email           String       @unique
-  password        String
-  emailVerifiedAt DateTime?
+  id                    Int          @id @default(autoincrement())
+  name                  String
+  email                 String       @unique
+  password              String
+  emailVerifiedAt       DateTime?
+  emailVerificationToken String?
 
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
 
-  transactions    Transaction[]
+  transactions          Transaction[]
 }
 
 model Transaction {

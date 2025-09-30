@@ -19,7 +19,6 @@ import {
   Sun,
   MonitorSmartphone,
   HardDriveDownload,
-  Settings,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -409,59 +408,6 @@ export default function Profile() {
         </div>
       </section>
 
-      {/* Settings Section */}
-      <section className="mt-8">
-        <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Settings className="h-5 w-5" />
-          {t("profile.settings.title", "Settings")}
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link
-            to="/settings/profile"
-            className="p-4 rounded-lg border hover:bg-muted/50 transition-colors"
-          >
-            <div className="flex items-center gap-3">
-              <User2 className="h-5 w-5 text-blue-600" />
-              <div>
-                <h3 className="font-medium">{t("profile.settings.profile", "Profile Settings")}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t("profile.settings.profile.desc", "Update your name and email")}
-                </p>
-              </div>
-            </div>
-          </Link>
-          
-          <Link
-            to="/settings/password"
-            className="p-4 rounded-lg border hover:bg-muted/50 transition-colors"
-          >
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="h-5 w-5 text-green-600" />
-              <div>
-                <h3 className="font-medium">{t("profile.settings.password", "Password")}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t("profile.settings.password.desc", "Change your password")}
-                </p>
-              </div>
-            </div>
-          </Link>
-          
-          <Link
-            to="/settings/account"
-            className="p-4 rounded-lg border hover:bg-muted/50 transition-colors border-red-200 hover:border-red-300"
-          >
-            <div className="flex items-center gap-3">
-              <Settings className="h-5 w-5 text-red-600" />
-              <div>
-                <h3 className="font-medium text-red-600">{t("profile.settings.account", "Account")}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t("profile.settings.account.desc", "Manage your account")}
-                </p>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </section>
 
       {/* Footer mini-note */}
       <p className="mt-4 text-xs text-muted-foreground">

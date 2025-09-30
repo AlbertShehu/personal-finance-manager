@@ -24,7 +24,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const isGmail = (email = "") => /@(gmail|googlemail)\.com$/i.test(email.trim().toLowerCase());
 const normalizeEmail = (email = "") => email.trim().toLowerCase();
 
 export default function RegisterForm() {
@@ -63,7 +62,7 @@ export default function RegisterForm() {
   const pwd = form.watch("password") ?? "";
   const confirm = form.watch("confirmPassword") ?? "";
   const emailVal = normalizeEmail(form.watch("email") ?? "");
-  const gmailOk = !emailVal || isGmail(emailVal);
+  // Email validation removed - now accepts any valid email
 
   const reqs = {
     len: (pwd?.length || 0) >= 8,
@@ -81,57 +80,13 @@ export default function RegisterForm() {
         password: data.password,
       };
 
-      // Validimi i avancuar i email-it në frontend
-      if (!isGmail(payload.email)) {
+      // Validimi bazë i email-it (lejo çdo email valid)
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(payload.email)) {
         toast({
           variant: "destructive",
           title: t("register.error.title", "Registration Failed"),
-          description: t("register.validation.emailRules.gmailOnly", "Only Gmail addresses are allowed."),
-          duration: 6000,
-        });
-        return;
-      }
-
-      // Validimi i formës së Gmail
-      const localPart = payload.email.split('@')[0];
-      if (localPart.length < 6 || localPart.length > 30) {
-        toast({
-          variant: "destructive",
-          title: t("register.error.title", "Registration Failed"),
-          description: t("register.validation.emailRules.length", "Gmail local part must be 6-30 characters."),
-          duration: 6000,
-        });
-        return;
-      }
-
-      // Kontrollo karakteret e lejuara
-      const gmailLocalPartRegex = /^[a-zA-Z0-9._%+-]+$/;
-      if (!gmailLocalPartRegex.test(localPart)) {
-        toast({
-          variant: "destructive",
-          title: t("register.error.title", "Registration Failed"),
-          description: t("register.validation.emailRules.characters", "Email contains invalid characters for Gmail."),
-          duration: 6000,
-        });
-        return;
-      }
-
-      // Kontrollo pikat
-      if (localPart.endsWith('.') || localPart.startsWith('.')) {
-        toast({
-          variant: "destructive",
-          title: t("register.error.title", "Registration Failed"),
-          description: t("register.validation.emailRules.dots", "Gmail doesn't allow dots at the beginning or end."),
-          duration: 6000,
-        });
-        return;
-      }
-
-      if (localPart.includes('..')) {
-        toast({
-          variant: "destructive",
-          title: t("register.error.title", "Registration Failed"),
-          description: t("register.validation.emailRules.consecutiveDots", "Gmail doesn't allow consecutive dots."),
+          description: t("formValidation.email.invalid", "Please enter a valid email address."),
           duration: 6000,
         });
         return;
@@ -148,8 +103,8 @@ export default function RegisterForm() {
         description:
           t(
             "register.success.descriptionVerify",
-            "Registration completed. Check your Gmail for the verification link."
-          ) || "Registration completed. Check your Gmail for the verification link.",
+            "Registration completed. Check your email for the verification link."
+          ) || "Registration completed. Check your email for the verification link.",
         variant: "success",
         duration: 6000,
       });
@@ -222,37 +177,23 @@ export default function RegisterForm() {
           )}
         />
 
-        {/* Email (Gmail-only hint) */}
+        {/* Email */}
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                {t("register.email")}
-                {!!emailVal &&
-                  (gmailOk ? (
-                    <span className="inline-flex items-center gap-1 text-emerald-600 text-xs">
-                      <CheckCircle2 className="h-3 w-3" />
-                      {t("register.gmailOk", "Valid Gmail")}
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1 text-red-600 text-xs">
-                      <AlertCircle className="h-3 w-3" />
-                      {t("register.gmailOnly", "Only Gmail is allowed")}
-                    </span>
-                  ))}
-              </FormLabel>
+              <FormLabel>{t("register.email")}</FormLabel>
               <FormControl>
                 <Input
                   type="email"
                   {...field}
                   placeholder={t("register.emailPlaceholder")}
                   autoComplete="email"
-                  aria-invalid={!!form.formState.errors.email || (!gmailOk && !!emailVal) || undefined}
+                  aria-invalid={!!form.formState.errors.email || undefined}
                   className={cn(
                     "bg-background text-sm sm:text-base transition-colors",
-                    form.formState.errors.email || (!gmailOk && !!emailVal)
+                    form.formState.errors.email
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
                       : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
                   )}
@@ -380,7 +321,7 @@ export default function RegisterForm() {
             loading ||
             !form.formState.isValid ||
             (pwd && confirm && pwd !== confirm) ||
-            (!!emailVal && !gmailOk) // ⬅️ mos lejo submit kur s’është Gmail
+            false // Email validation removed - now accepts any valid email
           }
           className="w-full font-semibold py-2 sm:py-3 rounded-md text-sm sm:text-base"
         >

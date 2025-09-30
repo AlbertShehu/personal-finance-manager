@@ -5,12 +5,7 @@
     "cancel": "Cancel",
     "validation": {
       "email": {
-        "gmailOnly": "Only Gmail addresses are allowed",
-        "valid": "Valid Gmail address",
-        "length": "Gmail local part must be 6–30 characters",
-        "characters": "Email contains invalid characters for Gmail",
-        "dots": "Gmail doesn't allow dots at the start or end",
-        "consecutiveDots": "Gmail doesn't allow consecutive dots"
+        "invalid": "Please enter a valid email address"
       }
     }
   },
@@ -213,11 +208,11 @@
       "default": "An error occurred while saving the profile."
     }
   },
-  "settings": {
+  "settingsForm": {
     "password": {
       "title": "Change Password"
     },
-    "profile": {
+    "profileEdit": {
       "title": "Edit Profile"
     }
   },
@@ -236,9 +231,6 @@
     "loading": "Signing in...",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
-    "gmailOk": "Valid Gmail",
-    "gmailOnly": "Only Gmail addresses are allowed",
-    "gmailHint": "Please provide a valid Gmail or Googlemail address",
     "or": "or",
     "success": {
       "title": "Welcome back 👋",
@@ -256,7 +248,9 @@
       "email": "Please enter a valid email address.",
       "emailRules": {
         "invalid": "Please enter a valid email address",
-        "required": "Email address is required"
+        "length": "Local part must be 6–30 characters long",
+        "dots": "No dots at the beginning or end",
+        "consecutiveDots": "No consecutive dots"
       },
       "password": "Password must be at least 6 characters"
     },
@@ -289,9 +283,6 @@
     "loading": "Creating your account…",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "gmailOk": "Valid Gmail",
-    "gmailOnly": "Only Gmail addresses are allowed",
-    "gmailHint": "Please provide a valid Gmail or Googlemail address",
     "or": "or",
     "passwordReq": {
       "min": "At least 8 characters",
@@ -301,7 +292,7 @@
     "success": {
       "title": "Account created",
       "description": "You can sign in with your new account now.",
-      "descriptionVerify": "Registration completed. Check your Gmail for the verification link."
+      "descriptionVerify": "Registration completed. Check your email for the verification link."
     },
     "error": {
       "title": "Registration failed",
@@ -328,7 +319,9 @@
       "email": "Please enter a valid email address",
       "emailRules": {
         "invalid": "Please enter a valid email address",
-        "required": "Email address is required"
+        "length": "Local part must be 6–30 characters long",
+        "dots": "No dots at the beginning or end",
+        "consecutiveDots": "No consecutive dots"
       },
       "password": {
         "min": "Password must be at least 8 characters",
@@ -480,6 +473,8 @@
     "toast": {
       "addSuccess": "✅ Transaction added",
       "addSuccessDesc": "Your transaction was recorded.",
+      "deleteAccountSuccess": "✅ Account deleted",
+      "deleteAccountSuccessDesc": "Your account has been successfully deleted.",
       "addError": "❌ Failed to add transaction",
       "validationError": "❌ Validation error",
       "updateSuccess": "✅ Transaction updated",
@@ -535,45 +530,21 @@
     "subtitle": "Enter your email and we'll send reset instructions.",
     "submit": "Send link",
     "sending": "Sending...",
-    "gmailOk": "Valid Gmail",
-    "gmailOnly": "Only Gmail addresses are allowed",
-    "gmailHint": "Please provide a valid Gmail or Googlemail address",
     "success": "If the email exists, instructions were sent.",
-    "descriptionVerify": "Reset link sent. Check your Gmail.",
+    "descriptionVerify": "Reset link sent. Check your email.",
     "error": "Something went wrong. Try again.",
-    "invalidEmail": "An invalid Gmail address was provided.",
+    "invalidEmail": "An invalid email address was provided.",
     "emailNotFound": "No account found with this email address.",
     "serverError": "Failed to send reset email. Try again.",
     "rateLimit": "Too many requests. Please wait before trying again.",
     "default": "An unexpected error occurred. Please try again.",
     "required": "Email address is required.",
-    "invalidFormat": "Please enter a valid email address.",
-    "notGmail": "Only Gmail addresses are allowed.",
-    "localPartTooShort": "Gmail local part must be at least 6 characters.",
-    "localPartTooLong": "Gmail local part cannot exceed 30 characters.",
-    "invalidCharacters": "Email contains invalid characters for Gmail.",
-    "dotsAtEnds": "Gmail doesn’t allow dots at the start or end.",
-    "consecutiveDots": "Gmail doesn’t allow consecutive dots."
+    "invalidFormat": "Please enter a valid email address."
   },
   "error": {
     "title": "Password reset failed",
     "required": "Email address is required.",
-    "invalidFormat": "Please enter a valid email address.",
-    "notGmail": "Only Gmail addresses are allowed.",
-    "localPartTooShort": "Gmail local part must be at least 6 characters.",
-    "localPartTooLong": "Gmail local part cannot exceed 30 characters.",
-    "invalidCharacters": "Email contains invalid characters for Gmail.",
-    "dotsAtEnds": "Gmail doesn’t allow dots at the start or end.",
-    "consecutiveDots": "Gmail doesn’t allow consecutive dots."
-  },
-  "validation": {
-    "emailRules": {
-      "gmailOnly": "Only Gmail addresses are allowed",
-      "length": "Gmail local part must be 6–30 characters",
-      "characters": "Email contains invalid characters for Gmail",
-      "dots": "Gmail doesn’t allow dots at the start or end",
-      "consecutiveDots": "Gmail doesn’t allow consecutive dots"
-    }
+    "invalidFormat": "Please enter a valid email address."
   },
   "reset": {
     "title": "Reset password",
@@ -676,8 +647,7 @@
   "formValidation": {
     "email": {
       "required": "Email is required",
-      "invalid": "Please provide a valid Gmail or Googlemail address",
-      "gmailOnly": "Only Gmail addresses are allowed"
+      "invalid": "Please enter a valid email address"
     },
     "password": {
       "required": "Password is required",
@@ -807,7 +777,7 @@
     "transactions": "Transactions",
     "expenseRatio": "Expense ratio"
   },
-  "settings": {
+  "settingsPage": {
     "profile": {
       "title": "Profile Settings"
     },
@@ -829,7 +799,7 @@
       }
     }
   },
-  "profile": {
+  "profileSettings": {
     "settings": {
       "title": "Settings",
       "profile": "Profile Settings",

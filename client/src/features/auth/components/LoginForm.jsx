@@ -25,7 +25,7 @@ import api from "@/lib/axios"
 import { cn } from "@/lib/utils"
 
 const normalizeEmail = (v = "") => v.trim().toLowerCase()
-const isGmail = (v = "") => /@(gmail|googlemail)\.com$/i.test(normalizeEmail(v))
+// Gmail validation removed - now accepts any valid email
 
 export default function LoginForm() {
   const { t } = useTranslation()
@@ -107,50 +107,13 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     const email = normalizeEmail(data.email)
 
-    // Validimet bazë të Gmail (frontend)
-    if (!isGmail(email)) {
+    // Basic email validation (accepts any valid email)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       mobileToast({
         variant: "error",
         title: t("login.error.title", "Login failed"),
-        description: t("login.validation.emailRules.gmailOnly", "Only Gmail addresses are allowed."),
-        duration: 6000,
-      })
-      return
-    }
-    const localPart = email.split("@")[0]
-    if (localPart.length < 6 || localPart.length > 30) {
-      mobileToast({
-        variant: "error",
-        title: t("login.error.title", "Login failed"),
-        description: t("login.validation.emailRules.length", "Gmail local part must be 6-30 characters."),
-        duration: 6000,
-      })
-      return
-    }
-    const gmailLocalPartRegex = /^[a-zA-Z0-9._%+-]+$/
-    if (!gmailLocalPartRegex.test(localPart)) {
-      mobileToast({
-        variant: "error",
-        title: t("login.error.title", "Login failed"),
-        description: t("login.validation.emailRules.characters", "Email contains invalid characters for Gmail."),
-        duration: 6000,
-      })
-      return
-    }
-    if (localPart.endsWith(".") || localPart.startsWith(".")) {
-      mobileToast({
-        variant: "error",
-        title: t("login.error.title", "Login failed"),
-        description: t("login.validation.emailRules.dots", "Gmail doesn't allow dots at the beginning or end."),
-        duration: 6000,
-      })
-      return
-    }
-    if (localPart.includes("..")) {
-      mobileToast({
-        variant: "error",
-        title: t("login.error.title", "Login failed"),
-        description: t("login.validation.emailRules.consecutiveDots", "Gmail doesn't allow consecutive dots."),
+        description: t("formValidation.email.invalid", "Please enter a valid email address."),
         duration: 6000,
       })
       return
@@ -191,16 +154,18 @@ export default function LoginForm() {
       mobileToast({
         variant: "error",
         title: t("login.resend.needEmail.title", "Email required"),
-        description: t("login.resend.needEmail.desc", "Enter your Gmail address first."),
+        description: t("login.resend.needEmail.desc", "Enter your email address first."),
         duration: 6000,
       })
       return
     }
-    if (!isGmail(email)) {
+    // Basic email validation (accepts any valid email)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       mobileToast({
         variant: "error",
-        title: t("login.resend.gmailOnly.title", "Only Gmail allowed"),
-        description: t("login.resend.gmailOnly.desc", "Please use a @gmail.com address."),
+        title: t("login.error.title", "Login failed"),
+        description: t("formValidation.email.invalid", "Please enter a valid email address."),
         duration: 6000,
       })
       return
@@ -264,7 +229,7 @@ export default function LoginForm() {
                         ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
                         : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
                     )}
-                    placeholder="you@gmail.com"
+                    placeholder="you@example.com"
                     aria-invalid={!!form.formState.errors.email || undefined}
                   />
                 </FormControl>

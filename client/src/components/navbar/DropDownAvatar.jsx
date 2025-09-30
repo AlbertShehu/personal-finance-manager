@@ -25,7 +25,7 @@ import {
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu"
 
-import { User, Settings, KeyRound, LogOut, Edit3, Sun, Moon, Check } from "lucide-react"
+import { User, Settings, KeyRound, LogOut, Edit3, Sun, Moon, Check, UserCog } from "lucide-react"
 import useTheme from "@/hooks/useTheme"
 
 function getInitials(name) {
@@ -120,12 +120,16 @@ export default function DropDownAvatar() {
                 <KeyRound className="h-4 w-4 mr-2" />
                 {t("avatar.password")}
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/settings/profile")}>
-                <Edit3 className="h-4 w-4 mr-2" />
-                {t("avatar.editProfile")}
-              </DropdownMenuItem>
+               <DropdownMenuItem onClick={() => navigate("/settings/profile")}>
+                 <Edit3 className="h-4 w-4 mr-2" />
+                 {t("avatar.editProfile")}
+               </DropdownMenuItem>
+               <DropdownMenuItem onClick={() => navigate("/settings/account")}>
+                 <UserCog className="h-4 w-4 mr-2" />
+                 {t("avatar.account")}
+               </DropdownMenuItem>
 
-              <DropdownMenuSeparator />
+               <DropdownMenuSeparator />
 
               {/* Theme submenu inline */}
               <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">

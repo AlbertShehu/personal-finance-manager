@@ -2,14 +2,10 @@
   "common": {
     "skipToContent": "Kalo te përmbajtja",
     "undo": "Anulo",
+    "cancel": "Anulo",
     "validation": {
       "email": {
-        "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
-        "valid": "Adresë Gmail e vlefshme",
-        "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
-        "characters": "Email përmban karaktere të pavlefshme për Gmail",
-        "dots": "Gmail nuk lejon pika në fillim ose fund",
-        "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme"
+        "invalid": "Ju lutemi shkruani një email adresë të vlefshme"
       }
     }
   },
@@ -242,9 +238,7 @@
     "loading": "Duke u identifikuar...",
     "rememberMe": "Më mbaj mend",
     "forgotPassword": "Ke harruar fjalëkalimin?",
-    "gmailOk": "Gmail i vlefshëm",
-    "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
-    "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
+    "invalid": "Ju lutemi shkruani një email adresë të vlefshme",
     "or": "ose",
     "success": {
       "title": "Mirë se u ktheve 👋",
@@ -261,11 +255,10 @@
     "validation": {
       "email": "Ju lutem jepni një adresë email të vlefshme.",
       "emailRules": {
-        "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
-        "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
-        "characters": "Email përmban karaktere të pavlefshme për Gmail",
-        "dots": "Gmail nuk lejon pika në fillim ose fund",
-        "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme"
+        "invalid": "Ju lutemi shkruani një email adresë të vlefshme",
+        "length": "Pjesa lokale duhet të ketë 6–30 karaktere",
+        "dots": "Nuk lejohen pika në fillim ose në fund",
+        "consecutiveDots": "Nuk lejohen pika të njëpasnjëshme"
       },
       "password": "Fjalëkalimi duhet të ketë të paktën 6 karaktere"
     },
@@ -298,9 +291,7 @@
     "loading": "Duke krijuar llogarinë…",
     "showPassword": "Shfaq fjalëkalimin",
     "hidePassword": "Fshihe fjalëkalimin",
-    "gmailOk": "Gmail i vlefshëm",
-    "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
-    "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
+    "invalid": "Ju lutemi shkruani një email adresë të vlefshme",
     "or": "ose",
     "passwordReq": {
       "min": "Të paktën 8 karaktere",
@@ -310,7 +301,7 @@
     "success": {
       "title": "Llogaria u krijua",
       "description": "Tani mund të hysh me llogarinë tënde të re.",
-      "descriptionVerify": "Regjistrimi u përfundua. Kontrollo Gmail-in për linkun e verifikimit."
+      "descriptionVerify": "Regjistrimi u përfundua. Kontrollo email-in për linkun e verifikimit."
     },
     "error": {
       "title": "Regjistrimi dështoi",
@@ -336,11 +327,10 @@
       "name": "Ju lutem shkruani emrin",
       "email": "Ju lutem jepni një adresë email të vlefshme",
       "emailRules": {
-        "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
-        "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
-        "characters": "Email përmban karaktere të pavlefshme për Gmail",
-        "dots": "Gmail nuk lejon pika në fillim ose fund",
-        "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme"
+        "invalid": "Ju lutemi shkruani një email adresë të vlefshme",
+        "length": "Pjesa lokale duhet të ketë 6–30 karaktere",
+        "dots": "Nuk lejohen pika në fillim ose në fund",
+        "consecutiveDots": "Nuk lejohen pika të njëpasnjëshme"
       },
       "password": {
         "min": "Fjalëkalimi duhet të ketë të paktën 8 karaktere",
@@ -492,6 +482,8 @@
     "toast": {
       "addSuccess": "✅ Transaksioni u shtua",
       "addSuccessDesc": "Transaksioni u regjistrua me sukses.",
+      "deleteAccountSuccess": "✅ Llogaria u fshi",
+      "deleteAccountSuccessDesc": "Llogaria juaj u fshi me sukses.",
       "addError": "❌ Dështoi shtimi i transaksionit",
       "validationError": "❌ Gabim validimi",
       "updateSuccess": "✅ Transaksioni u përditësua",
@@ -548,44 +540,29 @@
     "subtitle": "Shkruaj emailin dhe do të dërgojmë udhëzimet e rivendosjes.",
     "submit": "Dërgo linkun",
     "sending": "Duke dërguar...",
-    "gmailOk": "Gmail i vlefshëm",
-    "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
-    "gmailHint": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
+    "invalid": "Ju lutemi shkruani një email adresë të vlefshme",
     "success": "Nëse emaili ekziston, udhëzimet u dërguan.",
-    "descriptionVerify": "Linku i rivendosjes u dërgua. Kontrollo Gmail-in.",
+    "descriptionVerify": "Linku i rivendosjes u dërgua. Kontrollo email-in.",
     "error": "Diçka shkoi keq. Provo sërish.",
-    "invalidEmail": "U dha një adresë Gmail e pavlefshme.",
+    "invalidEmail": "U dha një adresë email e pavlefshme.",
     "emailNotFound": "S’u gjet asnjë llogari me këtë adresë email.",
     "serverError": "Dështoi dërgimi i emailit të rivendosjes. Provo sërish.",
     "rateLimit": "Shumë kërkesa. Të lutem prit para se të provosh përsëri.",
     "default": "Ndodhi një gabim i papritur. Provo sërish.",
     "required": "Adresa e emailit është e detyrueshme.",
-    "invalidFormat": "Ju lutem jepni një adresë email të vlefshme.",
-    "notGmail": "Lejohen vetëm adresat Gmail.",
-    "localPartTooShort": "Pjesa lokale e Gmail duhet të ketë të paktën 6 karaktere.",
-    "localPartTooLong": "Pjesa lokale e Gmail s’mund të kalojë 30 karaktere.",
-    "invalidCharacters": "Email përmban karaktere të pavlefshme për Gmail.",
-    "dotsAtEnds": "Gmail nuk lejon pika në fillim ose fund.",
-    "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme."
+    "invalidFormat": "Ju lutem jepni një adresë email të vlefshme."
   },
   "error": {
     "title": "Rivendosja e fjalëkalimit dështoi",
     "required": "Adresa e emailit është e detyrueshme.",
-    "invalidFormat": "Ju lutem jepni një adresë email të vlefshme.",
-    "notGmail": "Lejohen vetëm adresat Gmail.",
-    "localPartTooShort": "Pjesa lokale e Gmail duhet të ketë të paktën 6 karaktere.",
-    "localPartTooLong": "Pjesa lokale e Gmail s’mund të kalojë 30 karaktere.",
-    "invalidCharacters": "Email përmban karaktere të pavlefshme për Gmail.",
-    "dotsAtEnds": "Gmail nuk lejon pika në fillim ose fund.",
-    "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme."
+    "invalidFormat": "Ju lutem jepni një adresë email të vlefshme."
   },
   "validation": {
     "emailRules": {
-      "invalid": "Ju lutemi shkruani një adresë email të vlefshme",
-      "length": "Pjesa lokale e Gmail duhet të ketë 6–30 karaktere",
-      "characters": "Email përmban karaktere të pavlefshme për Gmail",
-      "dots": "Gmail nuk lejon pika në fillim ose fund",
-      "consecutiveDots": "Gmail nuk lejon pika të njëpasnjëshme"
+      "invalid": "Ju lutemi shkruani një email adresë të vlefshme",
+      "length": "Pjesa lokale duhet të ketë 6–30 karaktere",
+      "dots": "Nuk lejohen pika në fillim ose në fund",
+      "consecutiveDots": "Nuk lejohen pika të njëpasnjëshme"
     }
   },
   "reset": {
@@ -689,8 +666,7 @@
   "formValidation": {
     "email": {
       "required": "Email është i detyrueshëm",
-      "invalid": "Ju lutem jepni një adresë email të vlefshme Gmail ose Googlemail",
-      "invalid": "Ju lutemi shkruani një adresë email të vlefshme"
+      "invalid": "Ju lutemi shkruani një email adresë të vlefshme"
     },
     "password": {
       "required": "Fjalëkalimi është i detyrueshëm",
