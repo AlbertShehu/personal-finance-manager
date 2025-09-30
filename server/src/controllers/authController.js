@@ -23,7 +23,7 @@ if (!process.env.JWT_SECRET) {
 }
 
 /* ===================== Helpers ===================== */
-const isGmail = (email) => /@(gmail|googlemail)\.com$/i.test(String(email || ""));
+// Removed isGmail function - no longer restricting to Gmail only
 const createTokenRaw = (len = 32) => crypto.randomBytes(len).toString("hex");
 const hashToken = (token) => crypto.createHash("sha256").update(String(token || "")).digest("hex");
 
@@ -47,9 +47,7 @@ const register = async (req, res) => {
       return res.status(400).json({ message: emailValidation.error });
     }
     
-    if (!isGmail(email)) {
-      return res.status(400).json({ message: "Lejohen vetëm adresat Gmail." });
-    }
+    // Removed Gmail-only restriction - allow any valid email
 
     const exists = await prisma.user.findUnique({ where: { email } });
     if (exists) {
@@ -146,9 +144,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: emailValidation.error });
     }
     
-    if (!isGmail(email)) {
-      return res.status(400).json({ message: "Lejohen vetëm adresat Gmail." });
-    }
+    // Removed Gmail-only restriction - allow any valid email
 
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) return res.status(401).json({ message: "Email ose fjalëkalim i pasaktë." });
@@ -374,9 +370,7 @@ const googleSignIn = async (req, res) => {
     const emailVerified = !!payload?.email_verified;
 
     if (!emailVerified) return res.status(400).json({ message: "Google email nuk është verifikuar." });
-    if (!isGmail(email)) {
-      return res.status(400).json({ message: "Lejohen vetëm adresat Gmail." });
-    }
+    // Removed Gmail-only restriction - allow any valid email
 
     let user = await prisma.user.findUnique({ where: { email } });
 
