@@ -22,8 +22,8 @@ COPY . .
 
 ENV NODE_ENV=production
 
-# Run database migrations
-RUN npx prisma migrate deploy
+# Push database schema (for provider switch from SQLite to PostgreSQL)
+RUN npx prisma db push --accept-data-loss
 
 # Start app
 CMD ["node", "index.js"]
