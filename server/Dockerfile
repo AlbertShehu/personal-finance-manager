@@ -20,8 +20,8 @@ RUN npx prisma generate
 # Copy app code
 COPY . .
 
-# Reset failed migrations and push schema
-RUN npx prisma migrate reset --force && npx prisma db push --accept-data-loss
+# Clean failed migrations and push schema
+RUN npx prisma db execute --stdin <<< "DELETE FROM _prisma_migrations WHERE migration_name = '20250930190000_init_postgresql';" && npx prisma db push --accept-data-loss
 
 ENV NODE_ENV=production
 
