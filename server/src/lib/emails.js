@@ -65,6 +65,15 @@ async function sendVerifyEmail({ to, name = "përdorues", token }) {
 async function sendResetEmail({ to, token }) {
   if (!to || !token) throw new Error("sendResetEmail: 'to' dhe 'token' janë të detyrueshëm.");
   if (!process.env.BASE_URL) throw new Error("sendResetEmail: mungon BASE_URL në .env");
+  
+  // Në development, printo email-in në console në vend që ta dërgojë
+  if (process.env.NODE_ENV === 'development') {
+    const resetUrl = `${process.env.BASE_URL}/reset-password/${encodeURIComponent(token)}`;
+    console.log("📨 [DEV] Password reset link:", resetUrl);
+    console.log("📨 [DEV] Email would be sent to:", to);
+    return { success: true, message: "Email printed to console (development mode)" };
+  }
+  
   if (!process.env.EMAIL_USER) throw new Error("sendResetEmail: mungon EMAIL_USER në .env");
 
   const transporter = getMailer();

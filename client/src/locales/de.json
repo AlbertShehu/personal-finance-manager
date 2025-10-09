@@ -798,5 +798,10 @@
     "expense": "Ausgaben",
     "transactions": "Transaktionen",
     "expenseRatio": "Ausgabenquote"
+  },
+  "settings": {
+    "password": {
+      "title": "Passwort ändern"
+    }
   }
 }

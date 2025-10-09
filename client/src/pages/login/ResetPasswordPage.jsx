@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { useTranslation } from "react-i18next"
 import { useParams, useSearchParams, useNavigate, Link } from "react-router-dom"
-import { Eye, EyeOff, CheckCircle2, CircleAlert } from "lucide-react"
+import { CheckCircle2, CircleAlert } from "lucide-react"
 import api from "@/lib/axios"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -42,8 +42,6 @@ export default function ResetPasswordPage() {
   }, [lng, i18n])
 
   const [loading, setLoading] = useState(false)
-  const [showPwd, setShowPwd] = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
 
   const schema = z
     .object({
@@ -137,24 +135,14 @@ export default function ResetPasswordPage() {
                 <FormItem>
                   <FormLabel>{t("reset.password")}</FormLabel>
                   <FormControl>
-                    <div className="relative">
-                      <Input
-                        type={showPwd ? "text" : "password"}
-                        {...field}
-                        autoComplete="new-password"
-                        placeholder={t("reset.passwordPlaceholder")}
-                        aria-invalid={!!form.formState.errors.password || undefined}
-                        className="bg-background pr-10"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPwd((v) => !v)}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded hover:bg-muted"
-                        aria-label={showPwd ? t("register.hidePassword") : t("register.showPassword")}
-                      >
-                        {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </button>
-                    </div>
+                    <Input
+                      type="password"
+                      {...field}
+                      autoComplete="new-password"
+                      placeholder={t("reset.passwordPlaceholder")}
+                      aria-invalid={!!form.formState.errors.password || undefined}
+                      className="bg-background"
+                    />
                   </FormControl>
 
                   {/* Kërkesat e fjalëkalimit */}
@@ -186,24 +174,14 @@ export default function ResetPasswordPage() {
                 <FormItem>
                   <FormLabel>{t("reset.confirmPassword")}</FormLabel>
                   <FormControl>
-                    <div className="relative">
-                      <Input
-                        type={showConfirm ? "text" : "password"}
-                        {...field}
-                        autoComplete="new-password"
-                        placeholder={t("reset.confirmPlaceholder")}
-                        aria-invalid={!!form.formState.errors.confirmPassword || mismatch || undefined}
-                        className="bg-background pr-10"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirm((v) => !v)}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded hover:bg-muted"
-                        aria-label={showConfirm ? t("register.hidePassword") : t("register.showPassword")}
-                      >
-                        {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                      </button>
-                    </div>
+                    <Input
+                      type="password"
+                      {...field}
+                      autoComplete="new-password"
+                      placeholder={t("reset.confirmPlaceholder")}
+                      aria-invalid={!!form.formState.errors.confirmPassword || mismatch || undefined}
+                      className="bg-background"
+                    />
                   </FormControl>
 
                   {mismatch && !form.formState.errors.confirmPassword && (

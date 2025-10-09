@@ -6,7 +6,13 @@ const { PrismaClient } = require('@prisma/client');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 require('dotenv').config();
-const { sendVerifyEmail } = require('./src/lib/emails');
+const { sendVerifyEmail, sendResetEmail } = require('./src/lib/emails');
+const { OAuth2Client } = require('google-auth-library');
+
+// Google OAuth Client
+const googleClient = process.env.GOOGLE_CLIENT_ID 
+  ? new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+  : null;
 
 const app = express();
 const prisma = new PrismaClient();
@@ -98,8 +104,9 @@ app.post('/api/auth/register', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Register error:', error);
-    res.status(500).json({ message: 'Gabim në server' });
+    console.error('🛑 [REGISTER] Gabim i plotë:', error);
+    console.error('🛑 [REGISTER] Stack:', error.stack);
+    res.status(500).json({ message: 'Gabim në server', error: error.message });
   }
 });
 
@@ -140,6 +147,166 @@ app.get('/api/auth/verify', async (req, res) => {
   } catch (error) {
     console.error('Verify email error:', error);
     res.status(500).json({ message: 'Gabim në server' });
+  }
+});
+
+// Forgot Password
+app.post('/api/auth/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email është i detyrueshëm' });
+    }
+
+    // Uniformizoj përgjigjen për sigurinë
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() }
+    });
+
+    if (user && user.emailVerifiedAt) {
+      // Gjenero token për rivendosje
+      const resetToken = crypto.randomBytes(32).toString('hex');
+      const tokenHash = crypto.createHash('sha256').update(resetToken).digest('hex');
+      const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 orë
+
+      // Ruaj token-in në DB (përdor emailVerificationToken për tani)
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          emailVerificationToken: tokenHash + ':' + expiresAt.getTime()
+        }
+      });
+
+      // Dërgo email për rivendosje
+      try {
+        await sendResetEmail({
+          to: user.email,
+          token: resetToken
+        });
+        console.log('✅ [FORGOT] Email reset u dërgua:', user.email);
+      } catch (emailErr) {
+        console.error('❌ [FORGOT] sendResetEmail:', emailErr);
+      }
+    }
+
+    // Përgjigje uniforme për sigurinë
+    res.status(200).json({
+      message: 'Nëse email ekziston, është dërguar udhëzimi për rivendosje.'
+    });
+
+  } catch (error) {
+    console.error('🛑 [FORGOT] Gabim:', error);
+    res.status(500).json({ message: 'Gabim në server' });
+  }
+});
+
+// Reset Password
+app.post('/api/auth/reset-password', async (req, res) => {
+  try {
+    const { token, password } = req.body;
+
+    if (!token || !password) {
+      return res.status(400).json({ message: 'Token dhe fjalëkalimi janë të detyrueshëm' });
+    }
+
+    const tokenHash = crypto.createHash('sha256').update(token).digest('hex');
+
+    // Gjej përdoruesin me këtë token
+    const users = await prisma.user.findMany();
+    const user = users.find(u => {
+      if (!u.emailVerificationToken || !u.emailVerificationToken.includes(':')) return false;
+      const [storedHash, expiry] = u.emailVerificationToken.split(':');
+      return storedHash === tokenHash && parseInt(expiry) > Date.now();
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: 'Token i pavlefshëm ose ka skaduar' });
+    }
+
+    // Hash fjalëkalimin e ri
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Përditëso fjalëkalimin
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        password: hashedPassword,
+        emailVerificationToken: null
+      }
+    });
+
+    console.log('✅ [RESET] Fjalëkalimi u rivendos për:', user.email);
+    res.status(200).json({ message: 'Fjalëkalimi u rivendos me sukses' });
+
+  } catch (error) {
+    console.error('🛑 [RESET] Gabim:', error);
+    res.status(500).json({ message: 'Gabim në server' });
+  }
+});
+
+// Google Sign-In
+app.post('/api/auth/google', async (req, res) => {
+  try {
+    if (!googleClient) {
+      return res.status(500).json({ message: 'GOOGLE_CLIENT_ID mungon në konfigurim.' });
+    }
+
+    const { credential } = req.body;
+    if (!credential) {
+      return res.status(400).json({ message: 'Missing credential' });
+    }
+
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    
+    const payload = ticket.getPayload();
+    const email = (payload?.email || '').toLowerCase();
+    const emailVerified = !!payload?.email_verified;
+
+    if (!emailVerified) {
+      return res.status(400).json({ message: 'Google email nuk është verifikuar.' });
+    }
+
+    let user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      const randomPwd = crypto.randomBytes(16).toString('hex');
+      const hashedPassword = await bcrypt.hash(randomPwd, 10);
+      
+      user = await prisma.user.create({
+        data: {
+          name: payload?.name || email.split('@')[0],
+          email,
+          password: hashedPassword,
+          emailVerifiedAt: new Date(),
+        },
+      });
+    } else if (!user.emailVerifiedAt) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { emailVerifiedAt: new Date() },
+      });
+    }
+
+    const token = jwt.sign(
+      { userId: user.id, email: user.email, name: user.name },
+      process.env.JWT_SECRET || 'fallback-secret',
+      { expiresIn: '7d' }
+    );
+
+    console.log('✅ [GOOGLE] Login successful:', user.email);
+
+    return res.json({
+      message: 'Login me Google i suksesshëm',
+      token,
+      user: { id: user.id, name: user.name, email: user.email },
+    });
+  } catch (error) {
+    console.error('🛑 [GOOGLE] Gabim:', error?.stack || error);
+    return res.status(401).json({ message: 'Verifikimi i Google dështoi.' });
   }
 });
 
@@ -249,6 +416,56 @@ app.post('/api/transactions', async (req, res) => {
 
   } catch (error) {
     console.error('Create transaction error:', error);
+    res.status(500).json({ message: 'Gabim në server' });
+  }
+});
+
+// Change Password
+app.patch('/api/users/change-password', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    if (!token) {
+      return res.status(401).json({ message: 'Token i detyrueshëm' });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret');
+    const userId = decoded.userId;
+
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ message: 'Të gjitha fushat janë të detyrueshme' });
+    }
+
+    // Gjej përdoruesin
+    const user = await prisma.user.findUnique({
+      where: { id: userId }
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Përdoruesi nuk u gjet' });
+    }
+
+    // Verifiko fjalëkalimin aktual
+    const validPassword = await bcrypt.compare(currentPassword, user.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Fjalëkalimi aktual është gabim' });
+    }
+
+    // Hash fjalëkalimin e ri
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Përditëso fjalëkalimin
+    await prisma.user.update({
+      where: { id: userId },
+      data: { password: hashedPassword }
+    });
+
+    console.log('✅ [CHANGE_PASSWORD] Password updated for user:', user.email);
+    res.json({ message: 'Fjalëkalimi u ndryshua me sukses' });
+
+  } catch (error) {
+    console.error('❌ [CHANGE_PASSWORD] Error:', error);
     res.status(500).json({ message: 'Gabim në server' });
   }
 });

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslation } from "react-i18next"
-import { Eye, EyeOff, Lock, CheckCircle2, CircleAlert } from "lucide-react"
+import { Lock, CheckCircle2, CircleAlert } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 import api from "@/lib/axios"
@@ -26,9 +26,6 @@ export default function ChangePasswordForm() {
   const { t } = useTranslation()
   const { toast } = useToast()
 
-  const [showOld, setShowOld] = useState(false)
-  const [showNew, setShowNew] = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const form = useForm({
@@ -117,23 +114,12 @@ export default function ChangePasswordForm() {
             <FormItem>
               <FormLabel>{t("password.form.currentPasswordLabel")}</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Input
-                    type={showOld ? "text" : "password"}
-                    autoComplete="current-password"
-                    {...field}
-                    className="pr-10"
-                    aria-invalid={!!form.formState.errors.currentPassword || undefined}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowOld(v => !v)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-2 hover:bg-muted"
-                    aria-label={showOld ? t("register.hidePassword") : t("register.showPassword")}
-                  >
-                    {showOld ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
+                <Input
+                  type="password"
+                  autoComplete="current-password"
+                  {...field}
+                  aria-invalid={!!form.formState.errors.currentPassword || undefined}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -148,23 +134,12 @@ export default function ChangePasswordForm() {
             <FormItem>
               <FormLabel>{t("password.form.newPasswordLabel")}</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Input
-                    type={showNew ? "text" : "password"}
-                    autoComplete="new-password"
-                    {...field}
-                    className="pr-10"
-                    aria-invalid={!!form.formState.errors.newPassword || undefined}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowNew(v => !v)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-2 hover:bg-muted"
-                    aria-label={showNew ? t("register.hidePassword") : t("register.showPassword")}
-                  >
-                    {showNew ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
+                <Input
+                  type="password"
+                  autoComplete="new-password"
+                  {...field}
+                  aria-invalid={!!form.formState.errors.newPassword || undefined}
+                />
               </FormControl>
 
               <ul className="mt-2 space-y-1 text-sm">
@@ -195,23 +170,12 @@ export default function ChangePasswordForm() {
             <FormItem>
               <FormLabel>{t("password.form.confirmNewPasswordLabel")}</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Input
-                    type={showConfirm ? "text" : "password"}
-                    autoComplete="new-password"
-                    {...field}
-                    className="pr-10"
-                    aria-invalid={!!form.formState.errors.confirmNewPassword || mismatch || undefined}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirm(v => !v)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-2 hover:bg-muted"
-                    aria-label={showConfirm ? t("register.hidePassword") : t("register.showPassword")}
-                  >
-                    {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
+                <Input
+                  type="password"
+                  autoComplete="new-password"
+                  {...field}
+                  aria-invalid={!!form.formState.errors.confirmNewPassword || mismatch || undefined}
+                />
               </FormControl>
 
               {mismatch && !form.formState.errors.confirmNewPassword && (

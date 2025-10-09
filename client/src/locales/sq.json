@@ -795,5 +795,10 @@
     "expense": "Shpenzime",
     "transactions": "Transaksione",
     "expenseRatio": "Raporti i Shpenzimeve"
+  },
+  "settings": {
+    "password": {
+      "title": "Ndrysho Fjalëkalimin"
+    }
   }
 }

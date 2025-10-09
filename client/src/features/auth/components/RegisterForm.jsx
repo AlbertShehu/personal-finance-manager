@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/lib/validations/registerSchema";
 import { useTranslation } from "react-i18next";
-import { Eye, EyeOff, CheckCircle2, CircleAlert, AlertCircle } from "lucide-react";
+import { CheckCircle2, CircleAlert, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import GoogleSignInButton from "@/components/ui/google-signin-button";
 import api from "@/lib/axios";
@@ -31,8 +31,6 @@ export default function RegisterForm() {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [showPwd, setShowPwd] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(registerSchema(t)),
@@ -216,33 +214,19 @@ export default function RegisterForm() {
             <FormItem>
               <FormLabel>{t("register.password")}</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Input
-                    type={showPwd ? "text" : "password"}
-                    {...field}
-                    placeholder="********"
-                    autoComplete="new-password"
-                    aria-invalid={!!form.formState.errors.password || undefined}
-                    className={cn(
-                      "bg-background pr-10 text-sm sm:text-base transition-colors",
-                      form.formState.errors.password 
-                        ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
-                        : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
-                    )}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPwd((v) => !v)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded hover:bg-muted"
-                    aria-label={
-                      showPwd
-                        ? t("register.hidePassword", "Hide password")
-                        : t("register.showPassword", "Show password")
-                    }
-                  >
-                    {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
+                <Input
+                  type="password"
+                  {...field}
+                  placeholder="********"
+                  autoComplete="new-password"
+                  aria-invalid={!!form.formState.errors.password || undefined}
+                  className={cn(
+                    "bg-background text-sm sm:text-base transition-colors",
+                    form.formState.errors.password 
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
+                      : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
+                  )}
+                />
               </FormControl>
               {/* Password requirements hint */}
               <ul className="mt-2 space-y-1 text-xs sm:text-sm">
@@ -272,35 +256,21 @@ export default function RegisterForm() {
             <FormItem>
               <FormLabel>{t("register.confirmPassword")}</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Input
-                    type={showConfirm ? "text" : "password"}
-                    {...field}
-                    placeholder="********"
-                    autoComplete="new-password"
-                    aria-invalid={
-                      !!form.formState.errors.confirmPassword || mismatch || undefined
-                    }
-                    className={cn(
-                      "bg-background pr-10 text-sm sm:text-base transition-colors",
-                      form.formState.errors.confirmPassword || mismatch
-                        ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
-                        : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
-                    )}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirm((v) => !v)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded hover:bg-muted"
-                    aria-label={
-                      showConfirm
-                        ? t("register.hidePassword", "Hide password")
-                        : t("register.showPassword", "Show password")
-                    }
-                  >
-                    {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
+                <Input
+                  type="password"
+                  {...field}
+                  placeholder="********"
+                  autoComplete="new-password"
+                  aria-invalid={
+                    !!form.formState.errors.confirmPassword || mismatch || undefined
+                  }
+                  className={cn(
+                    "bg-background text-sm sm:text-base transition-colors",
+                    form.formState.errors.confirmPassword || mismatch
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500" 
+                      : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500"
+                  )}
+                />
               </FormControl>
 
               {mismatch && !form.formState.errors.confirmPassword && (

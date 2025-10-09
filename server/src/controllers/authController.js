@@ -283,8 +283,8 @@ const resendVerification = async (req, res) => {
   const { email } = req.body || {};
   console.log("➡️  [RESEND] payload:", { email });
 
-  // Uniform response për input të paplotë / jo-gmail
-  if (!email || !isGmail(email)) {
+  // Uniform response për input të paplotë
+  if (!email) {
     return res.status(200).json({ message: "Nëse email ekziston, do të dërgohet verifikimi." });
   }
 
