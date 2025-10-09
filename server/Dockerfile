@@ -20,6 +20,9 @@ RUN npx prisma generate
 # Copy app code
 COPY . .
 
+# Push database schema
+RUN npx prisma db push --accept-data-loss
+
 ENV NODE_ENV=production
 
 # Start app
