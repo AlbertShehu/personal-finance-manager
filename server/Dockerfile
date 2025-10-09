@@ -20,8 +20,8 @@ RUN npx prisma generate
 # Copy app code
 COPY . .
 
-# Push database schema
-RUN npx prisma db push --accept-data-loss
+# Reset failed migrations and push schema
+RUN npx prisma migrate reset --force && npx prisma db push --accept-data-loss
 
 ENV NODE_ENV=production
 
