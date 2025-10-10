@@ -179,16 +179,17 @@ app.post('/api/auth/forgot-password', async (req, res) => {
         }
       });
 
-      // Dërgo email për rivendosje
-      try {
-        await sendResetPasswordEmail({
-          to: user.email,
-          token: resetToken
+      // Fire-and-forget: dërgo emailin në sfond pa pritur
+      sendResetPasswordEmail({
+        to: user.email,
+        token: resetToken
+      })
+        .then(() => {
+          console.log('✅ [FORGOT] Email reset u dërgua:', user.email);
+        })
+        .catch((emailErr) => {
+          console.error('❌ [FORGOT] sendResetEmail:', emailErr);
         });
-        console.log('✅ [FORGOT] Email reset u dërgua:', user.email);
-      } catch (emailErr) {
-        console.error('❌ [FORGOT] sendResetEmail:', emailErr);
-      }
     }
 
     // Përgjigje uniforme për sigurinë

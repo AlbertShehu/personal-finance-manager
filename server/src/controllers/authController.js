@@ -101,24 +101,29 @@ const register = async (req, res) => {
       throw e;
     }
 
+    // Fire-and-forget: dërgo emailin në sfond pa pritur
     if (created) {
       if (inFlightVerifySend.has(createdUser.id)) {
         console.log("🔁 [REGISTER] Send në progres; skip.");
       } else {
         inFlightVerifySend.add(createdUser.id);
-        try {
-          await sendVerificationEmail({ to: createdUser.email, name: createdUser.name, token: raw });
-          console.log("📬 [REGISTER] Verifikimi u dërgua →", createdUser.email);
-        } catch (emailError) {
-          console.log("⚠️ [REGISTER] Email verifikimi dështoi, por regjistrimi u krye:", emailError.message);
-        } finally {
-          inFlightVerifySend.delete(createdUser.id);
-        }
+        // NUK përdorim 'await' - kthe përgjigje menjëherë
+        sendVerificationEmail({ to: createdUser.email, name: createdUser.name, token: raw })
+          .then(() => {
+            console.log("📬 [REGISTER] Verifikimi u dërgua →", createdUser.email);
+          })
+          .catch((emailError) => {
+            console.error("⚠️ [REGISTER] Email verifikimi dështoi:", emailError.message);
+          })
+          .finally(() => {
+            inFlightVerifySend.delete(createdUser.id);
+          });
       }
     }
 
+    // Kthe përgjigje MENJËHERË - s'ka timeout
     return res.status(201).json({
-      message: "Regjistrimi u krye me sukses! Mund të bësh login tani.",
+      message: "Regjistrimi u krye. Kontrollo email-in për linkun e verifikimit (vlen 24 orë).",
       user: { id: createdUser.id, name: createdUser.name, email: createdUser.email }
     });
   } catch (error) {
@@ -200,12 +205,14 @@ const forgotPassword = async (req, res) => {
         data: { tokenHash, expiresAt, user: { connect: { id: user.id } } },
       });
 
-      try {
-        await sendResetPasswordEmail({ to: user.email, token: raw });
-        console.log("✅ [FORGOT] Email reset u dërgua:", email);
-      } catch (emailErr) {
-        console.error("❌ [FORGOT] sendResetEmail:", emailErr?.stack || emailErr);
-      }
+      // Fire-and-forget: dërgo emailin në sfond pa pritur
+      sendResetPasswordEmail({ to: user.email, token: raw })
+        .then(() => {
+          console.log("✅ [FORGOT] Email reset u dërgua:", email);
+        })
+        .catch((emailErr) => {
+          console.error("❌ [FORGOT] sendResetEmail:", emailErr?.stack || emailErr);
+        });
     }
 
     return res
@@ -327,20 +334,27 @@ const resendVerification = async (req, res) => {
       throw e;
     }
 
+    // Fire-and-forget: dërgo emailin në sfond pa pritur
     if (created) {
       if (inFlightVerifySend.has(user.id)) {
         console.log("🔁 [RESEND] Send në progres; skip.");
       } else {
         inFlightVerifySend.add(user.id);
-        try {
-          await sendVerificationEmail({ to: user.email, name: user.name, token: raw });
-          console.log("📬 [RESEND] verifikimi u ridërgua te:", user.email);
-        } finally {
-          inFlightVerifySend.delete(user.id);
-        }
+        // NUK përdorim 'await' - kthe përgjigje menjëherë
+        sendVerificationEmail({ to: user.email, name: user.name, token: raw })
+          .then(() => {
+            console.log("📬 [RESEND] verifikimi u ridërgua te:", user.email);
+          })
+          .catch((emailError) => {
+            console.error("⚠️ [RESEND] Email dështoi:", emailError.message);
+          })
+          .finally(() => {
+            inFlightVerifySend.delete(user.id);
+          });
       }
     }
 
+    // Kthe përgjigje MENJËHERË - s'ka timeout
     return res.status(200).json({ message: "Nëse email ekziston, u dërgua një link i ri verifikimi." });
   } catch (err) {
     console.error("🛑 [RESEND] Gabim:", err?.stack || err);
