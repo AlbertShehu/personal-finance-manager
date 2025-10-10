@@ -10,10 +10,8 @@ const __dirname = path.dirname(__filename)
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
   define: {
-    // Environment variables për production
-    'import.meta.env.VITE_API_URL': mode === 'production' 
-      ? JSON.stringify('https://personal-finance-manager-production-a720.up.railway.app')
-      : JSON.stringify(''),
+    // Environment variables për production dhe development
+    'import.meta.env.VITE_API_URL': JSON.stringify('https://personal-finance-manager-production-a720.up.railway.app'),
     'import.meta.env.VITE_API_TIMEOUT': JSON.stringify(30000),
     'import.meta.env.VITE_API_RETRIES': JSON.stringify(3),
   },
