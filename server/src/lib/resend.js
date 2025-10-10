@@ -58,10 +58,12 @@ async function sendVerificationEmail({ to, name = "përdorues", token }) {
       html,
       text,
     });
-    console.log("✅ [RESEND-VERIFY] Email u dërgua:", result.data?.id, "→", to);
+    console.log("✅ [RESEND-VERIFY] Email u dërgua:", result.data?.id || result.id || 'unknown', "→", to);
+    console.log("📊 [RESEND-VERIFY] Full response:", JSON.stringify(result, null, 2));
     return result;
   } catch (err) {
     console.error("❌ [RESEND-VERIFY] Dështoi dërgimi:", err?.message || err);
+    console.error("📊 [RESEND-VERIFY] Full error:", JSON.stringify(err, null, 2));
     throw err;
   }
 }
@@ -118,10 +120,12 @@ async function sendResetPasswordEmail({ to, token }) {
       html,
       text,
     });
-    console.log("✅ [RESEND-RESET] Email u dërgua:", result.data?.id, "→", to);
+    console.log("✅ [RESEND-RESET] Email u dërgua:", result.data?.id || result.id || 'unknown', "→", to);
+    console.log("📊 [RESEND-RESET] Full response:", JSON.stringify(result, null, 2));
     return result;
   } catch (err) {
     console.error("❌ [RESEND-RESET] Dështoi dërgimi:", err?.message || err);
+    console.error("📊 [RESEND-RESET] Full error:", JSON.stringify(err, null, 2));
     throw err;
   }
 }
