@@ -58,12 +58,23 @@ async function sendVerificationEmail({ to, name = "përdorues", token }) {
       html,
       text,
     });
-    console.log("✅ [RESEND-VERIFY] Email u dërgua:", result.data?.id || result.id || 'unknown', "→", to);
-    console.log("📊 [RESEND-VERIFY] Full response:", JSON.stringify(result, null, 2));
+    
+    // Resend kthen: { data: { id: '...' }, error: null } ose { data: null, error: {...} }
+    console.log("📊 [RESEND-VERIFY] Raw result:", JSON.stringify(result));
+    
+    if (result.error) {
+      console.error("❌ [RESEND-VERIFY] Resend error:", result.error);
+      throw new Error(result.error.message || 'Resend API error');
+    }
+    
+    const emailId = result.data?.id || result.id || 'unknown';
+    console.log("✅ [RESEND-VERIFY] Email u dërgua:", emailId, "→", to);
     return result;
   } catch (err) {
     console.error("❌ [RESEND-VERIFY] Dështoi dërgimi:", err?.message || err);
-    console.error("📊 [RESEND-VERIFY] Full error:", JSON.stringify(err, null, 2));
+    if (err.response) {
+      console.error("📊 [RESEND-VERIFY] API Response:", JSON.stringify(err.response, null, 2));
+    }
     throw err;
   }
 }
@@ -120,12 +131,23 @@ async function sendResetPasswordEmail({ to, token }) {
       html,
       text,
     });
-    console.log("✅ [RESEND-RESET] Email u dërgua:", result.data?.id || result.id || 'unknown', "→", to);
-    console.log("📊 [RESEND-RESET] Full response:", JSON.stringify(result, null, 2));
+    
+    // Resend kthen: { data: { id: '...' }, error: null } ose { data: null, error: {...} }
+    console.log("📊 [RESEND-RESET] Raw result:", JSON.stringify(result));
+    
+    if (result.error) {
+      console.error("❌ [RESEND-RESET] Resend error:", result.error);
+      throw new Error(result.error.message || 'Resend API error');
+    }
+    
+    const emailId = result.data?.id || result.id || 'unknown';
+    console.log("✅ [RESEND-RESET] Email u dërgua:", emailId, "→", to);
     return result;
   } catch (err) {
     console.error("❌ [RESEND-RESET] Dështoi dërgimi:", err?.message || err);
-    console.error("📊 [RESEND-RESET] Full error:", JSON.stringify(err, null, 2));
+    if (err.response) {
+      console.error("📊 [RESEND-RESET] API Response:", JSON.stringify(err.response, null, 2));
+    }
     throw err;
   }
 }
