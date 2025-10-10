@@ -172,7 +172,7 @@ export default function LoginForm() {
     }
     try {
       setResendLoading(true)
-      await api.post("/auth/resend-verification", { email })
+      await api.post("/auth/resend", { email })
       mobileToast({
         variant: "success",
         title: t("login.resend.sent.title", "Verification link sent"),

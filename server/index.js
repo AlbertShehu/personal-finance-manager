@@ -361,6 +361,65 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// Resend Email Verification
+app.post('/api/auth/resend', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email është i detyrueshëm' });
+    }
+
+    // Find user
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() }
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Përdoruesi nuk u gjet' });
+    }
+
+    // Check if already verified
+    if (user.emailVerifiedAt) {
+      return res.status(400).json({ message: 'Email-i është tashmë i verifikuar' });
+    }
+
+    // Generate new verification token
+    const rawToken = crypto.randomBytes(32).toString('hex');
+    const tokenHash = crypto.createHash('sha256').update(rawToken).digest('hex');
+    const expiry = Date.now() + (24 * 60 * 60 * 1000); // 24 hours
+    const tokenWithExpiry = `${tokenHash}:${expiry}`;
+
+    // Update user with new token
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { emailVerificationToken: tokenWithExpiry }
+    });
+
+    // Send verification email
+    try {
+      await sendVerifyEmail({
+        to: user.email,
+        name: user.name,
+        token: rawToken
+      });
+      console.log('✅ [RESEND] Email verification u dërgua përsëri:', user.email);
+    } catch (emailError) {
+      console.error('❌ [RESEND] Email sending failed:', emailError);
+      // Don't fail the request if email sending fails
+    }
+
+    res.json({ 
+      message: 'Email verifikimi u dërgua përsëri. Kontrollo email-in.',
+      ok: true 
+    });
+
+  } catch (error) {
+    console.error('Resend error:', error);
+    res.status(500).json({ message: 'Gabim në server' });
+  }
+});
+
 // Get user transactions
 app.get('/api/transactions', async (req, res) => {
   try {
