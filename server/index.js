@@ -10,6 +10,14 @@ const { sendVerifyEmail, sendResetEmail } = require('./src/lib/emails');
 const { sendVerificationEmail, sendResetPasswordEmail } = require('./src/lib/resend');
 const { OAuth2Client } = require('google-auth-library');
 
+// Log environment variables (pa sensitive data)
+console.log('🔧 Environment check:');
+console.log('   NODE_ENV:', process.env.NODE_ENV);
+console.log('   RESEND_API_KEY:', process.env.RESEND_API_KEY ? '✅ SET (length: ' + process.env.RESEND_API_KEY.length + ')' : '❌ MISSING');
+console.log('   EMAIL_FROM:', process.env.EMAIL_FROM || '❌ MISSING');
+console.log('   DATABASE_URL:', process.env.DATABASE_URL ? '✅ SET' : '❌ MISSING');
+console.log('   JWT_SECRET:', process.env.JWT_SECRET ? '✅ SET' : '❌ MISSING');
+
 // Google OAuth Client
 const googleClient = process.env.GOOGLE_CLIENT_ID 
   ? new OAuth2Client(process.env.GOOGLE_CLIENT_ID)

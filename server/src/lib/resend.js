@@ -4,6 +4,13 @@ const { Resend } = require('resend');
 // Initialize Resend
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
+// Log Resend initialization
+if (resend) {
+  console.log('✅ [RESEND] Initialized with API key (length:', process.env.RESEND_API_KEY.length + ')');
+} else {
+  console.warn('⚠️ [RESEND] Not initialized - RESEND_API_KEY missing!');
+}
+
 async function sendVerificationEmail({ to, name = "përdorues", token }) {
   if (!to || !token) throw new Error("sendVerificationEmail: 'to' dhe 'token' janë të detyrueshëm.");
   if (!process.env.SERVER_URL) throw new Error("sendVerificationEmail: mungon SERVER_URL në .env");
