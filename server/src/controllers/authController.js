@@ -40,14 +40,12 @@ const register = async (req, res) => {
       return res.status(400).json({ message: "Të gjitha fushat janë të detyrueshme." });
     }
     
-    // Validimi i avancuar i email-it Gmail
+    // Validimi i email-it (çdo provider)
     const emailValidation = await validateEmail(email);
     if (!emailValidation.isValid) {
       // console.log("❌ [REGISTER] Email validation failed:", emailValidation.error);
       return res.status(400).json({ message: emailValidation.error });
     }
-    
-    // Removed Gmail-only restriction - allow any valid email
 
     const exists = await prisma.user.findUnique({ where: { email } });
     if (exists) {
@@ -68,7 +66,7 @@ const register = async (req, res) => {
     if (pre && pre.expiresAt > new Date()) {
       console.log("⏱️  [REGISTER] Token ekzistues ende i vlefshëm; skip send.");
       return res.status(201).json({
-        message: "Regjistrimi u krye. Kontrollo Gmail për linkun e verifikimit (vlen 24 orë).",
+        message: "Regjistrimi u krye. Kontrollo email-in për linkun e verifikimit (vlen 24 orë).",
       });
     }
 
@@ -96,7 +94,7 @@ const register = async (req, res) => {
       if (e?.code === "P2002") {
         console.log("🪢 [REGISTER] Race P2002 – një proces tjetër e krijoi. Skip dërgimin.");
         return res.status(201).json({
-          message: "Regjistrimi u krye. Kontrollo Gmail për linkun e verifikimit (vlen 24 orë).",
+          message: "Regjistrimi u krye. Kontrollo email-in për linkun e verifikimit (vlen 24 orë).",
         });
       }
       throw e;
@@ -137,14 +135,12 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Email dhe fjalëkalimi janë të detyrueshëm." });
     }
     
-    // Validimi i email-it Gmail
+    // Validimi i email-it (çdo provider)
     const emailValidation = await validateEmail(email);
     if (!emailValidation.isValid) {
       console.log("❌ [LOGIN] Email validation failed:", emailValidation.error);
       return res.status(400).json({ message: emailValidation.error });
     }
-    
-    // Removed Gmail-only restriction - allow any valid email
 
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) return res.status(401).json({ message: "Email ose fjalëkalim i pasaktë." });
@@ -182,7 +178,7 @@ const forgotPassword = async (req, res) => {
   try {
     if (!email) return res.status(400).json({ message: "Email është i detyrueshëm." });
     
-    // Validimi i email-it Gmail
+    // Validimi i email-it (çdo provider)
     const emailValidation = await validateEmail(email);
     if (!emailValidation.isValid) {
       console.log("❌ [FORGOT] Email validation failed:", emailValidation.error);
@@ -370,7 +366,7 @@ const googleSignIn = async (req, res) => {
     const emailVerified = !!payload?.email_verified;
 
     if (!emailVerified) return res.status(400).json({ message: "Google email nuk është verifikuar." });
-    // Removed Gmail-only restriction - allow any valid email
+    // Lejo çdo email provider të vlefshëm
 
     let user = await prisma.user.findUnique({ where: { email } });
 
