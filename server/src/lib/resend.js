@@ -1,13 +1,12 @@
-// src/lib/emails.js (CJS)
-const { getMailer } = require("./mailer");
+// src/lib/resend.js (CJS)
 const { Resend } = require('resend');
 
 // Initialize Resend
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-async function sendVerifyEmail({ to, name = "përdorues", token }) {
-  if (!to || !token) throw new Error("sendVerifyEmail: 'to' dhe 'token' janë të detyrueshëm.");
-  if (!process.env.SERVER_URL) throw new Error("sendVerifyEmail: mungon SERVER_URL në .env");
+async function sendVerificationEmail({ to, name = "përdorues", token }) {
+  if (!to || !token) throw new Error("sendVerificationEmail: 'to' dhe 'token' janë të detyrueshëm.");
+  if (!process.env.SERVER_URL) throw new Error("sendVerificationEmail: mungon SERVER_URL në .env");
   
   // Në development, printo email-in në console në vend që ta dërgojë
   if (process.env.NODE_ENV === 'development') {
@@ -17,8 +16,12 @@ async function sendVerifyEmail({ to, name = "përdorues", token }) {
     return { success: true, message: "Email printed to console (development mode)" };
   }
 
+  if (!resend || !process.env.RESEND_API_KEY) {
+    throw new Error("sendVerificationEmail: mungon RESEND_API_KEY në .env");
+  }
+
   const verifyUrl = `${process.env.SERVER_URL}/api/auth/verify?token=${encodeURIComponent(token)}`;
-  console.log("📨 [VERIFY] Po dërgoj te:", to, "| URL:", verifyUrl);
+  console.log("📨 [RESEND-VERIFY] Po dërgoj te:", to, "| URL:", verifyUrl);
 
   const subject = "✅ Verifiko email-in tënd (FinMan)";
   const html = `
@@ -29,7 +32,9 @@ async function sendVerifyEmail({ to, name = "përdorues", token }) {
       <h2>Verifikimi i Email-it</h2>
       <p>Përshëndetje ${name},</p>
       <p>Për të aktivizuar llogarinë tënde në <b>FinMan</b>, kliko linkun më poshtë:</p>
-      <p><a href="${verifyUrl}" target="_blank">${verifyUrl}</a></p>
+      <p><a href="${verifyUrl}" target="_blank" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Verifiko Email-in</a></p>
+      <p>Ose kopjo dhe ngjit këtë link në browser:</p>
+      <p style="word-break: break-all; background-color: #f5f5f5; padding: 10px; border-radius: 5px;">${verifyUrl}</p>
       <p>Ky link është i vlefshëm për 24 orë.</p>
       <hr style="border:none;border-top:1px solid #eee; margin:16px 0;" />
       <p style="font-size: 0.9em; color: #666;">Nëse nuk e ke kërkuar ti, injoroje këtë email.</p>
@@ -45,49 +50,25 @@ async function sendVerifyEmail({ to, name = "përdorues", token }) {
     "Nëse nuk e ke kërkuar ti, injoroje këtë email."
   ].join("\n\n");
 
-  // Use Resend if available, fallback to SMTP
-  if (resend && process.env.RESEND_API_KEY) {
-    try {
-      const result = await resend.emails.send({
-        from: process.env.EMAIL_FROM || 'FinMan <onboarding@resend.dev>',
-        to,
-        subject,
-        html,
-        text,
-      });
-      console.log("✅ [VERIFY] Email u dërgua me Resend:", result.data?.id, "→", to);
-      return result;
-    } catch (err) {
-      console.error("❌ [VERIFY] Resend dështoi:", err?.message || err);
-      // Fallback to SMTP
-    }
-  }
-
-  // Fallback to SMTP
-  if (!process.env.EMAIL_USER) throw new Error("sendVerifyEmail: mungon EMAIL_USER në .env");
-
-  const transporter = getMailer();
-  const mailOptions = {
-    from: `FinMan <${process.env.EMAIL_USER}>`,
-    to,
-    subject,
-    html,
-    text,
-  };
-
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log("✅ [VERIFY] Email u dërgua me SMTP:", info.messageId, "→", to);
-    return info;
+    const result = await resend.emails.send({
+      from: process.env.EMAIL_FROM || 'FinMan <onboarding@resend.dev>',
+      to,
+      subject,
+      html,
+      text,
+    });
+    console.log("✅ [RESEND-VERIFY] Email u dërgua:", result.data?.id, "→", to);
+    return result;
   } catch (err) {
-    console.error("❌ [VERIFY] SMTP dështoi:", err?.message || err);
+    console.error("❌ [RESEND-VERIFY] Dështoi dërgimi:", err?.message || err);
     throw err;
   }
 }
 
-async function sendResetEmail({ to, token }) {
-  if (!to || !token) throw new Error("sendResetEmail: 'to' dhe 'token' janë të detyrueshëm.");
-  if (!process.env.BASE_URL) throw new Error("sendResetEmail: mungon BASE_URL në .env");
+async function sendResetPasswordEmail({ to, token }) {
+  if (!to || !token) throw new Error("sendResetPasswordEmail: 'to' dhe 'token' janë të detyrueshëm.");
+  if (!process.env.BASE_URL) throw new Error("sendResetPasswordEmail: mungon BASE_URL në .env");
   
   // Në development, printo email-in në console në vend që ta dërgojë
   if (process.env.NODE_ENV === 'development') {
@@ -97,8 +78,12 @@ async function sendResetEmail({ to, token }) {
     return { success: true, message: "Email printed to console (development mode)" };
   }
 
+  if (!resend || !process.env.RESEND_API_KEY) {
+    throw new Error("sendResetPasswordEmail: mungon RESEND_API_KEY në .env");
+  }
+
   const resetUrl = `${process.env.BASE_URL}/reset-password/${encodeURIComponent(token)}`;
-  console.log("📨 [RESET] Po dërgoj te:", to, "| URL:", resetUrl);
+  console.log("📨 [RESEND-RESET] Po dërgoj te:", to, "| URL:", resetUrl);
 
   const subject = "🔒 Resetimi i fjalëkalimit (FinMan)";
   const html = `
@@ -108,7 +93,9 @@ async function sendResetEmail({ to, token }) {
       </span>
       <h2>Rivendos fjalëkalimin</h2>
       <p>Kliko linkun më poshtë për të vendosur një fjalëkalim të ri:</p>
-      <p><a href="${resetUrl}" target="_blank">${resetUrl}</a></p>
+      <p><a href="${resetUrl}" target="_blank" style="background-color: #FF5722; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Rivendos Fjalëkalimin</a></p>
+      <p>Ose kopjo dhe ngjit këtë link në browser:</p>
+      <p style="word-break: break-all; background-color: #f5f5f5; padding: 10px; border-radius: 5px;">${resetUrl}</p>
       <p>Ky link është i vlefshëm vetëm për 1 orë.</p>
       <hr style="border:none;border-top:1px solid #eee; margin:16px 0;" />
       <p style="font-size: 0.9em; color: #666;">Nëse nuk e ke kërkuar ti, injoroje këtë email.</p>
@@ -123,54 +110,20 @@ async function sendResetEmail({ to, token }) {
     "Nëse nuk e ke kërkuar ti, injoroje këtë email."
   ].join("\n\n");
 
-  // Use Resend if available, fallback to SMTP
-  if (resend && process.env.RESEND_API_KEY) {
-    try {
-      const result = await resend.emails.send({
-        from: process.env.EMAIL_FROM || 'FinMan <onboarding@resend.dev>',
-        to,
-        subject,
-        html,
-        text,
-      });
-      console.log("✅ [RESET] Email u dërgua me Resend:", result.data?.id, "→", to);
-      return result;
-    } catch (err) {
-      console.error("❌ [RESET] Resend dështoi:", err?.message || err);
-      // Fallback to SMTP
-    }
-  }
-
-  // Fallback to SMTP
-  if (!process.env.EMAIL_USER) throw new Error("sendResetEmail: mungon EMAIL_USER në .env");
-
-  const transporter = getMailer();
-  const mailOptions = {
-    from: `FinMan <${process.env.EMAIL_USER}>`,
-    to,
-    subject,
-    html,
-    text,
-  };
-
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log("✅ [RESET] Email u dërgua me SMTP:", info.messageId, "→", to);
-    return info;
+    const result = await resend.emails.send({
+      from: process.env.EMAIL_FROM || 'FinMan <onboarding@resend.dev>',
+      to,
+      subject,
+      html,
+      text,
+    });
+    console.log("✅ [RESEND-RESET] Email u dërgua:", result.data?.id, "→", to);
+    return result;
   } catch (err) {
-    console.error("❌ [RESET] SMTP dështoi:", err?.message || err);
+    console.error("❌ [RESEND-RESET] Dështoi dërgimi:", err?.message || err);
     throw err;
   }
 }
 
-/** Prevent HTML injection në emër */
-function escapeHtml(str) {
-  return String(str)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-module.exports = { sendVerifyEmail, sendResetEmail };
+module.exports = { sendVerificationEmail, sendResetPasswordEmail };

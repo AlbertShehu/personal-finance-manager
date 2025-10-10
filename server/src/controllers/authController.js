@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const { hashPassword, comparePassword } = require("../utils/hash");
 const { sendVerifyEmail, sendResetEmail } = require("../lib/emails");
+const { sendVerificationEmail, sendResetPasswordEmail } = require("../lib/resend");
 const { validateEmail } = require("../utils/emailValidator");
 
 // Google Sign-In
@@ -106,7 +107,7 @@ const register = async (req, res) => {
       } else {
         inFlightVerifySend.add(createdUser.id);
         try {
-          await sendVerifyEmail({ to: createdUser.email, name: createdUser.name, token: raw });
+          await sendVerificationEmail({ to: createdUser.email, name: createdUser.name, token: raw });
           console.log("📬 [REGISTER] Verifikimi u dërgua →", createdUser.email);
         } catch (emailError) {
           console.log("⚠️ [REGISTER] Email verifikimi dështoi, por regjistrimi u krye:", emailError.message);
@@ -200,7 +201,7 @@ const forgotPassword = async (req, res) => {
       });
 
       try {
-        await sendResetEmail({ to: user.email, token: raw });
+        await sendResetPasswordEmail({ to: user.email, token: raw });
         console.log("✅ [FORGOT] Email reset u dërgua:", email);
       } catch (emailErr) {
         console.error("❌ [FORGOT] sendResetEmail:", emailErr?.stack || emailErr);
@@ -332,7 +333,7 @@ const resendVerification = async (req, res) => {
       } else {
         inFlightVerifySend.add(user.id);
         try {
-          await sendVerifyEmail({ to: user.email, name: user.name, token: raw });
+          await sendVerificationEmail({ to: user.email, name: user.name, token: raw });
           console.log("📬 [RESEND] verifikimi u ridërgua te:", user.email);
         } finally {
           inFlightVerifySend.delete(user.id);

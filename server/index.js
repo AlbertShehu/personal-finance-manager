@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 require('dotenv').config();
 const { sendVerifyEmail, sendResetEmail } = require('./src/lib/emails');
+const { sendVerificationEmail, sendResetPasswordEmail } = require('./src/lib/resend');
 const { OAuth2Client } = require('google-auth-library');
 
 // Google OAuth Client
@@ -180,7 +181,7 @@ app.post('/api/auth/forgot-password', async (req, res) => {
 
       // Dërgo email për rivendosje
       try {
-        await sendResetEmail({
+        await sendResetPasswordEmail({
           to: user.email,
           token: resetToken
         });
