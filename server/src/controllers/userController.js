@@ -1,7 +1,7 @@
 // server/controllers/userController.js
 const prisma = require("../lib/prisma");
 const { hashPassword, comparePassword } = require("../utils/hash");
-const { sendVerifyEmail } = require("../lib/emails");
+const { sendVerificationEmail } = require("../lib/resend");
 const crypto = require("crypto");
 
 // helpers
@@ -148,7 +148,7 @@ const updateProfile = async (req, res) => {
       });
 
       try {
-        await sendVerifyEmail({ to: updated.email, name: updated.name, token: raw });
+        await sendVerificationEmail({ to: updated.email, name: updated.name, token: raw });
         console.log("📬 [PROFILE] Verifikim i dërguar te adresa e re:", updated.email);
       } catch (e) {
         console.error("❌ [PROFILE] Dërgimi i verifikimit dështoi:", e?.message || e);
