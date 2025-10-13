@@ -75,6 +75,7 @@ const register = async (req, res) => {
     const raw = createTokenRaw(32);
     const tokenHash = hashToken(raw);
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    console.log("🔑 [REGISTER] Token created: length=%d hash=%s", raw.length, tokenHash.substring(0, 20) + '...');
 
     // 2) Nëse kishte rresht (i skaduar) → fshije përpara CREATE
     if (pre) {
@@ -255,30 +256,51 @@ const resetPassword = async (req, res) => {
 
 /* ===================== VERIFY EMAIL ===================== */
 const verifyEmail = async (req, res) => {
-  const raw = String(req.query.token || "");
-  if (!raw) return res.status(400).send("Missing token");
+  // Pastro token-in: heq hapësirat, newlines, tabs, etj.
+  const rawToken = (req.query.token || "")
+    .toString()
+    .trim()
+    .replace(/\s/g, '');  // heq çdo \r, \n, space, tab
+  
+  console.log("🔍 [VERIFY] Token received: length=%d chars=%s", rawToken.length, rawToken.substring(0, 20) + '...');
+  
+  if (!rawToken) {
+    console.error("❌ [VERIFY] Token mungon");
+    return res.status(400).json({ message: "Token mungon" });
+  }
 
   try {
-    const tokenHash = hashToken(raw);
+    const tokenHash = hashToken(rawToken);
+    console.log("🔍 [VERIFY] Token hash: %s", tokenHash.substring(0, 20) + '...');
+    
     const record = await prisma.emailVerificationToken.findUnique({ where: { tokenHash } });
 
-    if (!record || record.expiresAt < new Date()) {
-      const url = `${process.env.BASE_URL}/login?verified=0`;
-      return res.redirect(url);
+    if (!record) {
+      console.error("❌ [VERIFY] Token i pavlefshëm - s'u gjet në databazë");
+      return res.status(400).json({ message: "Token i verifikimit është i pavlefshëm" });
     }
 
+    if (record.expiresAt < new Date()) {
+      console.error("❌ [VERIFY] Token ka skaduar");
+      await prisma.emailVerificationToken.delete({ where: { id: record.id } });
+      return res.status(400).json({ message: "Token i verifikimit ka skaduar" });
+    }
+
+    // Verifiko email-in dhe pastro tokenin
     await prisma.$transaction([
       prisma.user.update({ where: { id: record.userId }, data: { emailVerifiedAt: new Date() } }),
       prisma.emailVerificationToken.delete({ where: { id: record.id } }),
     ]);
-    console.log("✅ [VERIFY] user u verifikua:", record.userId);
+    
+    const user = await prisma.user.findUnique({ where: { id: record.userId } });
+    console.log("✅ [VERIFY] Email verified for user:", user.email);
 
+    // Redirect te login me success message
     const url = `${process.env.BASE_URL}/login?verified=1`;
     return res.redirect(url);
   } catch (error) {
     console.error("🛑 [VERIFY] Gabim:", error?.stack || error);
-    const url = `${process.env.BASE_URL}/login?verified=0`;
-    return res.redirect(url);
+    return res.status(500).json({ message: "Verifikimi dështoi", error: error.message });
   }
 };
 

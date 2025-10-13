@@ -32,19 +32,30 @@ async function sendVerificationEmail({ to, name = "përdorues", token }) {
 
   const subject = "✅ Verifiko email-in tënd (FinMan)";
   const html = `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-      <span style="display:none;visibility:hidden;opacity:0;height:0;width:0;overflow:hidden;">
-        Verifiko email-in tënd për FinMan.
-      </span>
-      <h2>Verifikimi i Email-it</h2>
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #333;">Verifikimi i Email-it</h2>
       <p>Përshëndetje ${name},</p>
-      <p>Për të aktivizuar llogarinë tënde në <b>FinMan</b>, kliko linkun më poshtë:</p>
-      <p><a href="${verifyUrl}" target="_blank" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Verifiko Email-in</a></p>
-      <p>Ose kopjo dhe ngjit këtë link në browser:</p>
-      <p style="word-break: break-all; background-color: #f5f5f5; padding: 10px; border-radius: 5px;">${verifyUrl}</p>
-      <p>Ky link është i vlefshëm për 24 orë.</p>
-      <hr style="border:none;border-top:1px solid #eee; margin:16px 0;" />
-      <p style="font-size: 0.9em; color: #666;">Nëse nuk e ke kërkuar ti, injoroje këtë email.</p>
+      <p>Për të aktivizuar llogarinë tënde në <b>FinMan</b>, kliko butonin më poshtë:</p>
+      <p style="text-align: center; margin: 30px 0;">
+        <a href="${verifyUrl}" 
+           style="display:inline-block;padding:12px 24px;background:#0ea5e9;color:#fff;
+                  text-decoration:none;border-radius:8px;font-weight:600;font-size:16px;">
+          Verifiko Llogarinë
+        </a>
+      </p>
+      <p style="font-size: 14px; color: #666; margin-top: 30px;">
+        Nëse butoni nuk funksionon, kopjo këtë link dhe hapje në shfletues:
+      </p>
+      <p style="word-break: break-all; background-color: #f5f5f5; padding: 12px; border-radius: 5px; font-size: 13px; color: #333;">
+        ${verifyUrl}
+      </p>
+      <p style="font-size: 14px; color: #666; margin-top: 20px;">
+        Ky link është i vlefshëm për 24 orë.
+      </p>
+      <hr style="border:none;border-top:1px solid #eee; margin:24px 0;" />
+      <p style="font-size: 12px; color: #999;">
+        Nëse nuk e ke kërkuar ti, injoroje këtë email.
+      </p>
     </div>
   `.trim();
 
@@ -107,18 +118,29 @@ async function sendResetPasswordEmail({ to, token }) {
 
   const subject = "🔒 Resetimi i fjalëkalimit (FinMan)";
   const html = `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-      <span style="display:none;visibility:hidden;opacity:0;height:0;width:0;overflow:hidden;">
-        Vendos një fjalëkalim të ri për FinMan.
-      </span>
-      <h2>Rivendos fjalëkalimin</h2>
-      <p>Kliko linkun më poshtë për të vendosur një fjalëkalim të ri:</p>
-      <p><a href="${resetUrl}" target="_blank" style="background-color: #FF5722; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Rivendos Fjalëkalimin</a></p>
-      <p>Ose kopjo dhe ngjit këtë link në browser:</p>
-      <p style="word-break: break-all; background-color: #f5f5f5; padding: 10px; border-radius: 5px;">${resetUrl}</p>
-      <p>Ky link është i vlefshëm vetëm për 1 orë.</p>
-      <hr style="border:none;border-top:1px solid #eee; margin:16px 0;" />
-      <p style="font-size: 0.9em; color: #666;">Nëse nuk e ke kërkuar ti, injoroje këtë email.</p>
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #333;">Rivendos fjalëkalimin</h2>
+      <p>Kliko butonin më poshtë për të vendosur një fjalëkalim të ri:</p>
+      <p style="text-align: center; margin: 30px 0;">
+        <a href="${resetUrl}" 
+           style="display:inline-block;padding:12px 24px;background:#FF5722;color:#fff;
+                  text-decoration:none;border-radius:8px;font-weight:600;font-size:16px;">
+          Rivendos Fjalëkalimin
+        </a>
+      </p>
+      <p style="font-size: 14px; color: #666; margin-top: 30px;">
+        Nëse butoni nuk funksionon, kopjo këtë link dhe hapje në shfletues:
+      </p>
+      <p style="word-break: break-all; background-color: #f5f5f5; padding: 12px; border-radius: 5px; font-size: 13px; color: #333;">
+        ${resetUrl}
+      </p>
+      <p style="font-size: 14px; color: #666; margin-top: 20px;">
+        Ky link është i vlefshëm vetëm për 1 orë.
+      </p>
+      <hr style="border:none;border-top:1px solid #eee; margin:24px 0;" />
+      <p style="font-size: 12px; color: #999;">
+        Nëse nuk e ke kërkuar ti, injoroje këtë email dhe fjalëkalimi yt do të mbetet i njëjtë.
+      </p>
     </div>
   `.trim();
 
