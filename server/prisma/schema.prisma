@@ -49,6 +49,7 @@ model EmailVerificationToken {
   user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([expiresAt])
+  @@index([usedAt])
 }
 
 model PasswordResetToken {

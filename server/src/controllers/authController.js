@@ -63,9 +63,13 @@ const register = async (req, res) => {
     const raw = createTokenRaw(32);
     const tokenHash = hashToken(raw);
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    console.log("🔑 [REGISTER] Token created:");
-    console.log("   - Raw token: %s (length=%d)", raw, raw.length);
-    console.log("   - Hash token: %s", tokenHash);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("🔑 [REGISTER] Token created:");
+      console.log("   - Raw token: %s (length=%d)", raw, raw.length);
+      console.log("   - Hash token: %s", tokenHash);
+    } else {
+      console.log("🔑 [REGISTER] Token created (length=%d, hash=%s...)", raw.length, tokenHash.substring(0, 20));
+    }
 
     // 2) Upsert token - shmang race conditions
     await prisma.emailVerificationToken.upsert({
@@ -234,7 +238,11 @@ const verifyEmail = async (req, res) => {
     .trim()
     .replace(/\s/g, ''); // heq \r, \n, space
 
-  console.log("🔍 [VERIFY] raw=%s (len=%d)", raw, raw.length);
+  if (process.env.NODE_ENV !== 'production') {
+    console.log("🔍 [VERIFY] raw=%s (len=%d)", raw, raw.length);
+  } else {
+    console.log("🔍 [VERIFY] Token received (len=%d)", raw.length);
+  }
   
   if (!raw) {
     console.error("❌ [VERIFY] Token mungon");
@@ -244,7 +252,9 @@ const verifyEmail = async (req, res) => {
   try {
     // 2) Llogarit hash-in
     const hashed = hashToken(raw);
-    console.log("🔍 [VERIFY] hashed=%s", hashed);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("🔍 [VERIFY] hashed=%s", hashed);
+    }
 
     // 3) Provo token aktiv (jo i përdorur, jo i skaduar)
     let record = await prisma.emailVerificationToken.findFirst({
@@ -327,9 +337,13 @@ const resendVerification = async (req, res) => {
     const tokenHash = hashToken(raw);
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
     
-    console.log("🔑 [RESEND] Token created:");
-    console.log("   - Raw token: %s (length=%d)", raw, raw.length);
-    console.log("   - Hash token: %s", tokenHash);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("🔑 [RESEND] Token created:");
+      console.log("   - Raw token: %s (length=%d)", raw, raw.length);
+      console.log("   - Hash token: %s", tokenHash);
+    } else {
+      console.log("🔑 [RESEND] Token created (length=%d, hash=%s...)", raw.length, tokenHash.substring(0, 20));
+    }
 
     // 2) Upsert token - shmang race conditions
     await prisma.emailVerificationToken.upsert({

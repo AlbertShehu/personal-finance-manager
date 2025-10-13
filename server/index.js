@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
 
@@ -15,11 +17,51 @@ console.log('   DATABASE_URL:', process.env.DATABASE_URL ? '✅ SET' : '❌ MISS
 console.log('   JWT_SECRET:', process.env.JWT_SECRET ? '✅ SET' : '❌ MISSING');
 
 const app = express();
-const prisma = new PrismaClient();
+
+// Prisma client with production-optimized settings
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL
+    }
+  },
+  log: process.env.NODE_ENV === 'production' ? ['error'] : ['query', 'info', 'warn', 'error'],
+});
+
 const PORT = process.env.PORT || 8095;
 
+// Security middleware
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+  crossOriginEmbedderPolicy: false
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Shumë kërkesa nga ky IP, provo përsëri më vonë.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // limit each IP to 5 auth requests per windowMs
+  message: 'Shumë përpjekje hyrjeje, provo përsëri pas 15 minutash.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 app.use(cors({
   origin: [
     'https://finman-app.com',
@@ -27,11 +69,16 @@ app.use(cors({
     'http://localhost:5173',
     'http://localhost:4173'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Mount routes
-app.use('/api/auth', authRoutes);
+// Apply rate limiting
+app.use(limiter);
+
+// Mount routes with specific rate limiting
+app.use('/api/auth', authLimiter, authRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/users', userRoutes);
 
@@ -55,8 +102,32 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
 
+// Cleanup job for expired tokens (runs every 24 hours)
+const cleanupExpiredTokens = async () => {
+  try {
+    const result = await prisma.emailVerificationToken.deleteMany({
+      where: {
+        expiresAt: {
+          lt: new Date()
+        }
+      }
+    });
+    
+    if (result.count > 0) {
+      console.log(`🧹 [CLEANUP] Fshinë ${result.count} token-e të skaduara`);
+    }
+  } catch (error) {
+    console.error('❌ [CLEANUP] Gabim gjatë pastrimit të token-ave:', error);
+  }
+};
+
+// Run cleanup immediately, then every 24 hours
+cleanupExpiredTokens();
+setInterval(cleanupExpiredTokens, 24 * 60 * 60 * 1000); // 24 hours
+
 // Graceful shutdown
 process.on('SIGINT', async () => {
+  console.log('🛑 [SHUTDOWN] Duke mbyllur serverin...');
   await prisma.$disconnect();
   process.exit(0);
 });
