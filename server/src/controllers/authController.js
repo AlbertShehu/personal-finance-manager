@@ -59,11 +59,12 @@ const register = async (req, res) => {
     });
     // console.log("✅ [REGISTER] user u krijua:", createdUser.id);
 
-    // 0) Nëse ka token ende të vlefshëm → SKIP
+    // 0) Nëse ka token ende të vlefshëm → SKIP (por lejo ridërgim pas 10 min)
     const pre = await prisma.emailVerificationToken.findUnique({
       where: { userId: createdUser.id },
     });
-    if (pre && pre.expiresAt > new Date()) {
+    const TOO_OLD_MS = 10 * 60 * 1000; // 10 minuta
+    if (pre && pre.expiresAt > new Date() && Date.now() - pre.createdAt.getTime() < TOO_OLD_MS) {
       console.log("⏱️  [REGISTER] Token ekzistues ende i vlefshëm; skip send.");
       return res.status(201).json({
         message: "Regjistrimi u krye. Kontrollo email-in për linkun e verifikimit (vlen 24 orë).",
@@ -81,7 +82,7 @@ const register = async (req, res) => {
     // 2) Nëse kishte rresht (i skaduar) → fshije përpara CREATE
     if (pre) {
       await prisma.emailVerificationToken
-        .delete({ where: { userId: createdUser.id } })
+        .deleteMany({ where: { userId: createdUser.id } })
         .catch(() => {});
     }
 
@@ -156,10 +157,10 @@ const login = async (req, res) => {
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) return res.status(401).json({ message: "Email ose fjalëkalim i pasaktë." });
 
-    // Lejo login pa email verifikimi për test
-    // if (!user.emailVerifiedAt) {
-    //   return res.status(403).json({ message: "Verifiko email-in përpara se të hysh." });
-    // }
+    // Kërko email verification për production
+    if (!user.emailVerifiedAt) {
+      return res.status(403).json({ message: "Verifiko email-in përpara se të hysh." });
+    }
 
     const token = jwt.sign(
       { id: user.id, email: user.email, name: user.name },
@@ -333,9 +334,10 @@ const resendVerification = async (req, res) => {
       return res.status(200).json({ message: "Email tashmë i verifikuar." });
     }
 
-    // Nëse ka token ende të vlefshëm → SKIP
+    // Nëse ka token ende të vlefshëm → SKIP (por lejo ridërgim pas 10 min)
     const cur = await prisma.emailVerificationToken.findUnique({ where: { userId: user.id } });
-    if (cur && cur.expiresAt > new Date()) {
+    const TOO_OLD_MS = 10 * 60 * 1000; // 10 minuta
+    if (cur && cur.expiresAt > new Date() && Date.now() - cur.createdAt.getTime() < TOO_OLD_MS) {
       return res
         .status(200)
         .json({ message: "Linku ekzistues është ende i vlefshëm. Kontrollo inbox/Spam." });
@@ -343,7 +345,7 @@ const resendVerification = async (req, res) => {
 
     // Nëse ka rresht (i skaduar) → fshije përpara CREATE
     if (cur) {
-      await prisma.emailVerificationToken.delete({ where: { userId: user.id } }).catch(() => {});
+      await prisma.emailVerificationToken.deleteMany({ where: { userId: user.id } }).catch(() => {});
     }
 
     // CREATE – vetëm fituesi dërgon
