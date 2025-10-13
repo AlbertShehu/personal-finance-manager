@@ -6,7 +6,6 @@ const { PrismaClient } = require('@prisma/client');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 require('dotenv').config();
-const { sendVerifyEmail, sendResetEmail } = require('./src/lib/emails');
 const { sendVerificationEmail, sendResetPasswordEmail } = require('./src/lib/resend');
 const { OAuth2Client } = require('google-auth-library');
 
@@ -96,7 +95,7 @@ app.post('/api/auth/register', async (req, res) => {
 
     // Send verification email
     try {
-      await sendVerifyEmail({
+      await sendVerificationEmail({
         to: user.email,
         name: user.name,
         token: emailVerificationToken
@@ -408,7 +407,7 @@ app.post('/api/auth/resend', async (req, res) => {
 
     // Send verification email
     try {
-      await sendVerifyEmail({
+      await sendVerificationEmail({
         to: user.email,
         name: user.name,
         token: rawToken

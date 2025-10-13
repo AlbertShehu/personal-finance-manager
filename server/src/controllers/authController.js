@@ -3,7 +3,6 @@ const prisma = require("../lib/prisma");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const { hashPassword, comparePassword } = require("../utils/hash");
-const { sendVerifyEmail, sendResetEmail } = require("../lib/emails");
 const { sendVerificationEmail, sendResetPasswordEmail } = require("../lib/resend");
 const { validateEmail } = require("../utils/emailValidator");
 
