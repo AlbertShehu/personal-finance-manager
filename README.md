@@ -124,3 +124,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 # URGENT: Force Cloudflare Pages rebuild - CSP still showing old values Sun, Sep 28, 2025  1:03:54 PM
 # Force Cloudflare Pages deployment
 # Force redeploy
+# Force Railway redeploy - Mon, Oct 13, 2025  6:23:34 PM
