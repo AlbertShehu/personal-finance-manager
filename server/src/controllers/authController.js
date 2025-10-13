@@ -59,18 +59,6 @@ const register = async (req, res) => {
     });
     // console.log("✅ [REGISTER] user u krijua:", createdUser.id);
 
-    // 0) Nëse ka token ende të vlefshëm → SKIP (por lejo ridërgim pas 10 min)
-    const pre = await prisma.emailVerificationToken.findUnique({
-      where: { userId: createdUser.id },
-    });
-    const TOO_OLD_MS = 10 * 60 * 1000; // 10 minuta
-    if (pre && pre.expiresAt > new Date() && Date.now() - pre.createdAt.getTime() < TOO_OLD_MS) {
-      console.log("⏱️  [REGISTER] Token ekzistues ende i vlefshëm; skip send.");
-      return res.status(201).json({
-        message: "Regjistrimi u krye. Kontrollo email-in për linkun e verifikimit (vlen 24 orë).",
-      });
-    }
-
     // 1) Gjenero token të ri
     const raw = createTokenRaw(32);
     const tokenHash = hashToken(raw);
@@ -79,49 +67,31 @@ const register = async (req, res) => {
     console.log("   - Raw token: %s (length=%d)", raw, raw.length);
     console.log("   - Hash token: %s", tokenHash);
 
-    // 2) Nëse kishte rresht (i skaduar) → fshije përpara CREATE
-    if (pre) {
-      await prisma.emailVerificationToken
-        .deleteMany({ where: { userId: createdUser.id } })
-        .catch(() => {});
-    }
-
-    // 3) PROVO CREATE – vetëm fituesi dërgon email
-    let created = false;
-    try {
-      await prisma.emailVerificationToken.create({
-        data: { tokenHash, expiresAt, user: { connect: { id: createdUser.id } } },
-      });
-      created = true;
-      console.log("✅ [REGISTER] token verifikimi u KRIJUA për:", createdUser.id);
-    } catch (e) {
-      if (e?.code === "P2002") {
-        console.log("🪢 [REGISTER] Race P2002 – një proces tjetër e krijoi. Skip dërgimin.");
-        return res.status(201).json({
-          message: "Regjistrimi u krye. Kontrollo email-in për linkun e verifikimit (vlen 24 orë).",
-        });
-      }
-      throw e;
-    }
+    // 2) Upsert token - shmang race conditions
+    await prisma.emailVerificationToken.upsert({
+      where: { userId: createdUser.id },
+      update: { tokenHash, expiresAt, usedAt: null }, // 🔹 reset usedAt për token të ri
+      create: { userId: createdUser.id, tokenHash, expiresAt },
+    });
+    
+    console.log("✅ [REGISTER] token verifikimi u UPSERT për:", createdUser.id);
 
     // Fire-and-forget: dërgo emailin në sfond pa pritur
-    if (created) {
-      if (inFlightVerifySend.has(createdUser.id)) {
-        console.log("🔁 [REGISTER] Send në progres; skip.");
-      } else {
-        inFlightVerifySend.add(createdUser.id);
-        // NUK përdorim 'await' - kthe përgjigje menjëherë
-        sendVerificationEmail({ to: createdUser.email, name: createdUser.name, token: raw })
-          .then(() => {
-            console.log("📬 [REGISTER] Verifikimi u dërgua →", createdUser.email);
-          })
-          .catch((emailError) => {
-            console.error("⚠️ [REGISTER] Email verifikimi dështoi:", emailError.message);
-          })
-          .finally(() => {
-            inFlightVerifySend.delete(createdUser.id);
-          });
-      }
+    if (inFlightVerifySend.has(createdUser.id)) {
+      console.log("🔁 [REGISTER] Send në progres; skip.");
+    } else {
+      inFlightVerifySend.add(createdUser.id);
+      // NUK përdorim 'await' - kthe përgjigje menjëherë
+      sendVerificationEmail({ to: createdUser.email, name: createdUser.name, token: raw })
+        .then(() => {
+          console.log("📬 [REGISTER] Verifikimi u dërgua →", createdUser.email);
+        })
+        .catch((emailError) => {
+          console.error("⚠️ [REGISTER] Email verifikimi dështoi:", emailError.message);
+        })
+        .finally(() => {
+          inFlightVerifySend.delete(createdUser.id);
+        });
     }
 
     // Kthe përgjigje MENJËHERË - s'ka timeout
@@ -272,43 +242,61 @@ const verifyEmail = async (req, res) => {
   }
 
   try {
-    // 2) Llogarit hash-in (si përdoret në shumicën e implementimeve)
+    // 2) Llogarit hash-in
     const hashed = hashToken(raw);
     console.log("🔍 [VERIFY] hashed=%s", hashed);
 
-    // 3) Gjej përdoruesin — prano si hashed edhe si raw (hotfix)
-    const record = await prisma.emailVerificationToken.findFirst({
-      where: {
-        expiresAt: { gt: new Date() },
-        OR: [
-          { tokenHash: hashed },
-          { tokenHash: raw }
-        ],
+    // 3) Provo token aktiv (jo i përdorur, jo i skaduar)
+    let record = await prisma.emailVerificationToken.findFirst({
+      where: { 
+        tokenHash: { in: [hashed, raw] }, 
+        expiresAt: { gt: new Date() }, 
+        usedAt: null 
       },
     });
 
-    console.log("🔍 [VERIFY] Database record found:", record ? "YES" : "NO");
+    console.log("🔍 [VERIFY] Active record found:", record ? "YES" : "NO");
+
     if (record) {
-      console.log("🔍 [VERIFY] Record tokenHash:", record.tokenHash.substring(0, 20) + '...');
+      // 4) Konfirmo email-in dhe shëno token-in si i përdorur
+      await prisma.$transaction([
+        prisma.user.update({
+          where: { id: record.userId },
+          data: { emailVerifiedAt: new Date() },
+        }),
+        prisma.emailVerificationToken.update({
+          where: { id: record.id },
+          data: { usedAt: new Date() }, // 🔹 shëno si i përdorur
+        }),
+      ]);
+      
+      const user = await prisma.user.findUnique({ where: { id: record.userId } });
+      console.log("✅ [VERIFY] Email verified for user:", user.email);
+
+      // 5) Ridrejto te front-i
+      const url = `${process.env.BASE_URL}/login?verified=1`;
+      return res.redirect(url);
     }
 
-    if (!record) {
-      console.error("❌ [VERIFY] Token i pavlefshëm - s'u gjet në databazë");
-      return res.status(400).json({ message: "Token i verifikimit është i pavlefshëm ose ka skaduar" });
+    // 6) Nëse nuk është aktiv, kontrollo nëse është përdorur më parë
+    const used = await prisma.emailVerificationToken.findFirst({
+      where: { 
+        tokenHash: { in: [hashed, raw] }, 
+        usedAt: { not: null } 
+      },
+    });
+
+    if (used) {
+      // Idempotent/safe-links: trajto si sukses
+      console.log("✅ [VERIFY] Token already used - treating as success (idempotent)");
+      const url = `${process.env.BASE_URL}/login?verified=1`;
+      return res.redirect(url);
     }
 
-    // 4) Konfirmo email-in dhe pastro tokenin
-    await prisma.$transaction([
-      prisma.user.update({ where: { id: record.userId }, data: { emailVerifiedAt: new Date() } }),
-      prisma.emailVerificationToken.delete({ where: { id: record.id } }),
-    ]);
-    
-    const user = await prisma.user.findUnique({ where: { id: record.userId } });
-    console.log("✅ [VERIFY] Email verified for user:", user.email);
+    // 7) Përndryshe, vërtet invalid/skaduar
+    console.error("❌ [VERIFY] Token i pavlefshëm - s'u gjet në databazë");
+    return res.status(400).json({ message: "Token i verifikimit është i pavlefshëm ose ka skaduar" });
 
-    // 5) Ridrejto te front-i
-    const url = `${process.env.BASE_URL}/login?verified=1`;
-    return res.redirect(url);
   } catch (error) {
     console.error("🛑 [VERIFY] Gabim:", error?.stack || error);
     return res.status(500).json({ message: "Verifikimi dështoi", error: error.message });
@@ -334,21 +322,7 @@ const resendVerification = async (req, res) => {
       return res.status(200).json({ message: "Email tashmë i verifikuar." });
     }
 
-    // Nëse ka token ende të vlefshëm → SKIP (por lejo ridërgim pas 10 min)
-    const cur = await prisma.emailVerificationToken.findUnique({ where: { userId: user.id } });
-    const TOO_OLD_MS = 10 * 60 * 1000; // 10 minuta
-    if (cur && cur.expiresAt > new Date() && Date.now() - cur.createdAt.getTime() < TOO_OLD_MS) {
-      return res
-        .status(200)
-        .json({ message: "Linku ekzistues është ende i vlefshëm. Kontrollo inbox/Spam." });
-    }
-
-    // Nëse ka rresht (i skaduar) → fshije përpara CREATE
-    if (cur) {
-      await prisma.emailVerificationToken.deleteMany({ where: { userId: user.id } }).catch(() => {});
-    }
-
-    // CREATE – vetëm fituesi dërgon
+    // 1) Gjenero token të ri
     const raw = createTokenRaw(32);
     const tokenHash = hashToken(raw);
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
@@ -357,39 +331,31 @@ const resendVerification = async (req, res) => {
     console.log("   - Raw token: %s (length=%d)", raw, raw.length);
     console.log("   - Hash token: %s", tokenHash);
 
-    let created = false;
-    try {
-      await prisma.emailVerificationToken.create({
-        data: { tokenHash, expiresAt, user: { connect: { id: user.id } } },
-      });
-      created = true;
-      console.log("✅ [RESEND] token verifikimi u KRIJUA për:", user.id);
-    } catch (e) {
-      if (e?.code === "P2002") {
-        console.log("🪢 [RESEND] Race P2002 – dikush tjetër e krijoi. Skip dërgimin.");
-        return res.status(200).json({ message: "Nëse email ekziston, u dërgua një link i ri verifikimi." });
-      }
-      throw e;
-    }
+    // 2) Upsert token - shmang race conditions
+    await prisma.emailVerificationToken.upsert({
+      where: { userId: user.id },
+      update: { tokenHash, expiresAt, usedAt: null }, // 🔹 reset usedAt për token të ri
+      create: { userId: user.id, tokenHash, expiresAt },
+    });
+    
+    console.log("✅ [RESEND] token verifikimi u UPSERT për:", user.id);
 
     // Fire-and-forget: dërgo emailin në sfond pa pritur
-    if (created) {
-      if (inFlightVerifySend.has(user.id)) {
-        console.log("🔁 [RESEND] Send në progres; skip.");
-      } else {
-        inFlightVerifySend.add(user.id);
-        // NUK përdorim 'await' - kthe përgjigje menjëherë
-        sendVerificationEmail({ to: user.email, name: user.name, token: raw })
-          .then(() => {
-            console.log("📬 [RESEND] verifikimi u ridërgua te:", user.email);
-          })
-          .catch((emailError) => {
-            console.error("⚠️ [RESEND] Email dështoi:", emailError.message);
-          })
-          .finally(() => {
-            inFlightVerifySend.delete(user.id);
-          });
-      }
+    if (inFlightVerifySend.has(user.id)) {
+      console.log("🔁 [RESEND] Send në progres; skip.");
+    } else {
+      inFlightVerifySend.add(user.id);
+      // NUK përdorim 'await' - kthe përgjigje menjëherë
+      sendVerificationEmail({ to: user.email, name: user.name, token: raw })
+        .then(() => {
+          console.log("📬 [RESEND] verifikimi u ridërgua te:", user.email);
+        })
+        .catch((emailError) => {
+          console.error("⚠️ [RESEND] Email dështoi:", emailError.message);
+        })
+        .finally(() => {
+          inFlightVerifySend.delete(user.id);
+        });
     }
 
     // Kthe përgjigje MENJËHERË - s'ka timeout
