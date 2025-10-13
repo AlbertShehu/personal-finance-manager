@@ -262,6 +262,7 @@ const verifyEmail = async (req, res) => {
     .replace(/\s/g, '');  // heq çdo \r, \n, space, tab
   
   console.log("🔍 [VERIFY] Token received: length=%d chars=%s", rawToken.length, rawToken.substring(0, 20) + '...');
+  console.log("🔍 [VERIFY] Full token: %s", rawToken);
   
   if (!rawToken) {
     console.error("❌ [VERIFY] Token mungon");
@@ -271,8 +272,10 @@ const verifyEmail = async (req, res) => {
   try {
     const tokenHash = hashToken(rawToken);
     console.log("🔍 [VERIFY] Token hash: %s", tokenHash.substring(0, 20) + '...');
+    console.log("🔍 [VERIFY] Full hash: %s", tokenHash);
     
     const record = await prisma.emailVerificationToken.findUnique({ where: { tokenHash } });
+    console.log("🔍 [VERIFY] Database record found:", record ? "YES" : "NO");
 
     if (!record) {
       console.error("❌ [VERIFY] Token i pavlefshëm - s'u gjet në databazë");

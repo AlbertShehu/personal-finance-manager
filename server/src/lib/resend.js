@@ -75,6 +75,20 @@ async function sendVerificationEmail({ to, name = "përdorues", token }) {
       subject,
       html,
       text,
+      // Anti-spam headers
+      headers: {
+        'List-Unsubscribe': '<mailto:unsubscribe@finman-app.com>',
+        'X-Mailer': 'FinMan App',
+        'X-Priority': '3',
+        'X-MSMail-Priority': 'Normal',
+        'Importance': 'Normal',
+        'Reply-To': 'support@finman-app.com'
+      },
+      // Better deliverability
+      tags: [
+        { name: 'category', value: 'verification' },
+        { name: 'type', value: 'account' }
+      ]
     });
     
     // Resend kthen: { data: { id: '...' }, error: null } ose { data: null, error: {...} }
@@ -159,6 +173,20 @@ async function sendResetPasswordEmail({ to, token }) {
       subject,
       html,
       text,
+      // Anti-spam headers
+      headers: {
+        'List-Unsubscribe': '<mailto:unsubscribe@finman-app.com>',
+        'X-Mailer': 'FinMan App',
+        'X-Priority': '3',
+        'X-MSMail-Priority': 'Normal',
+        'Importance': 'Normal',
+        'Reply-To': 'support@finman-app.com'
+      },
+      // Better deliverability
+      tags: [
+        { name: 'category', value: 'password-reset' },
+        { name: 'type', value: 'security' }
+      ]
     });
     
     // Resend kthen: { data: { id: '...' }, error: null } ose { data: null, error: {...} }
