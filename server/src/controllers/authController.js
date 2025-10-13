@@ -74,7 +74,9 @@ const register = async (req, res) => {
     const raw = createTokenRaw(32);
     const tokenHash = hashToken(raw);
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    console.log("🔑 [REGISTER] Token created: length=%d hash=%s", raw.length, tokenHash.substring(0, 20) + '...');
+    console.log("🔑 [REGISTER] Token created:");
+    console.log("   - Raw token: %s (length=%d)", raw, raw.length);
+    console.log("   - Hash token: %s", tokenHash);
 
     // 2) Nëse kishte rresht (i skaduar) → fshije përpara CREATE
     if (pre) {
@@ -255,40 +257,46 @@ const resetPassword = async (req, res) => {
 
 /* ===================== VERIFY EMAIL ===================== */
 const verifyEmail = async (req, res) => {
-  // Pastro token-in: heq hapësirat, newlines, tabs, etj.
-  const rawToken = (req.query.token || "")
+  // 1) Pastro token-in nga query
+  const raw = (req.query.token ?? '')
     .toString()
     .trim()
-    .replace(/\s/g, '');  // heq çdo \r, \n, space, tab
+    .replace(/\s/g, ''); // heq \r, \n, space
+
+  console.log("🔍 [VERIFY] raw=%s (len=%d)", raw, raw.length);
   
-  console.log("🔍 [VERIFY] Token received: length=%d chars=%s", rawToken.length, rawToken.substring(0, 20) + '...');
-  console.log("🔍 [VERIFY] Full token: %s", rawToken);
-  
-  if (!rawToken) {
+  if (!raw) {
     console.error("❌ [VERIFY] Token mungon");
     return res.status(400).json({ message: "Token mungon" });
   }
 
   try {
-    const tokenHash = hashToken(rawToken);
-    console.log("🔍 [VERIFY] Token hash: %s", tokenHash.substring(0, 20) + '...');
-    console.log("🔍 [VERIFY] Full hash: %s", tokenHash);
-    
-    const record = await prisma.emailVerificationToken.findUnique({ where: { tokenHash } });
+    // 2) Llogarit hash-in (si përdoret në shumicën e implementimeve)
+    const hashed = hashToken(raw);
+    console.log("🔍 [VERIFY] hashed=%s", hashed);
+
+    // 3) Gjej përdoruesin — prano si hashed edhe si raw (hotfix)
+    const record = await prisma.emailVerificationToken.findFirst({
+      where: {
+        expiresAt: { gt: new Date() },
+        OR: [
+          { tokenHash: hashed },
+          { tokenHash: raw }
+        ],
+      },
+    });
+
     console.log("🔍 [VERIFY] Database record found:", record ? "YES" : "NO");
+    if (record) {
+      console.log("🔍 [VERIFY] Record tokenHash:", record.tokenHash.substring(0, 20) + '...');
+    }
 
     if (!record) {
       console.error("❌ [VERIFY] Token i pavlefshëm - s'u gjet në databazë");
-      return res.status(400).json({ message: "Token i verifikimit është i pavlefshëm" });
+      return res.status(400).json({ message: "Token i verifikimit është i pavlefshëm ose ka skaduar" });
     }
 
-    if (record.expiresAt < new Date()) {
-      console.error("❌ [VERIFY] Token ka skaduar");
-      await prisma.emailVerificationToken.delete({ where: { id: record.id } });
-      return res.status(400).json({ message: "Token i verifikimit ka skaduar" });
-    }
-
-    // Verifiko email-in dhe pastro tokenin
+    // 4) Konfirmo email-in dhe pastro tokenin
     await prisma.$transaction([
       prisma.user.update({ where: { id: record.userId }, data: { emailVerifiedAt: new Date() } }),
       prisma.emailVerificationToken.delete({ where: { id: record.id } }),
@@ -297,7 +305,7 @@ const verifyEmail = async (req, res) => {
     const user = await prisma.user.findUnique({ where: { id: record.userId } });
     console.log("✅ [VERIFY] Email verified for user:", user.email);
 
-    // Redirect te login me success message
+    // 5) Ridrejto te front-i
     const url = `${process.env.BASE_URL}/login?verified=1`;
     return res.redirect(url);
   } catch (error) {
@@ -342,6 +350,10 @@ const resendVerification = async (req, res) => {
     const raw = createTokenRaw(32);
     const tokenHash = hashToken(raw);
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    
+    console.log("🔑 [RESEND] Token created:");
+    console.log("   - Raw token: %s (length=%d)", raw, raw.length);
+    console.log("   - Hash token: %s", tokenHash);
 
     let created = false;
     try {
