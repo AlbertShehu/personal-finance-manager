@@ -125,16 +125,16 @@ export default function Profile() {
   const authState = useSelector((state) => state.auth);
   const user = authState?.user;
 
-  // theme e lexuar pas-mount (shmang mismatch)
-  const [themePref, setThemePref] = React.useState("system");
+  // theme e lexuar pas-mount (shmang mismatch) - light është default
+  const [themePref, setThemePref] = React.useState("light");
   React.useEffect(() => {
     try {
       const saved = localStorage.getItem("theme");
       if (saved === "light" || saved === "dark" || saved === "system") {
         setThemePref(saved);
       } else {
-        const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
-        setThemePref(prefersDark ? "dark" : "light");
+        // Light është theme kryesor - nuk përdorim system preference
+        setThemePref("light");
       }
       // reagon në ndryshimin e sistemit
       const mq = window.matchMedia?.("(prefers-color-scheme: dark)");

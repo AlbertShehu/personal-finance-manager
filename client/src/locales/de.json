@@ -190,6 +190,47 @@
     "noData": "Keine Benutzerdaten.",
     "id": "ID",
     "registered": "Registriert am",
+    "copy": {
+      "success": {
+        "title": "Kopiert",
+        "desc": "E-Mail in Zwischenablage kopiert"
+      },
+      "error": {
+        "title": "Kopieren fehlgeschlagen",
+        "desc": "E-Mail konnte nicht kopiert werden"
+      },
+      "aria": "E-Mail kopieren",
+      "title": "E-Mail kopieren",
+      "tip": "Tipp: Du kannst deine E-Mail kopieren, indem du auf das",
+      "tip.end": "Symbol klickst."
+    },
+    "export": {
+      "success": {
+        "title": "Profil exportiert",
+        "desc": "Dein Profil-JSON wurde heruntergeladen"
+      },
+      "error": {
+        "title": "Export fehlgeschlagen",
+        "desc": "Profil konnte nicht exportiert werden"
+      },
+      "button": "JSON exportieren"
+    },
+    "email": {
+      "verified": "Verifiziert",
+      "notVerified": "Nicht verifiziert"
+    },
+    "language": "Sprache",
+    "theme": "Design",
+    "security": "Sicherheit",
+    "soon": "Bald",
+    "sessions": {
+      "title": "Aktuelle Sitzungen",
+      "count": "{{count}} Gerät(e)",
+      "empty": "Noch keine Sitzungsdaten.",
+      "lastSeen": "Zuletzt gesehen",
+      "thisDevice": "Dieses Gerät",
+      "device": "Gerät"
+    },
     "form": {
       "nameLabel": "Name",
       "emailLabel": "E-Mail",
@@ -270,6 +311,31 @@
         "title": "Fehler bei Google-Anmeldung",
         "desc": "Bitte erneut versuchen."
       }
+    },
+    "verified": {
+      "title": "E-Mail verifiziert ✅",
+      "desc": "Du kannst dich jetzt anmelden."
+    },
+    "verifyFail": {
+      "title": "Verifizierung fehlgeschlagen",
+      "desc": "Link ungültig oder abgelaufen. Du kannst unten einen neuen Link anfordern."
+    },
+    "resend": {
+      "prompt": "Verifizierungs-E-Mail nicht erhalten?",
+      "sending": "Wird gesendet…",
+      "cta": "Erneut senden",
+      "needEmail": {
+        "title": "E-Mail erforderlich",
+        "desc": "Gib zuerst deine E-Mail-Adresse ein."
+      },
+      "sent": {
+        "title": "Verifizierungslink gesendet",
+        "desc": "Prüfe dein Postfach oder Spam-Ordner."
+      },
+      "fail": {
+        "title": "Konnte nicht erneut senden",
+        "desc": "Bitte später erneut versuchen."
+      }
     }
   },
   "register": {
@@ -339,7 +405,8 @@
       "currentPasswordLabel": "Aktuelles Passwort",
       "newPasswordLabel": "Neues Passwort",
       "confirmNewPasswordLabel": "Neues Passwort bestätigen",
-      "submit": "Passwort ändern"
+      "submit": "Passwort ändern",
+      "saving": "Wird gespeichert…"
     },
     "validation": {
       "currentPassword": "Aktuelles Passwort ist erforderlich.",
@@ -577,7 +644,10 @@
     "confirmPlaceholder": "********",
     "submit": "Passwort zurücksetzen",
     "loading": "Wird zurückgesetzt…",
-    "success": "Passwort zurückgesetzt. Du kannst dich jetzt anmelden.",
+    "success": {
+      "title": "Passwort erfolgreich zurückgesetzt",
+      "description": "Dein Passwort wurde erfolgreich zurückgesetzt."
+    },
     "error": "Zurücksetzen fehlgeschlagen",
     "backToLogin": "Zur Anmeldung",
     "missingToken": "Link ist ungültig oder abgelaufen.",
@@ -800,8 +870,25 @@
     "expenseRatio": "Ausgabenquote"
   },
   "settings": {
+    "profile": {
+      "title": "Profil-Einstellungen"
+    },
     "password": {
       "title": "Passwort ändern"
+    },
+    "account": {
+      "title": "Konto-Einstellungen",
+      "delete": {
+        "title": "Konto löschen",
+        "description": "Sobald du dein Konto löschst, gibt es kein Zurück. Bitte sei dir sicher.",
+        "warning": "Diese Aktion wird dein Konto und alle zugehörigen Daten dauerhaft löschen. Das kann nicht rückgängig gemacht werden.",
+        "confirm": "Bist du dir absolut sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
+        "password": "Gib dein Passwort zur Bestätigung ein",
+        "passwordPlaceholder": "Dein Passwort",
+        "button": "Mein Konto löschen",
+        "confirmButton": "Ja, mein Konto löschen",
+        "deleting": "Wird gelöscht..."
+      }
     }
   }
 }

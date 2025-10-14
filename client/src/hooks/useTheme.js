@@ -11,8 +11,8 @@ function applyTheme(theme) {
 
 export function useTheme() {
   const [theme, setThemeState] = React.useState(() => {
-    if (typeof window === "undefined") return "dark"
-    return localStorage.getItem(STORAGE_KEY) || "dark"
+    if (typeof window === "undefined") return "light"
+    return localStorage.getItem(STORAGE_KEY) || "light"
   })
 
   // Apply on mount

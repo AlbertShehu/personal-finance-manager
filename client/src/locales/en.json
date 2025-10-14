@@ -189,6 +189,47 @@
     "noData": "No user data.",
     "id": "ID",
     "registered": "Registered on",
+    "copy": {
+      "success": {
+        "title": "Copied",
+        "desc": "Email copied to clipboard"
+      },
+      "error": {
+        "title": "Copy failed",
+        "desc": "Could not copy email"
+      },
+      "aria": "Copy email",
+      "title": "Copy email",
+      "tip": "Tip: you can copy your email by clicking the",
+      "tip.end": "icon."
+    },
+    "export": {
+      "success": {
+        "title": "Profile exported",
+        "desc": "Your profile JSON has been downloaded"
+      },
+      "error": {
+        "title": "Export failed",
+        "desc": "Could not export your profile"
+      },
+      "button": "Export JSON"
+    },
+    "email": {
+      "verified": "Verified",
+      "notVerified": "Not verified"
+    },
+    "language": "Language",
+    "theme": "Theme",
+    "security": "Security",
+    "soon": "Soon",
+    "sessions": {
+      "title": "Recent Sessions",
+      "count": "{{count}} device(s)",
+      "empty": "No session data yet.",
+      "lastSeen": "Last seen",
+      "thisDevice": "This device",
+      "device": "Device"
+    },
     "form": {
       "nameLabel": "Name",
       "emailLabel": "Email",
@@ -268,6 +309,31 @@
         "title": "Google Sign-In error",
         "desc": "Please try again."
       }
+    },
+    "verified": {
+      "title": "Email verified ✅",
+      "desc": "You can sign in now."
+    },
+    "verifyFail": {
+      "title": "Verification failed",
+      "desc": "Link invalid or expired. You can resend a new link below."
+    },
+    "resend": {
+      "prompt": "Didn't get the verification email?",
+      "sending": "Sending…",
+      "cta": "Resend",
+      "needEmail": {
+        "title": "Email required",
+        "desc": "Enter your email address first."
+      },
+      "sent": {
+        "title": "Verification link sent",
+        "desc": "Check your inbox or spam folder."
+      },
+      "fail": {
+        "title": "Could not resend",
+        "desc": "Please try again later."
+      }
     }
   },
   "register": {
@@ -336,7 +402,8 @@
       "currentPasswordLabel": "Current password",
       "newPasswordLabel": "New password",
       "confirmNewPasswordLabel": "Confirm new password",
-      "submit": "Change password"
+      "submit": "Change password",
+      "saving": "Saving…"
     },
     "validation": {
       "currentPassword": "Current password is required.",
@@ -555,7 +622,10 @@
     "confirmPlaceholder": "********",
     "submit": "Reset password",
     "loading": "Resetting…",
-    "success": "Password reset. You can sign in now.",
+    "success": {
+      "title": "Password Reset Successful",
+      "description": "Your password has been reset successfully."
+    },
     "error": "Reset failed",
     "backToLogin": "Back to login",
     "missingToken": "Reset link is invalid or expired.",
@@ -799,6 +869,21 @@
       }
     }
   },
+  "settings": {
+    "account": {
+      "delete": {
+        "title": "Delete Account",
+        "description": "Once you delete your account, there is no going back. Please be certain.",
+        "warning": "This action will permanently delete your account and all associated data. This cannot be undone.",
+        "confirm": "Are you absolutely sure? This action cannot be undone.",
+        "password": "Enter your password to confirm",
+        "passwordPlaceholder": "Your password",
+        "button": "Delete My Account",
+        "confirmButton": "Yes, Delete My Account",
+        "deleting": "Deleting..."
+      }
+    }
+  },
   "profileSettings": {
     "settings": {
       "title": "Settings",
@@ -811,8 +896,25 @@
     }
   },
   "settings": {
+    "profile": {
+      "title": "Profile Settings"
+    },
     "password": {
       "title": "Change Password"
+    },
+    "account": {
+      "title": "Account Settings",
+      "delete": {
+        "title": "Delete Account",
+        "description": "Once you delete your account, there is no going back. Please be certain.",
+        "warning": "This action will permanently delete your account and all associated data. This cannot be undone.",
+        "confirm": "Are you absolutely sure? This action cannot be undone.",
+        "password": "Enter your password to confirm",
+        "passwordPlaceholder": "Your password",
+        "button": "Delete My Account",
+        "confirmButton": "Yes, Delete My Account",
+        "deleting": "Deleting..."
+      }
     }
   }
 }

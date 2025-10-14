@@ -12,7 +12,7 @@
   "landing": {
     "metaTitle": "FinMan – Menaxher i Zgjuar i Financave Personale",
     "tagline": "Platformë financiare e sigurt",
-    "title": "Menaxho financat me stil",
+    "title": "Menaxho financat me stil!",
     "subtitle": "Analitika, eksporti, siguria — të gjitha në një vend. Zgjidh një zgjidhje të thjeshtë e të zgjuar.",
     "login": "Hyr",
     "register": "Regjistrohu",
@@ -193,9 +193,50 @@
     "login": "Hyr"
   },
   "profile": {
-    "noData": "S’ka të dhëna përdoruesi.",
+    "noData": "S'ka të dhëna përdoruesi.",
     "id": "ID",
     "registered": "Regjistruar më",
+    "copy": {
+      "success": {
+        "title": "U kopjua",
+        "desc": "Email-i u kopjua në clipboard"
+      },
+      "error": {
+        "title": "Kopjimi dështoi",
+        "desc": "Nuk mund të kopjohet email-i"
+      },
+      "aria": "Kopjo email-in",
+      "title": "Kopjo email-in",
+      "tip": "Këshillë: mund ta kopjosh email-in duke klikuar",
+      "tip.end": "ikonën."
+    },
+    "export": {
+      "success": {
+        "title": "Profili u eksportua",
+        "desc": "JSON-i i profilit tënd u shkarkua"
+      },
+      "error": {
+        "title": "Eksportimi dështoi",
+        "desc": "Nuk mund të eksportohet profili yt"
+      },
+      "button": "Eksporto JSON"
+    },
+    "email": {
+      "verified": "I verifikuar",
+      "notVerified": "I paverifikuar"
+    },
+    "language": "Gjuha",
+    "theme": "Tema",
+    "security": "Siguria",
+    "soon": "Së shpejti",
+    "sessions": {
+      "title": "Seancat e Fundit",
+      "count": "{{count}} pajisje(ë)",
+      "empty": "Nuk ka ende të dhëna seancash.",
+      "lastSeen": "E parë së fundmi",
+      "thisDevice": "Kjo pajisje",
+      "device": "Pajisja"
+    },
     "form": {
       "nameLabel": "Emri",
       "emailLabel": "Email",
@@ -276,6 +317,31 @@
         "title": "Gabim me Google Sign-In",
         "desc": "Ju lutem provo përsëri."
       }
+    },
+    "verified": {
+      "title": "Email i verifikuar ✅",
+      "desc": "Tani mund të hysh në llogari."
+    },
+    "verifyFail": {
+      "title": "Verifikimi dështoi",
+      "desc": "Linku është i pavlefshëm ose ka skaduar. Mund të ridërgosh një link të ri më poshtë."
+    },
+    "resend": {
+      "prompt": "Nuk e more email-in e verifikimit?",
+      "sending": "Po dërgohet…",
+      "cta": "Ridërgo",
+      "needEmail": {
+        "title": "Email i detyrueshëm",
+        "desc": "Vendos adresën e email-it së pari."
+      },
+      "sent": {
+        "title": "Linku i verifikimit u dërgua",
+        "desc": "Kontrollo inbox-in ose dosjen e spam-it."
+      },
+      "fail": {
+        "title": "Nuk mund të ridërgohet",
+        "desc": "Provo përsëri më vonë."
+      }
     }
   },
   "register": {
@@ -345,7 +411,8 @@
       "currentPasswordLabel": "Fjalëkalimi aktual",
       "newPasswordLabel": "Fjalëkalimi i ri",
       "confirmNewPasswordLabel": "Konfirmo fjalëkalimin e ri",
-      "submit": "Ndrysho fjalëkalimin"
+      "submit": "Ndrysho fjalëkalimin",
+      "saving": "Po ruhet…"
     },
     "validation": {
       "currentPassword": "Fjalëkalimi aktual është i detyrueshëm.",
@@ -420,7 +487,7 @@
     "exportPdf": "Eksporto PDF",
     "manageIncome": "Menaxho Të Hyrat",
     "addTransaction": "Shto transaksion",
-    "empty": "S’u gjetën transaksione për këtë filtër.",
+    "empty": "Nuk u gjetën transaksione për këtë filtër.",
     "confirmDelete": "Je i sigurt që dëshiron ta fshish këtë transaksion?",
     "deleteSuccess": "Transaksioni u fshi me sukses",
     "deleteDescription": "Transaksioni u hoq nga lista",
@@ -574,7 +641,10 @@
     "confirmPlaceholder": "********",
     "submit": "Rivendos fjalëkalimin",
     "loading": "Duke e rivendosur…",
-    "success": "Fjalëkalimi u rivendos. Tani mund të hyni.",
+    "success": {
+      "title": "Fjalëkalimi u Rivendos me Sukses",
+      "description": "Fjalëkalimi yt u rivendos me sukses."
+    },
     "error": "Rivendosja dështoi",
     "backToLogin": "Kthehu te hyrja",
     "missingToken": "Linku i rivendosjes është i pavlefshëm ose ka skaduar.",
@@ -797,8 +867,25 @@
     "expenseRatio": "Raporti i Shpenzimeve"
   },
   "settings": {
+    "profile": {
+      "title": "Cilësimet e Profilit"
+    },
     "password": {
       "title": "Ndrysho Fjalëkalimin"
+    },
+    "account": {
+      "title": "Cilësimet e Llogarisë",
+      "delete": {
+        "title": "Fshi Llogarinë",
+        "description": "Pasi të fshish llogarinë, nuk ka kthim mbrapsht. Ju lutem jini të sigurt.",
+        "warning": "Ky veprim do të fshijë përgjithmonë llogarinë tënde dhe të gjitha të dhënat e lidhura. Kjo nuk mund të anulohet.",
+        "confirm": "Je absolutisht i sigurt? Ky veprim nuk mund të anulohet.",
+        "password": "Vendos fjalëkalimin për të konfirmuar",
+        "passwordPlaceholder": "Fjalëkalimi yt",
+        "button": "Fshi Llogarinë Time",
+        "confirmButton": "Po, Fshi Llogarinë Time",
+        "deleting": "Po fshihet..."
+      }
     }
   }
 }

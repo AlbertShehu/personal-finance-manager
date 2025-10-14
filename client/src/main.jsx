@@ -10,13 +10,12 @@ import '@fontsource-variable/inter'
 import i18n from './lib/i18'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
-// Dark-mode bootstrap për të shmangur flicker
+// Light-mode bootstrap për të shmangur flicker (light është theme kryesor)
 const rootEl = document.documentElement
 const savedTheme = localStorage.getItem('theme')
-const prefersDark =
-  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 
-if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+// Light është theme kryesor - vetëm nëse useri ka zgjedhur dark eksplicitisht
+if (savedTheme === 'dark') {
   rootEl.classList.add('dark')
 } else {
   rootEl.classList.remove('dark')

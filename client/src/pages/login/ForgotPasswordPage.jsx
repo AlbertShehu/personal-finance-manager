@@ -56,7 +56,7 @@ export default function ForgotPasswordPage() {
       }
 
       // NOTE: api ka baseURL me /api → endpoint relativ
-      await api.post("/auth/forgot-password", { email })
+      await api.post("/auth/forgot-password", { email, language: i18n.language })
       toast({
         title: t("forgot.success.title", "Check your email"),
         description: t("forgot.success.description", "We sent you a link to reset your password."),

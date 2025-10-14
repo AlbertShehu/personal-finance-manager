@@ -59,10 +59,15 @@ const AccountSettings = () => {
       
     } catch (err) {
       console.error('Delete account error:', err);
-      setError(
-        err.response?.data?.message || 
-        'Gabim gjatë fshirjes së llogarisë. Provo përsëri.'
-      );
+      console.error('Error response:', err.response?.data);
+      console.error('Error status:', err.response?.status);
+      
+      const errorMessage = err.response?.data?.message || 
+        err.response?.status === 401 ? 'Fjalëkalim i pasaktë.' :
+        err.response?.status === 404 ? 'Llogaria nuk u gjet.' :
+        'Gabim gjatë fshirjes së llogarisë. Provo përsëri.';
+        
+      setError(errorMessage);
     } finally {
       setIsDeleting(false);
     }

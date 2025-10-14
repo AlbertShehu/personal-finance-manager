@@ -20,5 +20,11 @@ i18n
       lookupLocalStorage: 'lang',     // <<— ky është i rëndësishëm
     },
   })
+  .then(() => {
+    console.log("✅ i18n initialized successfully");
+  })
+  .catch((err) => {
+    console.error("❌ i18n initialization failed:", err);
+  });
 
 export default i18n

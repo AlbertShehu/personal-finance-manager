@@ -153,8 +153,8 @@ const cleanupExpiredTokens = async () => {
   }
 };
 
-// Run cleanup immediately, then every 24 hours
-cleanupExpiredTokens();
+// Run cleanup after a delay to ensure Prisma is initialized, then every 24 hours
+setTimeout(cleanupExpiredTokens, 5000); // Wait 5 seconds for Prisma to initialize
 setInterval(cleanupExpiredTokens, 24 * 60 * 60 * 1000); // 24 hours
 
 // Graceful shutdown

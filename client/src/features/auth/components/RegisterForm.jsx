@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/lib/validations/registerSchema";
 import { useTranslation } from "react-i18next";
+import i18n from "@/lib/i18";
 import { CheckCircle2, CircleAlert, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import GoogleSignInButton from "@/components/ui/google-signin-button";
@@ -31,6 +32,12 @@ export default function RegisterForm() {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+
+  // Debug: kontrollo nëse t funksionon
+  console.log("🔍 RegisterForm - t function:", typeof t);
+  console.log("🔍 RegisterForm - t('test'):", t('test'));
+  console.log("🔍 RegisterForm - i18n ready:", i18n.isInitialized);
+  console.log("🔍 RegisterForm - i18n language:", i18n.language);
 
   const form = useForm({
     resolver: zodResolver(registerSchema(t)),
@@ -76,17 +83,23 @@ export default function RegisterForm() {
         name: data.name?.trim(),
         email: normalizeEmail(data.email),
         password: data.password,
+        language: i18n.language, // Shtojmë gjuhën aktuale
       };
 
       // Validimi bazë i email-it (lejo çdo email valid)
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(payload.email)) {
+        // Fallback për rastin kur t nuk funksionon
+        const title = typeof t === 'function' ? t("register.error.title", "Registration Failed") : "Registration Failed";
+        const description = typeof t === 'function' ? t("formValidation.email.invalid", "Please enter a valid email address.") : "Please enter a valid email address.";
+        
         toast({
           variant: "destructive",
-          title: t("register.error.title", "Registration Failed"),
-          description: t("formValidation.email.invalid", "Please enter a valid email address."),
+          title: title,
+          description: description,
           duration: 6000,
         });
+        console.log("🔍 Email validation error - translation:", description);
         return;
       }
 

@@ -177,6 +177,12 @@ const updateProfile = async (req, res) => {
  */
 const deleteAccount = async (req, res) => {
   try {
+    console.log("🗑️ [DELETE ACCOUNT] Request received:", {
+      userId: req.user?.id,
+      hasPassword: !!req.body?.password,
+      body: req.body
+    });
+
     const userId = req.user?.id;
     const { password } = req.body || {};
 
@@ -189,12 +195,16 @@ const deleteAccount = async (req, res) => {
     const ok = await comparePassword(password, user.password);
     if (!ok) return res.status(401).json({ message: "Fjalëkalim i pasaktë." });
 
-    await prisma.$transaction([
+    console.log("🗑️ [DELETE ACCOUNT] Starting deletion for user:", userId);
+
+    const result = await prisma.$transaction([
       prisma.transaction.deleteMany({ where: { userId } }),
       prisma.passwordResetToken.deleteMany({ where: { userId } }),
       prisma.emailVerificationToken.deleteMany({ where: { userId } }),
       prisma.user.delete({ where: { id: userId } }),
     ]);
+
+    console.log("✅ [DELETE ACCOUNT] Successfully deleted user:", userId, "Result:", result);
 
     return res.status(200).json({ message: "Llogaria u fshi me sukses." });
   } catch (err) {

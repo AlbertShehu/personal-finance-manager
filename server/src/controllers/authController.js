@@ -86,7 +86,7 @@ const register = async (req, res) => {
     } else {
       inFlightVerifySend.add(createdUser.id);
       // NUK përdorim 'await' - kthe përgjigje menjëherë
-      sendVerificationEmail({ to: createdUser.email, name: createdUser.name, token: raw })
+      sendVerificationEmail({ to: createdUser.email, name: createdUser.name, token: raw, language: req.body.language || 'sq' })
         .then(() => {
           console.log("📬 [REGISTER] Verifikimi u dërgua →", createdUser.email);
         })
@@ -183,7 +183,7 @@ const forgotPassword = async (req, res) => {
       });
 
       // Fire-and-forget: dërgo emailin në sfond pa pritur
-      sendResetPasswordEmail({ to: user.email, token: raw })
+      sendResetPasswordEmail({ to: user.email, token: raw, language: req.body.language || 'sq' })
         .then(() => {
           console.log("✅ [FORGOT] Email reset u dërgua:", email);
         })
@@ -360,7 +360,7 @@ const resendVerification = async (req, res) => {
     } else {
       inFlightVerifySend.add(user.id);
       // NUK përdorim 'await' - kthe përgjigje menjëherë
-      sendVerificationEmail({ to: user.email, name: user.name, token: raw })
+      sendVerificationEmail({ to: user.email, name: user.name, token: raw, language: req.body.language || 'sq' })
         .then(() => {
           console.log("📬 [RESEND] verifikimi u ridërgua te:", user.email);
         })
