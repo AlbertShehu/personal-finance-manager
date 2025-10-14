@@ -18,6 +18,12 @@ console.log('   JWT_SECRET:', process.env.JWT_SECRET ? '✅ SET' : '❌ MISSING'
 
 const app = express();
 
+// Trust proxy for Railway/Cloudflare (fixes rate limiting)
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', true); // Trust all proxies (Railway + Cloudflare)
+  console.log('🔒 [PROXY] Trust proxy enabled for production');
+}
+
 // Prisma client with production-optimized settings
 const prisma = new PrismaClient({
   datasources: {
@@ -43,13 +49,15 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false
 }));
 
-// Rate limiting
+// Rate limiting with Cloudflare support
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
   message: 'Shumë kërkesa nga ky IP, provo përsëri më vonë.',
   standardHeaders: true,
   legacyHeaders: false,
+  // Use Cloudflare IP if available, otherwise use Express IP
+  keyGenerator: (req) => req.headers['cf-connecting-ip'] || req.ip,
 });
 
 const authLimiter = rateLimit({
@@ -58,6 +66,8 @@ const authLimiter = rateLimit({
   message: 'Shumë përpjekje hyrjeje, provo përsëri pas 15 minutash.',
   standardHeaders: true,
   legacyHeaders: false,
+  // Use Cloudflare IP if available, otherwise use Express IP
+  keyGenerator: (req) => req.headers['cf-connecting-ip'] || req.ip,
 });
 
 // Middleware
