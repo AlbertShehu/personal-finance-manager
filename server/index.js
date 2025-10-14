@@ -70,19 +70,41 @@ const authLimiter = rateLimit({
   keyGenerator: (req) => req.headers['cf-connecting-ip'] || req.ip,
 });
 
+// CORS configuration with proper headers
+const ALLOWED_ORIGINS = [
+  'https://finman-app.com',
+  'https://finman-app.pages.dev',
+  /https:\/\/.*\.pages\.dev$/,
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:4173',
+];
+
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true); // lejo kërkesa pa Origin (p.sh. health checks)
+    const ok = ALLOWED_ORIGINS.some(o => o instanceof RegExp ? o.test(origin) : o === origin);
+    return ok ? cb(null, true) : cb(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'X-Request-Id',       // ✅ KJO ËSHTË THELBËSORE
+    'CF-Connecting-IP',
+    'X-Forwarded-For'
+  ],
+  exposedHeaders: ['X-Request-Id'],
+  credentials: true,        // lëre true vetëm nëse përdor cookies/cred
+  maxAge: 86400             // cache i preflight
+}));
+
+// Lejo preflight për çdo rrugë
+app.options('*', cors());
+
 // Middleware
 app.use(express.json({ limit: '10mb' }));
-app.use(cors({
-  origin: [
-    'https://finman-app.com',
-    'https://finman-app.pages.dev',
-    'http://localhost:5173',
-    'http://localhost:4173'
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
 
 // Apply rate limiting
 app.use(limiter);
