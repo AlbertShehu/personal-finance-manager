@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { useTranslation } from "react-i18next"
+import i18n from "@/lib/i18"
 import { Link } from "react-router-dom"
 import api from "@/lib/axios"
 import { Input } from "@/components/ui/input"
@@ -23,7 +24,8 @@ export default function ForgotPasswordPage() {
   const { toast } = useToast()
 
   React.useEffect(() => {
-    document.title = `${t("forgot.title", "Forgot password")} · FinMan`
+    const title = typeof t === 'function' ? t("forgot.title", "Forgot password") : "Forgot password";
+    document.title = `${title} · FinMan`
   }, [t])
 
   const schema = z.object({
@@ -46,9 +48,13 @@ export default function ForgotPasswordPage() {
       // Validimi bazë i email-it (çdo email provider)
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
+        // Fallback për rastin kur t nuk funksionon
+        const title = typeof t === 'function' ? t("forgot.error.title", "Error") : "Error";
+        const description = typeof t === 'function' ? t("forgot.validation.emailRules.invalid", "Please enter a valid email address.") : "Please enter a valid email address.";
+        
         toast({
-          title: t("forgot.error.title", "Error"),
-          description: t("forgot.validation.emailRules.invalid", "Please enter a valid email address."),
+          title: title,
+          description: description,
           variant: "destructive",
           duration: 6000,
         });
@@ -57,9 +63,14 @@ export default function ForgotPasswordPage() {
 
       // NOTE: api ka baseURL me /api → endpoint relativ
       await api.post("/auth/forgot-password", { email, language: i18n.language })
+      
+      // Fallback për rastin kur t nuk funksionon
+      const successTitle = typeof t === 'function' ? t("forgot.success.title", "Check your email") : "Check your email";
+      const successDescription = typeof t === 'function' ? t("forgot.success.description", "We sent you a link to reset your password.") : "We sent you a link to reset your password.";
+      
       toast({
-        title: t("forgot.success.title", "Check your email"),
-        description: t("forgot.success.description", "We sent you a link to reset your password."),
+        title: successTitle,
+        description: successDescription,
         variant: "success",
         duration: 6000,
       })
@@ -69,9 +80,13 @@ export default function ForgotPasswordPage() {
         err?.response?.data?.message ||
         err?.response?.data?.error ||
         err?.message ||
-        t("forgot.error")
+        (typeof t === 'function' ? t("forgot.error") : "An error occurred")
+      
+      // Fallback për rastin kur t nuk funksionon
+      const errorTitle = typeof t === 'function' ? t("forgot.error.title", "Error") : "Error";
+      
       toast ({ 
-        title: t("forgot.error.title", "Error"),
+        title: errorTitle,
         description: msg,
         variant: "destructive",
         duration: 6000,
@@ -90,9 +105,11 @@ export default function ForgotPasswordPage() {
           >
             <div className="text-center space-y-1">
               <h1 className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-300">
-                {t("forgot.title")}
+                {typeof t === 'function' ? t("forgot.title") : "Forgot Password"}
               </h1>
-              <p className="text-sm text-muted-foreground">{t("forgot.subtitle")}</p>
+              <p className="text-sm text-muted-foreground">
+                {typeof t === 'function' ? t("forgot.subtitle") : "Enter your email and we will send you reset instructions."}
+              </p>
             </div>
 
             <FormField
@@ -100,12 +117,12 @@ export default function ForgotPasswordPage() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("register.email", "Email")}</FormLabel>
+                  <FormLabel>{typeof t === 'function' ? t("register.email", "Email") : "Email"}</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
                       {...field}
-                      placeholder={t("register.emailPlaceholder", "you@example.com")}
+                      placeholder={typeof t === 'function' ? t("register.emailPlaceholder", "you@example.com") : "you@example.com"}
                       autoComplete="email"
                       aria-invalid={!!form.formState.errors.email || undefined}
                       className="bg-background"
@@ -122,8 +139,8 @@ export default function ForgotPasswordPage() {
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting
-                ? t("forgot.sending", "Sending…")
-                : t("forgot.submit")}
+                ? (typeof t === 'function' ? t("forgot.sending", "Sending…") : "Sending…")
+                : (typeof t === 'function' ? t("forgot.submit") : "Send Link")}
             </Button>
 
             <div className="text-center">
@@ -131,7 +148,7 @@ export default function ForgotPasswordPage() {
                 to="/login"
                 className="text-sm text-blue-600 dark:text-blue-300 hover:underline"
               >
-                {t("reset.backToLogin", "Back to login")}
+                {typeof t === 'function' ? t("reset.backToLogin", "Back to login") : "Back to login"}
               </Link>
             </div>
           </form>
