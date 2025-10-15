@@ -49,8 +49,8 @@ export default function ForgotPasswordPage() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         // Fallback për rastin kur t nuk funksionon
-        const title = typeof t === 'function' ? t("forgot.error.title", "Error") : "Error";
-        const description = typeof t === 'function' ? t("forgot.validation.emailRules.invalid", "Please enter a valid email address.") : "Please enter a valid email address.";
+        const title = typeof t === 'function' ? t("forgot.error", "Something went wrong. Try again.") : "Something went wrong. Try again.";
+        const description = typeof t === 'function' ? t("forgot.invalid", "Please enter a valid email address.") : "Please enter a valid email address.";
         
         toast({
           title: title,
@@ -65,8 +65,8 @@ export default function ForgotPasswordPage() {
       await api.post("/auth/forgot-password", { email, language: i18n.language })
       
       // Fallback për rastin kur t nuk funksionon
-      const successTitle = typeof t === 'function' ? t("forgot.success.title", "Check your email") : "Check your email";
-      const successDescription = typeof t === 'function' ? t("forgot.success.description", "We sent you a link to reset your password.") : "We sent you a link to reset your password.";
+      const successTitle = typeof t === 'function' ? t("forgot.success", "If the email exists, instructions were sent.") : "If the email exists, instructions were sent.";
+      const successDescription = typeof t === 'function' ? t("forgot.descriptionVerify", "Reset link sent. Check your email.") : "Reset link sent. Check your email.";
       
       toast({
         title: successTitle,
@@ -83,7 +83,7 @@ export default function ForgotPasswordPage() {
         (typeof t === 'function' ? t("forgot.error") : "An error occurred")
       
       // Fallback për rastin kur t nuk funksionon
-      const errorTitle = typeof t === 'function' ? t("forgot.error.title", "Error") : "Error";
+      const errorTitle = typeof t === 'function' ? t("forgot.error", "Something went wrong. Try again.") : "Something went wrong. Try again.";
       
       toast ({ 
         title: errorTitle,
