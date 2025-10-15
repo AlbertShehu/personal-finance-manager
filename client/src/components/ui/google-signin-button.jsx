@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useGoogleLogin } from "@react-oauth/google"
 import { useTranslation } from "react-i18next"
 import { useToast } from "@/hooks/use-toast"
-import api from "@/lib/api"
+import api from "@/lib/axios"
 import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react"
 
