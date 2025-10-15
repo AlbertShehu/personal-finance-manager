@@ -62,7 +62,7 @@ const limiter = rateLimit({
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // limit each IP to 5 auth requests per windowMs
+  max: 20, // limit each IP to 20 auth requests per windowMs (increased for testing)
   message: 'Shumë përpjekje hyrjeje, provo përsëri pas 15 minutash.',
   standardHeaders: true,
   legacyHeaders: false,
@@ -104,7 +104,28 @@ app.use(cors({
 app.options('*', cors());
 
 // Middleware
-app.use(express.json({ limit: '10mb' }));
+app.use(express.json({ 
+  limit: '10mb',
+  verify: (req, res, buf, encoding) => {
+    try {
+      if (buf && buf.length > 0) {
+        JSON.parse(buf);
+      }
+    } catch (e) {
+      console.error('🛑 [JSON PARSE ERROR] Invalid JSON received:', buf?.toString() || 'empty buffer');
+      throw new Error('Invalid JSON');
+    }
+  }
+}));
+
+// Error handling middleware for JSON parsing
+app.use((error, req, res, next) => {
+  if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
+    console.error('🛑 [JSON ERROR] Syntax error in JSON:', error.message);
+    return res.status(400).json({ message: 'Invalid JSON format' });
+  }
+  next(error);
+});
 
 // Apply rate limiting
 app.use(limiter);
