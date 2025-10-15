@@ -387,11 +387,11 @@ const googleSignIn = async (req, res) => {
       return res.status(500).json({ message: "GOOGLE_CLIENT_ID mungon në konfigurim." });
     }
 
-    const { credential } = req.body; // ID token nga FE
-    if (!credential) return res.status(400).json({ message: "Missing credential" });
+    const { idToken } = req.body; // ID token nga FE
+    if (!idToken) return res.status(400).json({ message: "Missing credential" });
 
     const ticket = await googleClient.verifyIdToken({
-      idToken: credential,
+      idToken: idToken,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
     const payload = ticket.getPayload();
@@ -411,13 +411,18 @@ const googleSignIn = async (req, res) => {
           email,
           password: await hashPassword(randomPwd),
           emailVerifiedAt: new Date(), // ✅ email i verifikuar nga Google
-          // (opsionale) googleSub: payload?.sub, // shto fushë në skemë nëse të duhet
+          googleId: payload?.sub, // Ruaj Google ID
+          profilePicture: payload?.picture, // Ruaj foton e profilit
         },
       });
     } else if (!user.emailVerifiedAt) {
       await prisma.user.update({
         where: { id: user.id },
-        data: { emailVerifiedAt: new Date() },
+        data: { 
+          emailVerifiedAt: new Date(),
+          googleId: payload?.sub, // Përditëso Google ID nëse mungon
+          profilePicture: payload?.picture, // Përditëso foton e profilit
+        },
       });
     }
 

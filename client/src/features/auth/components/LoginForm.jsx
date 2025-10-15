@@ -56,10 +56,6 @@ export default function LoginForm() {
     })
   }, [t, form])
 
-  // Trajtuesi i suksesit të Google Sign-In
-  const handleGoogleSuccess = ({ token, user }) => {
-    navigate(from, { replace: true })
-  }
 
   // Nëse ridrejtohet nga /api/auth/verify?token=...&verified=1|0
   useEffect(() => {
@@ -318,13 +314,7 @@ export default function LoginForm() {
           </div>
 
           <div className="flex justify-center">
-            <GoogleSignInButton
-              onSuccess={handleGoogleSuccess}
-              className="w-full max-w-xs"
-              disabled={isLoading}
-            >
-              {t("login.google.button", "Sign in with Google")}
-            </GoogleSignInButton>
+            <GoogleSignInButton />
           </div>
         </form>
       </Form>
