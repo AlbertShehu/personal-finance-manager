@@ -105,8 +105,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Albert Shehu**
-- GitHub: [@yourusername](https://github.com/AlbertShehu)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/albert-shehu-5202ba2b0/)
+- GitHub: https://github.com/AlbertShehu
+- LinkedIn:https://linkedin.com/in/albert-shehu-5202ba2b0/
 
 ## 🙏 Acknowledgments
 
@@ -117,11 +117,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-⭐ **Star this repository if you found it helpful!**
-# Railway deployment trigger Sun, Sep 28, 2025  2:05:25 AM
-# Force Cloudflare Pages rebuild Sun, Sep 28, 2025  3:40:25 AM
-# FORCE CLOUDFLARE PAGES REBUILD - CSP UPDATE Sun, Sep 28, 2025 12:48:36 PM
-# URGENT: Force Cloudflare Pages rebuild - CSP still showing old values Sun, Sep 28, 2025  1:03:54 PM
-# Force Cloudflare Pages deployment
-# Force redeploy
-# Force Railway redeploy - Mon, Oct 13, 2025  6:23:34 PM
